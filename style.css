@@ -52,7 +52,7 @@ footer { text-align: center; padding: 2rem 1rem; opacity: 0.7; font-size: 0.9rem
 .theme-switch {
     display: inline-block;
     height: 30px;
-    position: relative;
+    position: fixed;
     width: 60px;
 }
 .theme-switch input { display:none; }
@@ -103,4 +103,5 @@ body.light .project-card a { color: #0077cc; }
     height: 100%;
     z-index: -1;
 }
+
 
