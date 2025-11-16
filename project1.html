@@ -402,7 +402,33 @@ document.querySelectorAll('.code-header').forEach(header => {
     });
 });
 
+// 1. Ouvre tous les blocs pour mesurer la largeur
+document.querySelectorAll('.code-content').forEach(c => {
+    c.style.display = 'block';
+});
 
+// 2. Trouve la largeur maximale des code-block
+let maxWidth = 0;
+document.querySelectorAll('.code-block').forEach(block => {
+    maxWidth = Math.max(maxWidth, block.offsetWidth);
+});
+
+// 3. Fixe cette largeur pour tous les blocs
+document.querySelectorAll('.code-block').forEach(block => {
+    block.style.width = maxWidth + 'px';
+});
+
+// 4. Referme les contenus (comme au début)
+document.querySelectorAll('.code-content').forEach(c => {
+    c.style.display = 'none';
+});
+// Toggle affichage des codes
+document.querySelectorAll('.code-header').forEach(header => {
+    header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    });
+});
 
 const savedTheme = localStorage.getItem('theme');
 if(savedTheme === 'light') {
@@ -413,6 +439,7 @@ if(savedTheme === 'light') {
 
 </body>
 </html>
+
 
 
 
