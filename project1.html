@@ -21,13 +21,11 @@ body {
 
 /* Controls wrapper */
 .controls-wrapper {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    z-index: 100;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
 /* Switch thème */
@@ -677,7 +675,12 @@ body.light .language-switcher button:hover:not(.active) {
 </style>
 </head>
 <body>
-
+<!-- Bouton menu à droite -->
+<button class="menu-button" id="menu-button">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
 <!-- Overlay -->
 <div class="overlay" id="overlay"></div>
 
@@ -1169,6 +1172,7 @@ toggle.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
