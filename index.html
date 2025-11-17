@@ -203,14 +203,15 @@ input:checked + .slider:before {
     background: #333;
 }
 .top-bar {
-    position: fixed;        
-    top: 1rem;
-    left: 1rem;
+    position: fixed;        /* reste toujours en haut */
+    top: 0;
+    left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between; /* espace entre gauche et droite */
     align-items: center;
-    z-index: 101;          
+    padding: 1rem 1.5rem;
+    z-index: 300;           /* au-dessus de la sidebar et overlay */
 }
 
 /* Bouton home */
@@ -228,11 +229,10 @@ input:checked + .slider:before {
     height: 100%;
     object-fit: cover;
 }
+
+
 /* Bouton menu sidebar - en haut à droite */
 .menu-button {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
     width: 45px;
     height: 45px;
     background: #4DA6FF;
@@ -496,11 +496,18 @@ body.light .language-switcher button:hover:not(.active) {
         padding: 0.3rem 0.6rem; /* Réduit le padding */
         font-size: 0.8rem; /* Réduit la police */
     }
+
+    .top-bar {
+        padding: 0.5rem 1rem;
+    }
+
+    .home-button, .menu-button {
+        width: 40px;
+        height: 40px;
+    }
     
     /* Bouton Menu Droite */
     .menu-button {
-        top: 0.5rem;
-        right: 0.5rem;
         width: 40px; /* Réduit la taille */
         height: 40px; /* Réduit la taille */
     }
@@ -770,6 +777,7 @@ document.addEventListener('keydown', (e) => {
 </script>
 </body>
 </html>
+
 
 
 
