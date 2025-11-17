@@ -401,6 +401,26 @@ body.light .language-switcher button:hover:not(.active) {
     z-index: -1;
 }
 
+.home-button {
+    position: absolute;     /* ou fixed si tu veux qu’il reste toujours visible */
+    top: 1rem;
+    left: 1rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid white;
+    cursor: pointer;
+    display: block;
+}
+
+.home-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* pour cadrer bien ton visage */
+}
+
+
 /* Responsive Mobile */
 @media (max-width: 768px) {
     header h1 {
@@ -523,6 +543,9 @@ body.light .language-switcher button:hover:not(.active) {
 <body>
 <canvas id="background-canvas"></canvas>
 
+<a href="index.html" class="home-button">
+    <img src="ma_photo.jpg" alt="Retour à l'accueil">
+</a>
 
 
 <!-- Bouton menu à droite -->
@@ -737,6 +760,7 @@ document.addEventListener('keydown', (e) => {
 </script>
 </body>
 </html>
+
 
 
 
