@@ -523,18 +523,7 @@ body.light .language-switcher button:hover:not(.active) {
 <body>
 <canvas id="background-canvas"></canvas>
 
-<!-- Controls à gauche -->
-<div class="controls-wrapper">
-    <label class="theme-switch">
-        <input type="checkbox" id="theme-toggle">
-        <span class="slider"></span>
-    </label>
-    
-    <div class="language-switcher">
-        <button id="lang-fr" class="active">FR</button>
-        <button id="lang-en">EN</button>
-    </div>
-</div>
+
 
 <!-- Bouton menu à droite -->
 <button class="menu-button" id="menu-button">
@@ -548,6 +537,18 @@ body.light .language-switcher button:hover:not(.active) {
 
 <!-- Sidebar -->
 <nav class="sidebar" id="sidebar">
+    <!-- Controls à gauche -->
+    <div class="controls-wrapper">
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        
+        <div class="language-switcher">
+            <button id="lang-fr" class="active">FR</button>
+            <button id="lang-en">EN</button>
+        </div>
+    </div>
     <h2 data-lang="projects">Projets</h2>
     <a href="project1.html" class="sidebar-link">
         <h3>Blink Activated Alert Button</h3>
@@ -736,6 +737,7 @@ document.addEventListener('keydown', (e) => {
 </script>
 </body>
 </html>
+
 
 
 
