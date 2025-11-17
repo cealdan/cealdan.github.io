@@ -6,7 +6,7 @@
 <title>Blink Activated Alert Button</title>
 <link rel="stylesheet" href="style.css">
 <style>
-body { background: #111; color: #fff; }
+body { background: #111; color: #fff; overflow-x: hidden; }
 
 .code-block {
     background: #222;
@@ -15,6 +15,8 @@ body { background: #111; color: #fff; }
     margin-bottom: 1rem;
     font-family: monospace;
     width: 95%; /* Changé de max-content à 95% */
+    margin-left: auto;
+    margin-right: auto;
     max-width: 100%;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     overflow: hidden; /* Empêche le débordement */
@@ -79,6 +81,7 @@ header a {
 }
 section {
     padding: 0 1rem;
+	box-sizing: border-box;
 }
 section a {
     color: #4da6ff; 
@@ -447,6 +450,7 @@ if(savedTheme === 'light') {
 
 </body>
 </html>
+
 
 
 
