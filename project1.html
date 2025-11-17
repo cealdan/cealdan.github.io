@@ -178,47 +178,100 @@ section a {
     line-height: 1.8;
 }
 
-.code-block {
-    background: #222;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    font-family: monospace;
-    width: 100%;
-    max-width: 100%;
+/* GitHub Tree Container */
+.github-tree-container {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 95%;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    overflow: hidden;
 }
 
-.code-header {
-    cursor: pointer;
-    font-weight: bold;
-    padding: 0.75rem;
+.github-tree-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #333;
+}
+
+.github-tree-header svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+}
+
+.github-tree-header h3 {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.file-tree {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.95rem;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    margin: 0.2rem 0;
     border-radius: 6px;
-    background: #333;
-    transition: background 0.3s ease;
-    user-select: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    position: relative;
 }
 
-.code-header:hover {
-    background: #444;
+.file-item:hover {
+    background: #2a2a2a;
 }
 
-.code-header::before {
-    content: "▶ ";
-    display: inline-block;
-    transition: transform 0.3s ease;
+.file-item.folder {
+    font-weight: 500;
 }
 
-.code-header.open::before {
-    transform: rotate(90deg);
+.file-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.file-name {
+    flex: 1;
+}
+
+.file-item.folder .file-name {
+    color: #4da6ff;
+}
+
+.file-item.file .file-name {
+    color: #e0e0e0;
+}
+
+.file-item.non-code {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.file-item.non-code:hover {
+    background: transparent;
 }
 
 .code-content {
     display: none;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #0d1117;
+    border-radius: 8px;
     overflow-x: auto;
     max-width: 100%;
+}
+
+.code-content.active {
+    display: block;
 }
 
 .code-content pre {
@@ -228,6 +281,37 @@ section a {
     overflow-wrap: break-word;
     font-size: 0.85rem;
     line-height: 1.5;
+    color: #c9d1d9;
+}
+
+.indent {
+    margin-left: 1.5rem;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: #238636;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.github-link:hover {
+    background: #2ea043;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4);
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
 }
 
 button.next-btn {
@@ -265,23 +349,46 @@ body.light {
     color: #000;
 }
 
+body.light .github-tree-container {
+    background: #fff;
+    border: 1px solid #d0d7de;
+}
+
+body.light .github-tree-header {
+    border-bottom-color: #d0d7de;
+}
+
+body.light .github-tree-header svg {
+    fill: #000;
+}
+
+body.light .github-tree-header h3 {
+    color: #000;
+}
+
+body.light .file-item:hover {
+    background: #f6f8fa;
+}
+
+body.light .file-item.folder .file-name {
+    color: #0969da;
+}
+
+body.light .file-item.file .file-name {
+    color: #1f2328;
+}
+
+body.light .code-content {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+}
+
+body.light .code-content pre {
+    color: #1f2328;
+}
+
 body.light .next-btn {
     color: #000000;
-}
-
-body.light .code-header {
-    background: #e0e0e0;
-    color: #000000;
-}
-
-body.light .code-header:hover {
-    background: #d0d0d0;
-}
-
-body.light .code-block {
-    background: #ffffff;
-    color: #000000;
-    border: 1px solid #ddd;
 }
 
 body.light header a {
@@ -350,19 +457,16 @@ body.light .language-switcher button:hover:not(.active) {
         line-height: 1.7;
     }
 
-    .code-block {
-        padding: 0.75rem;
-        margin-bottom: 1rem;
+    .github-tree-container {
+        padding: 1rem;
     }
 
-    .code-header {
-        padding: 0.6rem;
-        font-size: 0.9rem;
+    .file-tree {
+        font-size: 0.85rem;
     }
 
-    .code-content pre {
-        font-size: 0.75rem;
-        line-height: 1.4;
+    .indent {
+        margin-left: 1rem;
     }
 
     button.next-btn {
@@ -386,33 +490,12 @@ body.light .language-switcher button:hover:not(.active) {
         font-size: 0.9rem;
     }
 
-    .code-content pre {
-        font-size: 0.7rem;
+    .file-tree {
+        font-size: 0.8rem;
     }
 
-    .code-block {
-        padding: 0.5rem;
-    }
-}
-
-/* Amélioration du scroll horizontal sur mobile */
-@media (max-width: 768px) {
-    .code-content {
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .code-content::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    .code-content::-webkit-scrollbar-track {
-        background: #333;
-        border-radius: 3px;
-    }
-
-    .code-content::-webkit-scrollbar-thumb {
-        background: #4da6ff;
-        border-radius: 3px;
+    .github-tree-container {
+        padding: 0.75rem;
     }
 }
 </style>
@@ -446,22 +529,82 @@ body.light .language-switcher button:hover:not(.active) {
 
 <section>
     <div class="text-container">
-        <p data-lang="main-text">
-            A simple website where a button can be triggered by an eye blink — hands-free.<br><br>
-            Here you can find the HTML, CSS, and JavaScript files to run the website locally, as well as the C++ code for Arduino. The Arduino code was taken from 
-            <a href="https://github.com/upsidedownlabs/BioAmp-EXG-Pill" target="_blank">another repository</a> created by Upside Down Labs, the company that built the board for signal acquisition that I used. 
-            On the other hand, the HTML, CSS, and JavaScript code were written by myself with the help of a friend for the first project of NeuroTechSorbonne, a neurotech student club at Sorbonne University which we founded.<br><br>
-
-            <strong data-lang="requirements-title">Requirements:</strong> <span data-lang="requirements-text">It only works on Google Chrome since it uses the Web Serial API. It also requires three electrodes, an Arduino Uno board, and a board for signal acquisition. Refer to the 
-            <a href="https://github.com/upsidedownlabs/BioAmp-EXG-Pill" target="_blank">Upside Down Labs repository</a> for the hardware setup.</span><br><br>
-
-            <strong data-lang="review-title">Review:</strong> <span data-lang="review-text">The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don't want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.</span>
+        <p data-lang="readme-intro">
+            A simple website where a button can be triggered by an eye blink — hands-free.
+        </p>
+        
+        <p data-lang="readme-description">
+            Here you can find the HTML, CSS, and JavaScript files to run the website locally, as well as the C++ code for Arduino. The Arduino code was taken from <a href="https://github.com/upsidedownlabs/BioAmp-EXG-Pill" target="_blank">another repository</a> created by Upside Down Labs, the company that built the board for signal acquisition that I used. On the other hand, the HTML, CSS, and JavaScript code were written by myself with the help of a friend for the first project of NeuroTechSorbonne, a neurotech student club at Sorbonne University which we founded.
+        </p>
+        
+        <p>
+            <strong data-lang="requirements-title">Requirements:</strong><br>
+            <span data-lang="requirements-text">It only works on Google Chrome since it uses the Web Serial API. It also requires three electrodes, an Arduino Uno board, and a board for signal acquisition. Refer to the <a href="https://github.com/upsidedownlabs/BioAmp-EXG-Pill" target="_blank">Upside Down Labs repository</a> for the hardware setup.</span>
+        </p>
+        
+        <p>
+            <strong data-lang="review-title">Review:</strong><br>
+            <span data-lang="review-text">The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don't want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.</span>
         </p>
     </div>
 
-    <div class="code-block">
-        <div class="code-header" data-lang="code-cpp">Code en C++ pour Arduino</div>
-        <div class="code-content">
+    <!-- GitHub Repository Tree -->
+    <div class="github-tree-container">
+        <div class="github-tree-header">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <h3 data-lang="repo-structure">Structure du dépôt</h3>
+        </div>
+        
+        <div class="file-tree">
+            <div class="file-item folder">
+                <svg class="file-icon" viewBox="0 0 16 16" fill="#54a3ff">
+                    <path d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75z"/>
+                </svg>
+                <span class="file-name">BlinkActivatedAlertButton/</span>
+            </div>
+            
+            <div class="indent">
+                <div class="file-item file" data-file="arduino">
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
+                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
+                    </svg>
+                    <span class="file-name">FixedEyeBlinkDetection.ino</span>
+                </div>
+                
+                <div class="file-item file" data-file="css">
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
+                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
+                    </svg>
+                    <span class="file-name">neuroweb.css</span>
+                </div>
+                
+                <div class="file-item file" data-file="html">
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
+                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
+                    </svg>
+                    <span class="file-name">neuroweb.html</span>
+                </div>
+                
+                <div class="file-item file" data-file="js">
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
+                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
+                    </svg>
+                    <span class="file-name">neuroweb.js</span>
+                </div>
+            </div>
+        </div>
+        
+        <a href="https://github.com/cealdan/BlinkActivatedAlertButton/" target="_blank" class="github-link">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <span data-lang="view-on-github">Voir sur GitHub</span>
+        </a>
+        
+        <!-- Code Sections (hidden by default, shown when file is clicked) -->
+        <div id="code-arduino" class="code-content">
             <pre>// Eye Blink Detection (Experimental!) - BioAmp EXG Pill
 // https://github.com/upsidedownlabs/BioAmp-EXG-Pill
 
@@ -594,37 +737,8 @@ float EOGFilter(float input) {
     return output;
 }</pre>
         </div>
-    </div>
 
-    <div class="code-block">
-        <div class="code-header" data-lang="code-html">Code source HTML</div>
-        <div class="code-content">
-            <pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="fr"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
-    &lt;title&gt;NeuroWeb&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="container"&gt;
-        &lt;h1&gt;Bienvenue sur NeuroWeb&lt;/h1&gt;
-        &lt;p&gt;Ceci est un projet d'application d'interface cerveau-machine non-invasive pour la navigation web.&lt;/p&gt;
-        &lt;button id="alertButton"&gt;Bouton&lt;/button&gt;
-        &lt;button id="Button"&gt;Choisis le port&lt;/button&gt;
-    &lt;/div&gt;
-
-    &lt;script src="neuroweb.js"&gt;&lt;/script&gt;
-    &lt;link rel="stylesheet" href="neuroweb.css"&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
-        </div>
-    </div>
-
-    <div class="code-block">
-        <div class="code-header" data-lang="code-css">Code source CSS</div>
-        <div class="code-content">
+        <div id="code-css" class="code-content">
             <pre>* {
     margin: 0;
     padding: 0;
@@ -696,11 +810,31 @@ p {
     background-color: #0f7e3d;
 }</pre>
         </div>
-    </div>
 
-    <div class="code-block">
-        <div class="code-header" data-lang="code-js">Code source JavaScript</div>
-        <div class="code-content">
+        <div id="code-html" class="code-content">
+            <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+    &lt;title&gt;NeuroWeb&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Bienvenue sur NeuroWeb&lt;/h1&gt;
+        &lt;p&gt;Ceci est un projet d'application d'interface cerveau-machine non-invasive pour la navigation web.&lt;/p&gt;
+        &lt;button id="alertButton"&gt;Bouton&lt;/button&gt;
+        &lt;button id="Button"&gt;Choisis le port&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;script src="neuroweb.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="neuroweb.css"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+
+        <div id="code-js" class="code-content">
             <pre>document.getElementById('Button').addEventListener('click', async () => {
     try {
         const port = await navigator.serial.requestPort();
@@ -743,29 +877,27 @@ const translations = {
     fr: {
         "view-github": "Voir le projet sur GitHub",
         "video-error": "Votre navigateur ne supporte pas la lecture de vidéos.",
-        "main-text": "Un site web simple où un bouton peut être déclenché par un clignement d'œil — sans les mains.<br><br>Vous trouverez ici les fichiers HTML, CSS et JavaScript pour exécuter le site web localement, ainsi que le code C++ pour Arduino. Le code Arduino a été repris d'<a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">un autre dépôt</a> créé par Upside Down Labs, la société qui a fabriqué la carte d'acquisition de signal que j'ai utilisée. D'un autre côté, les codes HTML, CSS et JavaScript ont été écrits par moi-même avec l'aide d'un ami pour le premier projet de NeuroTechSorbonne, un club étudiant de neurotechnologie à Sorbonne Université que nous avons fondé.<br><br>",
+        "readme-intro": "Un site web simple où un bouton peut être déclenché par un clignement d'œil — sans les mains.",
+        "readme-description": "Vous trouverez ici les fichiers HTML, CSS et JavaScript pour exécuter le site web localement, ainsi que le code C++ pour Arduino. Le code Arduino a été repris d'<a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">un autre dépôt</a> créé par Upside Down Labs, la société qui a fabriqué la carte d'acquisition de signal que j'ai utilisée. D'un autre côté, les codes HTML, CSS et JavaScript ont été écrits par moi-même avec l'aide d'un ami pour le premier projet de NeuroTechSorbonne, un club étudiant de neurotechnologie à Sorbonne Université que nous avons fondé.",
         "requirements-title": "Prérequis :",
         "requirements-text": "Cela ne fonctionne que sur Google Chrome car il utilise l'API Web Serial. Il nécessite également trois électrodes, une carte Arduino Uno et une carte d'acquisition de signal. Consultez le <a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">dépôt Upside Down Labs</a> pour la configuration matérielle.",
         "review-title": "Critique :",
         "review-text": "Le projet fonctionne bien mais est un peu trop sensible. De plus, c'est un projet éducatif et n'a pas d'application pratique réelle, car les clignements d'yeux se produisent fréquemment et nous ne voulons pas que le bouton soit déclenché tout le temps. Une façon de résoudre ce problème pourrait être d'utiliser l'apprentissage profond pour distinguer les clignements d'yeux délibérés des clignements inconscients.",
-        "code-cpp": "Code en C++ pour Arduino",
-        "code-html": "Code source HTML",
-        "code-css": "Code source CSS",
-        "code-js": "Code source JavaScript",
+        "repo-structure": "Structure du dépôt",
+        "view-on-github": "Voir sur GitHub",
         "test-btn": "Test →"
     },
     en: {
         "view-github": "View project on GitHub",
         "video-error": "Your browser does not support video playback.",
-        "main-text": "A simple website where a button can be triggered by an eye blink — hands-free.<br><br>Here you can find the HTML, CSS, and JavaScript files to run the website locally, as well as the C++ code for Arduino. The Arduino code was taken from <a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">another repository</a> created by Upside Down Labs, the company that built the board for signal acquisition that I used. On the other hand, the HTML, CSS, and JavaScript code were written by myself with the help of a friend for the first project of NeuroTechSorbonne, a neurotech student club at Sorbonne University which we founded.<br><br>",
+        "readme-intro": "A simple website where a button can be triggered by an eye blink — hands-free.",
+        "readme-description": "Here you can find the HTML, CSS, and JavaScript files to run the website locally, as well as the C++ code for Arduino. The Arduino code was taken from <a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">another repository</a> created by Upside Down Labs, the company that built the board for signal acquisition that I used. On the other hand, the HTML, CSS, and JavaScript code were written by myself with the help of a friend for the first project of NeuroTechSorbonne, a neurotech student club at Sorbonne University which we founded.",
         "requirements-title": "Requirements:",
         "requirements-text": "It only works on Google Chrome since it uses the Web Serial API. It also requires three electrodes, an Arduino Uno board, and a board for signal acquisition. Refer to the <a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">Upside Down Labs repository</a> for the hardware setup.",
         "review-title": "Review:",
         "review-text": "The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don't want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.",
-        "code-cpp": "C++ Code for Arduino",
-        "code-html": "HTML Source Code",
-        "code-css": "CSS Source Code",
-        "code-js": "JavaScript Source Code",
+        "repo-structure": "Repository Structure",
+        "view-on-github": "View on GitHub",
         "test-btn": "Test →"
     }
 };
@@ -805,17 +937,23 @@ changeLanguage(initialLang);
 document.getElementById('lang-fr').addEventListener('click', () => changeLanguage('fr'));
 document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
 
-// Toggle affichage des codes avec animation
-document.querySelectorAll('.code-header').forEach(header => {
-    header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const isOpen = content.style.display === 'block';
+// Gestion des clics sur les fichiers dans l'arborescence
+document.querySelectorAll('.file-item[data-file]').forEach(fileItem => {
+    fileItem.addEventListener('click', function() {
+        const fileType = this.getAttribute('data-file');
+        const codeSection = document.getElementById('code-' + fileType);
         
-        // Toggle class pour l'animation de la flèche
-        header.classList.toggle('open', !isOpen);
+        // Fermer toutes les sections de code
+        document.querySelectorAll('.code-content').forEach(section => {
+            section.classList.remove('active');
+        });
         
-        // Toggle display
-        content.style.display = isOpen ? 'none' : 'block';
+        // Ouvrir la section cliquée
+        if (codeSection) {
+            codeSection.classList.add('active');
+            // Scroll vers le code
+            codeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
     });
 });
 
@@ -841,4 +979,5 @@ toggle.addEventListener('change', () => {
 
 </body>
 </html>
+
 
