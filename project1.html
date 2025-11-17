@@ -108,12 +108,35 @@ input:checked + .slider:before {
 .language-switcher button:hover:not(.active) {
     background: #333;
 }
+.top-bar {
+    position: fixed;        /* reste toujours en haut */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* espace entre gauche et droite */
+    align-items: center;
+    padding: 1rem 1.5rem;
+    z-index: 300;           /* au-dessus de la sidebar et overlay */
+}
 
+/* Bouton home */
+.home-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid white;
+    display: block;
+}
+
+.home-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 /* Bouton menu sidebar - en haut à droite */
 .menu-button {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
     width: 45px;
     height: 45px;
     background: #4DA6FF;
@@ -731,7 +754,7 @@ body.light .language-switcher button:hover:not(.active) {
 
 
 <a href="index.html" class="home-button">
-    <img src="photo_cv.jpg" alt="Retour à l'accueil">
+    <img src="photo_cv.JPG" alt="Retour à l'accueil">
 </a>
 <!-- Bouton menu à droite -->
 <button class="menu-button" id="menu-button">
@@ -1252,6 +1275,7 @@ document.addEventListener('keydown', (e) => {
 
 </body>
 </html>
+
 
 
 
