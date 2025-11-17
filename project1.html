@@ -420,9 +420,61 @@ body.light .language-switcher button:hover:not(.active) {
 
 /* Media queries pour mobile */
 @media (max-width: 768px) {
+/* Boutons de Contrôle Gauche */
     .controls-wrapper {
         top: 0.5rem;
         left: 0.5rem;
+        gap: 0.4rem; /* Réduit l'espacement */
+    }
+    
+    /* Bouton Thème */
+    .theme-switch {
+        height: 26px; /* Réduit la hauteur */
+        width: 52px; /* Réduit la largeur */
+    }
+    
+    .slider:before {
+        height: 22px; /* Réduit l'icône */
+        width: 22px; /* Réduit l'icône */
+        left: 2px;
+        bottom: 2px;
+        font-size: 14px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(26px); /* Ajuste le déplacement */
+    }
+    
+    /* Boutons Langue */
+    .language-switcher {
+        padding: 0.2rem; /* Réduit le padding */
+        gap: 0.2rem; /* Réduit l'espacement */
+    }
+    
+    .language-switcher button {
+        padding: 0.3rem 0.6rem; /* Réduit le padding */
+        font-size: 0.8rem; /* Réduit la police */
+    }
+    
+    /* Bouton Menu Droite */
+    .menu-button {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 40px; /* Réduit la taille */
+        height: 40px; /* Réduit la taille */
+    }
+    
+    .menu-button span {
+        width: 22px; /* Réduit la largeur des barres */
+        height: 2px; /* Réduit l'épaisseur des barres */
+    }
+    
+    .menu-button.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px); /* Ajuste le point de pivot */
+    }
+    
+    .menu-button.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px); /* Ajuste le point de pivot */
     }
 
     header h1 {
@@ -978,6 +1030,7 @@ toggle.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
