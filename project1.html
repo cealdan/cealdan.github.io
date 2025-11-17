@@ -67,22 +67,52 @@ button.next-btn {
     cursor: pointer;
 }
 button.next-btn:hover { background-color: #0077cc;}
+header {
+    padding: 2rem 1rem;
+}
 
+header h1 {
+    margin-bottom: 1rem;
+}
 header a {
     color: #4da6ff; 
+}
+section {
+    padding: 0 1rem;
 }
 section a {
     color: #4da6ff; 
 }
-body.light .next-btn { color: #000000; }
-body.light .code-header { background: #f5f5f5; color: #000000; }
-body.light .code-block { background: #f5f5f5; color: #000000; }
 .text-container {
 	width: 100%;
     max-width: 95%;   /* largeur maximale pour le texte */
     margin: 0 auto;     /* centre horizontalement */
     padding-bottom: 2rem;      /* espace autour du texte */
 }
+.media-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.media-section img,
+.media-section video {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+}
+body.light .next-btn { color: #000000; }
+body.light .code-header { background: #f5f5f5; color: #000000; }
+body.light .code-block { background: #f5f5f5; color: #000000; }
+
 
 
 </style>
@@ -435,3 +465,4 @@ if(savedTheme === 'light') {
 
 </body>
 </html>
+
