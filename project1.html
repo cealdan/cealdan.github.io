@@ -295,7 +295,14 @@ document.querySelectorAll('.code-header').forEach(header => {
         content.style.display = content.style.display === 'block' ? 'none' : 'block';
     });
 });
+
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme === 'light') {
+    document.body.classList.add('light');
+    toggle.checked = true;
+}
 </script>
 
 </body>
 </html>
+
