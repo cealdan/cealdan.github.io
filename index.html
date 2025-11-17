@@ -111,11 +111,11 @@ footer p {
     margin-bottom: 0.5rem;
 }
 
-/* Switch thème */
+/* Switch thème - maintenant à gauche */
 .theme-switch-wrapper {
     position: fixed;
     top: 1rem;
-    right: 1rem;
+    left: 1rem;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -167,6 +167,125 @@ input:checked + .slider:before {
     background-color: #fff;
 }
 
+/* Bouton menu sidebar - en haut à droite */
+.menu-button {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 45px;
+    height: 45px;
+    background: #4DA6FF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    z-index: 101;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    background: #3a8fd9;
+}
+
+.menu-button span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.menu-button.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100vh;
+    background: #1c1c1c;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.5);
+    transition: right 0.3s ease;
+    z-index: 100;
+    overflow-y: auto;
+    padding: 5rem 2rem 2rem 2rem;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #4DA6FF;
+    border-bottom: 2px solid #4DA6FF;
+    padding-bottom: 0.5rem;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: #2a2a2a;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover {
+    background: #333;
+    border-left-color: #4DA6FF;
+    transform: translateX(-5px);
+}
+
+.sidebar-link h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.sidebar-link p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Overlay pour fermer la sidebar */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Thème clair */
 body.light { 
     background: #ffffff; 
@@ -195,6 +314,28 @@ body.light .project-card a:hover {
 body.light header p {
     background: rgba(255, 165, 0, 0.1);
     border-color: rgba(255, 165, 0, 0.5);
+}
+
+body.light .sidebar {
+    background: #f5f5f5;
+    border-left: 1px solid #ddd;
+}
+
+body.light .sidebar-link {
+    background: #e8e8e8;
+    color: #000;
+}
+
+body.light .sidebar-link:hover {
+    background: #d8d8d8;
+}
+
+body.light .menu-button {
+    background: #0077cc;
+}
+
+body.light .menu-button:hover {
+    background: #005fa3;
 }
 
 /* Canvas */
@@ -240,7 +381,19 @@ body.light header p {
     
     .theme-switch-wrapper {
         top: 0.5rem;
+        left: 0.5rem;
+    }
+    
+    .menu-button {
+        top: 0.5rem;
         right: 0.5rem;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .sidebar {
+        width: 85%;
+        right: -85%;
     }
 }
 
@@ -256,22 +409,56 @@ body.light header p {
     .project-card {
         padding: 1rem;
     }
+    
+    .sidebar {
+        width: 90%;
+        right: -90%;
+        padding: 4rem 1.5rem 2rem 1.5rem;
+    }
+    
+    .sidebar h2 {
+        font-size: 1.5rem;
+    }
 }
 </style>
 </head>
 <body>
 <canvas id="background-canvas"></canvas>
+
+<!-- Switch thème à gauche -->
 <div class="theme-switch-wrapper">
     <label class="theme-switch">
         <input type="checkbox" id="theme-toggle">
         <span class="slider"></span>
     </label>
 </div>
+
+<!-- Bouton menu à droite -->
+<button class="menu-button" id="menu-button">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+    <h2>Projets</h2>
+    <a href="project1.html" class="sidebar-link">
+        <h3>Blink Activated Alert Button</h3>
+        <p>Contrôle par clignement d'œil</p>
+    </a>
+    <!-- Ajoutez d'autres projets ici -->
+</nav>
+
 <header>
     <h1>Dimitri Boïdo</h1>
     <h2>Student at Sorbonne University, independent developer, and neurotechnology enthusiast.</h2>
     <p>⚠️ This website is being optimized for mobile. Some features may display better on desktop.</p>
 </header>
+
 <section>
     <div class="project-card">
         <h3>Blink Activated Alert Button</h3>
@@ -279,10 +466,12 @@ body.light header p {
         <a href="project1.html">Voir le projet →</a>
     </div>
 </section>
+
 <footer>
     <p>cealdan.dev@gmail.com</p>
     <p>Copyright © 2025 Dimitri Boïdo</p>
 </footer>
+
 <script>
 // Canvas background "bits"
 const canvas = document.getElementById('background-canvas');
@@ -296,7 +485,7 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-const numBits = window.innerWidth < 768 ? 100 : 200; // Moins de bits sur mobile
+const numBits = window.innerWidth < 768 ? 100 : 200;
 const bits = [];
 const colors = {
     dark: 'rgba(77, 166, 255, 0.7)',
@@ -336,7 +525,7 @@ draw();
 
 // Thème
 const toggle = document.getElementById('theme-toggle');
-const savedTheme = localStorage.getItem('theme');
+const savedTheme = window.localStorage ? localStorage.getItem('theme') : null;
 
 if(savedTheme === 'light') {
     document.body.classList.add('light');
@@ -346,12 +535,34 @@ if(savedTheme === 'light') {
 toggle.addEventListener('change', () => {
     if(toggle.checked){
         document.body.classList.add('light');
-        localStorage.setItem('theme', 'light');
+        if(window.localStorage) localStorage.setItem('theme', 'light');
     } else {
         document.body.classList.remove('light');
-        localStorage.setItem('theme', 'dark');
+        if(window.localStorage) localStorage.setItem('theme', 'dark');
+    }
+});
+
+// Sidebar
+const menuButton = document.getElementById('menu-button');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+function toggleSidebar() {
+    menuButton.classList.toggle('active');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+}
+
+menuButton.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', toggleSidebar);
+
+// Fermer la sidebar avec Escape
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && sidebar.classList.contains('active')) {
+        toggleSidebar();
     }
 });
 </script>
 </body>
 </html>
+
