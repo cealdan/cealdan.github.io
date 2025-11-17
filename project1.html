@@ -4,100 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blink Activated Alert Button</title>
-<link rel="stylesheet" href="style.css">
 <style>
-body { background: #111; color: #fff; overflow-x: hidden; }
-
-.code-block {
-    background: #222;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    font-family: monospace;
-    width: 95%; /* Changé de max-content à 95% */
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    overflow: hidden; /* Empêche le débordement */
-
-
-}
-
-.code-header {
-    cursor: pointer;
-    font-weight: bold;
-    padding: 0.5rem;
-    border-radius: 6px;
-
-}
-
-.code-content {
-    display: none;
-    margin-top: 0.5rem;
-    overflow-x: auto; /* Ajoute un scroll horizontal si nécessaire */
-
-}
-
-.code-content pre {
+* {
     margin: 0;
-    white-space: pre-wrap; /* Permet le retour à la ligne */
-    word-wrap: break-word; /* Force la coupure des mots longs */
-    overflow-wrap: break-word;
-    font-size: 0.85rem; /* Réduit légèrement la taille sur mobile */
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Media query pour mobile */
-@media (max-width: 768px) {
-    .code-content pre {
-        font-size: 0.75rem; /* Encore plus petit sur mobile */
-    }
-    
-    .code-block {
-        padding: 0.75rem;
-    }
+body { 
+    background: #111; 
+    color: #fff; 
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
 
-button.next-btn {
-    margin-top: 1.5rem;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    background-color: #4da6ff;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-button.next-btn:hover { background-color: #0077cc;}
 header {
     padding: 2rem 1rem;
+    text-align: center;
 }
 
 header h1 {
     margin-bottom: 1rem;
+    font-size: 2.2rem;
 }
+
 header a {
-    color: #4da6ff; 
+    color: #4da6ff;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #4da6ff;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
-section {
-    padding: 0 1rem;
-	box-sizing: border-box;
+
+header a:hover {
+    background: #4da6ff;
+    color: #111;
 }
-section a {
-    color: #4da6ff; 
-}
-.text-container {
-	width: 100%;
-    max-width: 95%;   /* largeur maximale pour le texte */
-    margin: 0 auto;     /* centre horizontalement */
-    padding-bottom: 2rem;      /* espace autour du texte */
-}
+
 .media-section {
     display: flex;
     justify-content: center;
     gap: 2rem;
     margin-top: 2rem;
     flex-wrap: wrap;
+    padding: 0 1rem;
 }
 
 .media-section img,
@@ -105,33 +59,260 @@ section a {
     max-width: 300px;
     width: 100%;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+section {
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section a {
+    color: #4da6ff;
+    text-decoration: underline;
+}
+
+.text-container {
+    width: 100%;
+    max-width: 95%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.text-container p {
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.code-block {
+    background: #222;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-family: monospace;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.code-header {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.75rem;
+    border-radius: 6px;
+    background: #333;
+    transition: background 0.3s ease;
+    user-select: none;
+}
+
+.code-header:hover {
+    background: #444;
+}
+
+.code-header::before {
+    content: "▶ ";
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.code-header.open::before {
+    transform: rotate(90deg);
+}
+
+.code-content {
+    display: none;
+    margin-top: 0.5rem;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.code-content pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+button.next-btn {
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #4da6ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button.next-btn:hover {
+    background-color: #0077cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(77, 166, 255, 0.4);
 }
 
 footer {
     text-align: center;
     padding: 2rem;
     color: #888;
+    font-size: 0.9rem;
+    margin-top: 3rem;
 }
-body.light .next-btn { color: #000000; }
-body.light .code-header { background: #f5f5f5; color: #000000; }
-body.light .code-block { background: #f5f5f5; color: #000000; }
 
+/* Thème clair */
+body.light {
+    background: #f5f5f5;
+    color: #000;
+}
 
+body.light .next-btn {
+    color: #000000;
+}
 
+body.light .code-header {
+    background: #e0e0e0;
+    color: #000000;
+}
+
+body.light .code-header:hover {
+    background: #d0d0d0;
+}
+
+body.light .code-block {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ddd;
+}
+
+body.light header a {
+    border-color: #0077cc;
+    color: #0077cc;
+}
+
+body.light header a:hover {
+    background: #0077cc;
+    color: #fff;
+}
+
+/* Media queries pour mobile */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header {
+        padding: 1.5rem 1rem;
+    }
+
+    header a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .media-section {
+        gap: 1rem;
+    }
+
+    .media-section img,
+    .media-section video {
+        max-width: 100%;
+    }
+
+    section {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .text-container p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .code-block {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .code-header {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .code-content pre {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
+    button.next-btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .text-container p {
+        font-size: 0.9rem;
+    }
+
+    .code-content pre {
+        font-size: 0.7rem;
+    }
+
+    .code-block {
+        padding: 0.5rem;
+    }
+}
+
+/* Amélioration du scroll horizontal sur mobile */
+@media (max-width: 768px) {
+    .code-content {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .code-content::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .code-content::-webkit-scrollbar-track {
+        background: #333;
+        border-radius: 3px;
+    }
+
+    .code-content::-webkit-scrollbar-thumb {
+        background: #4da6ff;
+        border-radius: 3px;
+    }
+}
 </style>
 </head>
 <body>
 
 <header>
     <h1>Blink Activated Alert Button</h1>
-    <a href="https://github.com/cealdan/BlinkActivatedAlertButton/" target="_blank">Voir le projet sur github</a>
-	<section class="media-section" style="display:flex; justify-content:center; gap:2rem; margin-top:2rem; flex-wrap:wrap;">
-    <img src="neuroweb.jpg" alt="Illustration" style="max-width:300px; width:100%; border-radius:10px;">
-    <video style="max-width:300px; width:100%; border-radius:10px;" autoplay muted loop>
-        <source src="neuroweb.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la lecture de vidéos.
-    </video>
-</section>
+    <a href="https://github.com/cealdan/BlinkActivatedAlertButton/" target="_blank">Voir le projet sur GitHub</a>
+    <div class="media-section">
+        <img src="neuroweb.jpg" alt="Illustration">
+        <video autoplay muted loop playsinline>
+            <source src="neuroweb.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+    </div>
 </header>
 
 <section>
@@ -145,12 +326,13 @@ body.light .code-block { background: #f5f5f5; color: #000000; }
             <strong>Requirements:</strong> It only works on Google Chrome since it uses the Web Serial API. It also requires three electrodes, an Arduino Uno board, and a board for signal acquisition. Refer to the 
             <a href="https://github.com/upsidedownlabs/BioAmp-EXG-Pill" target="_blank">Upside Down Labs repository</a> for the hardware setup.<br><br>
 
-            <strong>Review:</strong> The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don’t want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.
+            <strong>Review:</strong> The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don't want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.
         </p>
     </div>
+
     <div class="code-block">
-        <div class="code-header">Code en C++ pour arduino</div>
-		<div class="code-content">
+        <div class="code-header">Code en C++ pour Arduino</div>
+        <div class="code-content">
             <pre>// Eye Blink Detection (Experimental!) - BioAmp EXG Pill
 // https://github.com/upsidedownlabs/BioAmp-EXG-Pill
 
@@ -282,42 +464,39 @@ float EOGFilter(float input) {
     }
     return output;
 }</pre>
-	</div>
+        </div>
     </div>
+
     <div class="code-block">
         <div class="code-header">Code source HTML</div>
-		<div class="code-content">
-        <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;fr&quot;&gt;
+        <div class="code-content">
+            <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
 &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
     &lt;title&gt;NeuroWeb&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
+    &lt;div class="container"&gt;
         &lt;h1&gt;Bienvenue sur NeuroWeb&lt;/h1&gt;
         &lt;p&gt;Ceci est un projet d'application d'interface cerveau-machine non-invasive pour la navigation web.&lt;/p&gt;
-        &lt;button id=&quot;alertButton&quot;&gt;Bouton&lt;/button&gt;
-        &lt;button id=&quot;Button&quot;&gt;Choisis le port&lt;/button&gt;
+        &lt;button id="alertButton"&gt;Bouton&lt;/button&gt;
+        &lt;button id="Button"&gt;Choisis le port&lt;/button&gt;
     &lt;/div&gt;
 
-    &lt;script src=&quot;neuroweb.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;neuroweb.css&quot;&gt;
-    &lt;script type=&quot;py&quot; src=&quot;./neuroweb.css&quot; config=&quot;./pyscript.json&quot;&gt;&lt;/script&gt;
+    &lt;script src="neuroweb.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="neuroweb.css"&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-        </pre>
+&lt;/html&gt;</pre>
+        </div>
     </div>
-	</div>
 
     <div class="code-block">
         <div class="code-header">Code source CSS</div>
-		<div class="code-content">
-        <pre>
-* {
+        <div class="code-content">
+            <pre>* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -386,21 +565,20 @@ p {
 
 #alertButton:hover {
     background-color: #0f7e3d;
-}
-        </pre>
+}</pre>
+        </div>
     </div>
-	</div>
+
     <div class="code-block">
         <div class="code-header">Code source JavaScript</div>
-		<div class="code-content">
-        <pre>
-document.getElementById(&#39;Button&#39;).addEventListener(&#39;click&#39;, async () =&gt; {
+        <div class="code-content">
+            <pre>document.getElementById('Button').addEventListener('click', async () => {
     try {
         const port = await navigator.serial.requestPort();
         await port.open({ baudRate: 115200 });
 
         const reader = port.readable.getReader();
-        const buttonToClick = document.getElementById(&#39;alertButton&#39;); 
+        const buttonToClick = document.getElementById('alertButton'); 
 
         while (true) {
             const { done, value } = await reader.read();
@@ -410,47 +588,47 @@ document.getElementById(&#39;Button&#39;).addEventListener(&#39;click&#39;, asyn
             const data = decoder.decode(value);
             console.log(data);
 
-            if (data.trim() === &#39;1&#39;) {
-                alert(&quot;Tu as navigué sur ce site avec ton esprit...&quot;);
+            if (data.trim() === '1') {
+                alert("Tu as navigué sur ce site avec ton esprit...");
             }
         }
 
         reader.releaseLock();
     } catch (error) {
-        console.error(&quot;Error: &quot;, error);
+        console.error("Error: ", error);
     }
-});
-        </pre>
+});</pre>
+        </div>
     </div>
-	</div>
 
     <button class="next-btn" onclick="window.location.href='neuroweb.html'">Test →</button>
 </section>
+
 <footer>
     Copyright © 2025 Dimitri Boïdo
 </footer>
-<script>
 
-// Toggle affichage des codes
+<script>
+// Toggle affichage des codes avec animation
 document.querySelectorAll('.code-header').forEach(header => {
     header.addEventListener('click', () => {
         const content = header.nextElementSibling;
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        const isOpen = content.style.display === 'block';
+        
+        // Toggle class pour l'animation de la flèche
+        header.classList.toggle('open', !isOpen);
+        
+        // Toggle display
+        content.style.display = isOpen ? 'none' : 'block';
     });
 });
 
-
-
+// Gestion du thème (si tu veux l'ajouter plus tard)
 const savedTheme = localStorage.getItem('theme');
 if(savedTheme === 'light') {
     document.body.classList.add('light');
-    toggle.checked = true;
 }
 </script>
 
 </body>
 </html>
-
-
-
-
