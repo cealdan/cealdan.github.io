@@ -1168,10 +1168,33 @@ toggle.addEventListener('change', () => {
         if(window.localStorage) localStorage.setItem('theme', 'dark');
     }
 });
+
+
+// Sidebar
+const menuButton = document.getElementById('menu-button');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+function toggleSidebar() {
+    menuButton.classList.toggle('active');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+}
+
+menuButton.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', toggleSidebar);
+
+// Fermer la sidebar avec Escape
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && sidebar.classList.contains('active')) {
+        toggleSidebar();
+    }
+});
 </script>
 
 </body>
 </html>
+
 
 
 
