@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blink Activated Alert Button</title>
-<link rel="stylesheet" href="style.css">
 <style>
-body { background: #111; color: #fff; }
+body { 
+    background: #111; 
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
 
 .code-block {
     background: #222;
@@ -14,10 +18,10 @@ body { background: #111; color: #fff; }
     border-radius: 8px;
     margin-bottom: 1rem;
     font-family: monospace;
-    width: max-content;
+    width: 100%; /* Changé de max-content à 100% */
     max-width: 100%;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-
+    overflow: hidden; /* Empêche le débordement */
 }
 
 .code-header {
@@ -30,8 +34,28 @@ body { background: #111; color: #fff; }
 .code-content {
     display: none;
     margin-top: 0.5rem;
+    overflow-x: auto; /* Ajoute un scroll horizontal si nécessaire */
+    max-width: 100%;
 }
 
+.code-content pre {
+    margin: 0;
+    white-space: pre-wrap; /* Permet le retour à la ligne */
+    word-wrap: break-word; /* Force la coupure des mots longs */
+    overflow-wrap: break-word;
+    font-size: 0.85rem; /* Réduit légèrement la taille sur mobile */
+}
+
+/* Media query pour mobile */
+@media (max-width: 768px) {
+    .code-content pre {
+        font-size: 0.75rem; /* Encore plus petit sur mobile */
+    }
+    
+    .code-block {
+        padding: 0.75rem;
+    }
+}
 
 button.next-btn {
     margin-top: 1.5rem;
@@ -43,25 +67,58 @@ button.next-btn {
     border-radius: 8px;
     cursor: pointer;
 }
-button.next-btn:hover { background-color: #0077cc;}
+
+button.next-btn:hover { 
+    background-color: #0077cc;
+}
+
+header {
+    padding: 2rem 1rem;
+}
+
+header h1 {
+    margin-bottom: 1rem;
+}
 
 header a {
     color: #4da6ff; 
 }
+
+section {
+    padding: 0 1rem;
+}
+
 section a {
     color: #4da6ff; 
 }
-body.light .next-btn { color: #000000; }
-body.light .code-header { background: #f5f5f5; color: #000000; }
-body.light .code-block { background: #f5f5f5; color: #000000; }
+
 .text-container {
-	width: 100%;
-    max-width: 95%;   /* largeur maximale pour le texte */
-    margin: 0 auto;     /* centre horizontalement */
-    padding-bottom: 2rem;      /* espace autour du texte */
+    width: 100%;
+    max-width: 95%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
 }
 
+.media-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
 
+.media-section img,
+.media-section video {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+}
 </style>
 </head>
 <body>
@@ -69,13 +126,13 @@ body.light .code-block { background: #f5f5f5; color: #000000; }
 <header>
     <h1>Blink Activated Alert Button</h1>
     <a href="https://github.com/cealdan/BlinkActivatedAlertButton/" target="_blank">Voir le projet sur github</a>
-	<section class="media-section" style="display:flex; justify-content:center; gap:2rem; margin-top:2rem; flex-wrap:wrap;">
-    <img src="neuroweb.jpg" alt="Illustration" style="max-width:300px; width:100%; border-radius:10px;">
-    <video style="max-width:300px; width:100%; border-radius:10px;" autoplay muted loop>
-        <source src="neuroweb.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la lecture de vidéos.
-    </video>
-</section>
+    <div class="media-section">
+        <img src="neuroweb.jpg" alt="Illustration">
+        <video autoplay muted loop>
+            <source src="neuroweb.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+    </div>
 </header>
 
 <section>
@@ -89,199 +146,84 @@ body.light .code-block { background: #f5f5f5; color: #000000; }
             <strong>Requirements:</strong> It only works on Google Chrome since it uses the Web Serial API. It also requires three electrodes, an Arduino Uno board, and a board for signal acquisition. Refer to the 
             <a href="https://github.com/upsidedownlabs/BioAmp-EXG-Pill" target="_blank">Upside Down Labs repository</a> for the hardware setup.<br><br>
 
-            <strong>Review:</strong> The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don’t want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.
+            <strong>Review:</strong> The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don't want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.
         </p>
     </div>
+    
     <div class="code-block">
         <div class="code-header">Code en C++ pour arduino</div>
-        <pre class="code-content">
-// Eye Blink Detection (Experimental!) - BioAmp EXG Pill<br>
-// https://github.com/upsidedownlabs/BioAmp-EXG-Pill<br>
-<br>
-// Upside Down Labs invests time and resources providing this open source code,<br>
-// please support Upside Down Labs and open-source hardware by purchasing<br>
-// products from Upside Down Labs!<br>
-<br>
-// Copyright (c) 2021 Upside Down Labs - contact@upsidedownlabs.tech<br>
-<br>
-// Permission is hereby granted, free of charge, to any person obtaining a copy<br>
-// of this software and associated documentation files (the &quot;Software&quot;), to deal<br>
-// in the Software without restriction, including without limitation the rights<br>
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br>
-// copies of the Software, and to permit persons to whom the Software is<br>
-// furnished to do so, subject to the following conditions:<br>
-<br>
-// The above copyright notice and this permission notice shall be included in all<br>
-// copies or substantial portions of the Software.<br>
-<br>
-// THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br>
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br>
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br>
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br>
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br>
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<br>
-// SOFTWARE.<br>
-<br>
-#include &lt;math.h&gt;<br>
-<br>
-#define SAMPLE_RATE 75<br>
-#define BAUD_RATE 115200<br>
-#define INPUT_PIN A0<br>
-#define OUTPUT_PIN 13<br>
-#define DATA_LENGTH 10<br>
-<br>
-int data_index = 0;<br>
-bool peak = false;<br>
-<br>
-<br>
-void setup() {<br>
-	// Serial connection begin<br>
-	Serial.begin(BAUD_RATE);<br>
-	// Setup Input &amp; Output pin<br>
-	pinMode(INPUT_PIN, INPUT);<br>
-	pinMode(OUTPUT_PIN, OUTPUT);<br>
-}<br>
-<br>
-void loop() {<br>
-	// Calculate elapsed time<br>
-	static unsigned long past = 0;<br>
-	unsigned long present = micros();<br>
-	unsigned long interval = present - past;<br>
-	past = present;<br>
-<br>
-	// Run timer<br>
-	static long timer = 0;<br>
-	timer -= interval;<br>
-<br>
-	// Sample<br>
-	if(timer &lt; 0){<br>
-		timer += 1000000 / SAMPLE_RATE;<br>
-    	// Sample and Nomalize input data (-1 to 1)<br>
-		float sensor_value = analogRead(INPUT_PIN);<br>
-		float signal = EOGFilter(sensor_value)/512;<br>
-    	// Get peak<br>
-    	peak = Getpeak(signal);<br>
-    	// Print sensor_value and peak<br>
-    	Serial.print(signal);<br>
-    	Serial.print(&quot;,&quot;);<br>
-    	Serial.println(peak);<br>
-    	// Blink LED on peak<br>
-    	digitalWrite(OUTPUT_PIN, peak);<br>
-	}<br>
-}<br>
-<br>
-bool Getpeak(float new_sample) {<br>
-	// Buffers for data, mean, and standard deviation<br>
-	static float data_buffer[DATA_LENGTH];<br>
-	static float mean_buffer[DATA_LENGTH];<br>
-	static float standard_deviation_buffer[DATA_LENGTH];<br>
-  <br>
-	// Check for peak<br>
-	if (new_sample - mean_buffer[data_index] &gt; (DATA_LENGTH*1.2) * standard_deviation_buffer[data_index]) {<br>
-		data_buffer[data_index] = new_sample + data_buffer[data_index];<br>
-		peak = true;<br>
-	} else {<br>
-		data_buffer[data_index] = new_sample;<br>
-		peak = false;<br>
-	}<br>
-<br>
-	// Calculate mean<br>
-	float sum = 0.0, mean, standard_deviation = 0.0;<br>
-	for (int i = 0; i &lt; DATA_LENGTH; ++i){<br>
-		sum += data_buffer[(data_index + i) % DATA_LENGTH];<br>
-	}<br>
-	mean = sum/DATA_LENGTH;<br>
-<br>
-	// Calculate standard deviation<br>
-	for (int i = 0; i &lt; DATA_LENGTH; ++i){<br>
-		standard_deviation += pow(data_buffer[(i) % DATA_LENGTH] - mean, 2);<br>
-	}<br>
-<br>
-	// Update mean buffer<br>
-	mean_buffer[data_index] = mean;<br>
-<br>
-	// Update standard deviation buffer<br>
-	standard_deviation_buffer[data_index] =  sqrt(standard_deviation/DATA_LENGTH);<br>
-<br>
-	// Update data_index<br>
-	data_index = (data_index+1)%DATA_LENGTH;<br>
-<br>
-	// Return peak<br>
-	return peak;<br>
-}<br>
-<br>
-// Band-Pass Butterworth IIR digital filter, generated using filter_gen.py.<br>
-// Sampling rate: 75.0 Hz, frequency: [0.5, 19.5] Hz.<br>
-// Filter is order 4, implemented as second-order sections (biquads).<br>
-// Reference: <br>
-// https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html<br>
-// https://courses.ideate.cmu.edu/16-223/f2020/Arduino/FilterDemos/filter_gen.py<br>
-float EOGFilter(float input)<br>
-{<br>
-  float output = input;<br>
-  {<br>
-    static float z1, z2; // filter section state<br>
-    float x = output - 0.02977423*z1 - 0.04296318*z2;<br>
-    output = 0.09797471*x + 0.19594942*z1 + 0.09797471*z2;<br>
-    z2 = z1;<br>
-    z1 = x;<br>
-  }<br>
-  {<br>
-    static float z1, z2; // filter section state<br>
-    float x = output - 0.08383952*z1 - 0.46067709*z2;<br>
-    output = 1.00000000*x + 2.00000000*z1 + 1.00000000*z2;<br>
-    z2 = z1;<br>
-    z1 = x;<br>
-  }<br>
-  {<br>
-    static float z1, z2; // filter section state<br>
-    float x = output - -1.92167271*z1 - 0.92347975*z2;<br>
-    output = 1.00000000*x + -2.00000000*z1 + 1.00000000*z2;<br>
-    z2 = z1;<br>
-    z1 = x;<br>
-  }<br>
-  {<br>
-    static float z1, z2; // filter section state<br>
-    float x = output - -1.96758891*z1 - 0.96933514*z2;<br>
-    output = 1.00000000*x + -2.00000000*z1 + 1.00000000*z2;<br>
-    z2 = z1;<br>
-    z1 = x;<br>
-  }<br>
-  return output;<br>
-}<br>
-        </pre>
+        <div class="code-content">
+            <pre>// Eye Blink Detection (Experimental!) - BioAmp EXG Pill
+// https://github.com/upsidedownlabs/BioAmp-EXG-Pill
+
+#include &lt;math.h&gt;
+
+#define SAMPLE_RATE 75
+#define BAUD_RATE 115200
+#define INPUT_PIN A0
+#define OUTPUT_PIN 13
+#define DATA_LENGTH 10
+
+int data_index = 0;
+bool peak = false;
+
+void setup() {
+    Serial.begin(BAUD_RATE);
+    pinMode(INPUT_PIN, INPUT);
+    pinMode(OUTPUT_PIN, OUTPUT);
+}
+
+void loop() {
+    static unsigned long past = 0;
+    unsigned long present = micros();
+    unsigned long interval = present - past;
+    past = present;
+
+    static long timer = 0;
+    timer -= interval;
+
+    if(timer < 0){
+        timer += 1000000 / SAMPLE_RATE;
+        float sensor_value = analogRead(INPUT_PIN);
+        float signal = EOGFilter(sensor_value)/512;
+        peak = Getpeak(signal);
+        Serial.print(signal);
+        Serial.print(",");
+        Serial.println(peak);
+        digitalWrite(OUTPUT_PIN, peak);
+    }
+}</pre>
+        </div>
     </div>
+
     <div class="code-block">
         <div class="code-header">Code source HTML</div>
-        <pre class="code-content">
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;fr&quot;&gt;
+        <div class="code-content">
+            <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
 &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;title&gt;NeuroWeb&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
+    &lt;div class="container"&gt;
         &lt;h1&gt;Bienvenue sur NeuroWeb&lt;/h1&gt;
         &lt;p&gt;Ceci est un projet d'application d'interface cerveau-machine non-invasive pour la navigation web.&lt;/p&gt;
-        &lt;button id=&quot;alertButton&quot;&gt;Bouton&lt;/button&gt;
-        &lt;button id=&quot;Button&quot;&gt;Choisis le port&lt;/button&gt;
+        &lt;button id="alertButton"&gt;Bouton&lt;/button&gt;
+        &lt;button id="Button"&gt;Choisis le port&lt;/button&gt;
     &lt;/div&gt;
-
-    &lt;script src=&quot;neuroweb.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;neuroweb.css&quot;&gt;
-    &lt;script type=&quot;py&quot; src=&quot;./neuroweb.css&quot; config=&quot;./pyscript.json&quot;&gt;&lt;/script&gt;
+    &lt;script src="neuroweb.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="neuroweb.css"&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-        </pre>
+&lt;/html&gt;</pre>
+        </div>
     </div>
 
     <div class="code-block">
         <div class="code-header">Code source CSS</div>
-        <pre class="code-content">
-* {
+        <div class="code-content">
+            <pre>* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -294,7 +236,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 .container {
@@ -303,96 +244,50 @@ body {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #666;
-    margin-bottom: 30px;
-}
-
-#alertButton {
-    padding: 50px 150px;
-    background-color: #1dbb4c;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute;
-    bottom: 70%;
-    right: 50%;
-    transform: translate(50%);
-    font-size: 30px;
-}
-
-#Button {
-    padding: 10px 30px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute;
-    right: 50%;
-    transform: translate(50%);
-    font-size: 15px;
-}
-
-#Button:hover {
-    background-color: #2980b9;
-}
-
-#alertButton:hover {
-    background-color: #0f7e3d;
-}
-        </pre>
+}</pre>
+        </div>
     </div>
 
     <div class="code-block">
         <div class="code-header">Code source JavaScript</div>
-        <pre class="code-content">
-document.getElementById(&#39;Button&#39;).addEventListener(&#39;click&#39;, async () =&gt; {
+        <div class="code-content">
+            <pre>document.getElementById('Button').addEventListener('click', async () => {
     try {
         const port = await navigator.serial.requestPort();
         await port.open({ baudRate: 115200 });
-
+        
         const reader = port.readable.getReader();
-        const buttonToClick = document.getElementById(&#39;alertButton&#39;); 
-
+        const buttonToClick = document.getElementById('alertButton');
+        
         while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-
+            
             const decoder = new TextDecoder();
             const data = decoder.decode(value);
             console.log(data);
-
-            if (data.trim() === &#39;1&#39;) {
-                alert(&quot;Tu as navigué sur ce site avec ton esprit...&quot;);
+            
+            if (data.trim() === '1') {
+                alert("Tu as navigué sur ce site avec ton esprit...");
             }
         }
-
+        
         reader.releaseLock();
     } catch (error) {
-        console.error(&quot;Error: &quot;, error);
+        console.error("Error: ", error);
     }
-});
-        </pre>
+});</pre>
+        </div>
     </div>
 
-    <button class="next-btn" onclick="window.location.href='neuroweb.html'">Test →</button>
+    <button class="next-btn" onclick="alert('Test page')">Test →</button>
 </section>
+
 <footer>
     Copyright © 2025 Dimitri Boïdo
 </footer>
+
 <script>
-
 // Toggle affichage des codes
 document.querySelectorAll('.code-header').forEach(header => {
     header.addEventListener('click', () => {
@@ -400,54 +295,7 @@ document.querySelectorAll('.code-header').forEach(header => {
         content.style.display = content.style.display === 'block' ? 'none' : 'block';
     });
 });
-
-// 1. Ouvre tous les blocs pour mesurer la largeur
-document.querySelectorAll('.code-content').forEach(c => {
-    c.style.display = 'block';
-});
-
-// 2. Trouve la largeur maximale des code-block
-let maxWidth = 0;
-document.querySelectorAll('.code-block').forEach(block => {
-    maxWidth = Math.max(maxWidth, block.offsetWidth);
-});
-
-// 3. Fixe cette largeur pour tous les blocs
-document.querySelectorAll('.code-block').forEach(block => {
-    block.style.width = maxWidth + 'px';
-});
-
-// 4. Referme les contenus (comme au début)
-document.querySelectorAll('.code-content').forEach(c => {
-    c.style.display = 'none';
-});
-// Toggle affichage des codes
-document.querySelectorAll('.code-header').forEach(header => {
-    header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
-    });
-});
-
-const savedTheme = localStorage.getItem('theme');
-if(savedTheme === 'light') {
-    document.body.classList.add('light');
-    toggle.checked = true;
-}
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
