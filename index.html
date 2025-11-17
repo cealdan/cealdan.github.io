@@ -111,15 +111,22 @@ footer p {
     margin-bottom: 0.5rem;
 }
 
-/* Switch thème - maintenant à gauche */
-.theme-switch-wrapper {
+/* Controls wrapper */
+.controls-wrapper {
     position: fixed;
     top: 1rem;
     left: 1rem;
     display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 100;
+}
+
+/* Switch thème */
+.theme-switch-wrapper {
+    display: flex;
     align-items: center;
     cursor: pointer;
-    z-index: 100;
 }
 
 .theme-switch {
@@ -165,6 +172,35 @@ input:checked + .slider:before {
     transform: translateX(30px);
     content: "🔆";
     background-color: #fff;
+}
+
+/* Language switcher */
+.language-switcher {
+    display: flex;
+    gap: 0.3rem;
+    background: #1c1c1c;
+    padding: 0.3rem;
+    border-radius: 20px;
+}
+
+.language-switcher button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.language-switcher button.active {
+    background: #4DA6FF;
+}
+
+.language-switcher button:hover:not(.active) {
+    background: #333;
 }
 
 /* Bouton menu sidebar - en haut à droite */
@@ -338,6 +374,23 @@ body.light .menu-button:hover {
     background: #005fa3;
 }
 
+body.light .language-switcher {
+    background: #e8e8e8;
+}
+
+body.light .language-switcher button {
+    color: #000;
+}
+
+body.light .language-switcher button.active {
+    background: #0077cc;
+    color: #fff;
+}
+
+body.light .language-switcher button:hover:not(.active) {
+    background: #d0d0d0;
+}
+
 /* Canvas */
 #background-canvas {
     position: fixed;
@@ -379,7 +432,7 @@ body.light .menu-button:hover {
         font-size: 1.3rem;
     }
     
-    .theme-switch-wrapper {
+    .controls-wrapper {
         top: 0.5rem;
         left: 0.5rem;
     }
@@ -425,12 +478,17 @@ body.light .menu-button:hover {
 <body>
 <canvas id="background-canvas"></canvas>
 
-<!-- Switch thème à gauche -->
-<div class="theme-switch-wrapper">
+<!-- Controls à gauche -->
+<div class="controls-wrapper">
     <label class="theme-switch">
         <input type="checkbox" id="theme-toggle">
         <span class="slider"></span>
     </label>
+    
+    <div class="language-switcher">
+        <button id="lang-fr" class="active">FR</button>
+        <button id="lang-en">EN</button>
+    </div>
 </div>
 
 <!-- Bouton menu à droite -->
@@ -445,25 +503,24 @@ body.light .menu-button:hover {
 
 <!-- Sidebar -->
 <nav class="sidebar" id="sidebar">
-    <h2>Projets</h2>
+    <h2 data-lang="projects">Projets</h2>
     <a href="project1.html" class="sidebar-link">
         <h3>Blink Activated Alert Button</h3>
-        <p>Contrôle par clignement d'œil</p>
+        <p data-lang="project1-desc">Contrôle par clignement d'œil</p>
     </a>
-    <!-- Ajoutez d'autres projets ici -->
 </nav>
 
 <header>
     <h1>Dimitri Boïdo</h1>
-    <h2>Student at Sorbonne University, independent developer, and neurotechnology enthusiast.</h2>
-    <p>⚠️ This website is being optimized for mobile. Some features may display better on desktop.</p>
+    <h2 data-lang="subtitle">Student at Sorbonne University, independent developer, and neurotechnology enthusiast.</h2>
+    <p data-lang="warning">⚠️ This website is being optimized for mobile. Some features may display better on desktop.</p>
 </header>
 
 <section>
     <div class="project-card">
         <h3>Blink Activated Alert Button</h3>
-        <p>An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.</p>
-        <a href="project1.html">Voir le projet →</a>
+        <p data-lang="project1-full">An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.</p>
+        <a href="project1.html" data-lang="view-project">Voir le projet →</a>
     </div>
 </section>
 
@@ -473,6 +530,61 @@ body.light .menu-button:hover {
 </footer>
 
 <script>
+// Traductions
+const translations = {
+    fr: {
+        subtitle: "Étudiant à Sorbonne Université, développeur indépendant et passionné de neurotechnologie.",
+        warning: "⚠️ Ce site est en cours d'optimisation pour mobile. Certaines fonctionnalités s'affichent mieux sur ordinateur.",
+        projects: "Projets",
+        "project1-desc": "Contrôle par clignement d'œil",
+        "project1-full": "Un projet expérimental utilisant un microcontrôleur et un capteur musculaire pour déclencher une action via un clignement d'œil. Une exploration du contrôle assistif et des interfaces naturelles.",
+        "view-project": "Voir le projet →"
+    },
+    en: {
+        subtitle: "Student at Sorbonne University, independent developer, and neurotechnology enthusiast.",
+        warning: "⚠️ This website is being optimized for mobile. Some features may display better on desktop.",
+        projects: "Projects",
+        "project1-desc": "Eye blink control",
+        "project1-full": "An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.",
+        "view-project": "View project →"
+    }
+};
+
+// Détecter la langue du navigateur
+function detectLanguage() {
+    const browserLang = navigator.language || navigator.userLanguage;
+    return browserLang.startsWith('fr') ? 'fr' : 'en';
+}
+
+// Changer la langue
+function changeLanguage(lang) {
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        if (translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+    
+    // Mettre à jour les boutons actifs
+    document.getElementById('lang-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    
+    // Sauvegarder le choix
+    if(window.localStorage) localStorage.setItem('language', lang);
+    
+    // Mettre à jour l'attribut lang de la page
+    document.documentElement.lang = lang;
+}
+
+// Initialiser la langue
+const savedLang = window.localStorage ? localStorage.getItem('language') : null;
+const initialLang = savedLang || detectLanguage();
+changeLanguage(initialLang);
+
+// Event listeners pour les boutons de langue
+document.getElementById('lang-fr').addEventListener('click', () => changeLanguage('fr'));
+document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
+
 // Canvas background "bits"
 const canvas = document.getElementById('background-canvas');
 const ctx = canvas.getContext('2d');
@@ -565,5 +677,6 @@ document.addEventListener('keydown', (e) => {
 </script>
 </body>
 </html>
+
 
 
