@@ -225,15 +225,10 @@ input:checked + .slider:before {
     z-index: 100;
     overflow-y: auto;
     padding: 5rem 2rem 2rem 2rem;
-    touch-action: pan-y;
 }
 
 .sidebar.active {
     right: 0;
-}
-
-.sidebar.dragging {
-    transition: none;
 }
 
 .sidebar h2 {
@@ -397,8 +392,8 @@ body.light .menu-button:hover {
     }
     
     .sidebar {
-        width: 75%;
-        right: -75%;
+        width: 85%;
+        right: -85%;
     }
 }
 
@@ -416,8 +411,8 @@ body.light .menu-button:hover {
     }
     
     .sidebar {
-        width: 80%;
-        right: -80%;
+        width: 90%;
+        right: -90%;
         padding: 4rem 1.5rem 2rem 1.5rem;
     }
     
@@ -547,7 +542,7 @@ toggle.addEventListener('change', () => {
     }
 });
 
-// Sidebar avec swipe
+// Sidebar
 const menuButton = document.getElementById('menu-button');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
@@ -558,107 +553,15 @@ function toggleSidebar() {
     overlay.classList.toggle('active');
 }
 
-function openSidebar() {
-    menuButton.classList.add('active');
-    sidebar.classList.add('active');
-    overlay.classList.add('active');
-}
-
-function closeSidebar() {
-    menuButton.classList.remove('active');
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
-}
-
 menuButton.addEventListener('click', toggleSidebar);
-overlay.addEventListener('click', closeSidebar);
+overlay.addEventListener('click', toggleSidebar);
 
 // Fermer la sidebar avec Escape
 document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape' && sidebar.classList.contains('active')) {
-        closeSidebar();
+        toggleSidebar();
     }
 });
-
-// Gestion du swipe sur mobile
-let touchStartX = 0;
-let touchEndX = 0;
-let touchStartY = 0;
-let touchEndY = 0;
-let isDragging = false;
-let startRight = 0;
-
-// Swipe depuis le bord droit pour ouvrir
-document.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-    
-    // Détection du swipe depuis le bord droit (zone de 30px)
-    if(touchStartX > window.innerWidth - 30 && !sidebar.classList.contains('active')) {
-        isDragging = true;
-        sidebar.classList.add('dragging');
-    }
-    
-    // Si la sidebar est ouverte et on touche dessus
-    if(sidebar.classList.contains('active') && touchStartX > window.innerWidth - sidebar.offsetWidth) {
-        isDragging = true;
-        sidebar.classList.add('dragging');
-        startRight = 0;
-    }
-}, { passive: true });
-
-document.addEventListener('touchmove', (e) => {
-    if(!isDragging) return;
-    
-    touchEndX = e.changedTouches[0].screenX;
-    const deltaX = touchStartX - touchEndX;
-    
-    // Si on ouvre depuis le bord
-    if(!sidebar.classList.contains('active')) {
-        if(deltaX < 0) { // Swipe vers la gauche
-            const movement = Math.abs(deltaX);
-            const maxWidth = sidebar.offsetWidth;
-            const newRight = -maxWidth + movement;
-            sidebar.style.right = Math.min(0, newRight) + 'px';
-        }
-    } else {
-        // Si on ferme (swipe vers la droite)
-        if(deltaX > 0) {
-            sidebar.style.right = -deltaX + 'px';
-        }
-    }
-}, { passive: true });
-
-document.addEventListener('touchend', (e) => {
-    if(!isDragging) return;
-    
-    touchEndX = e.changedTouches[0].screenX;
-    touchEndY = e.changedTouches[0].screenY;
-    
-    const deltaX = touchStartX - touchEndX;
-    const deltaY = Math.abs(touchStartY - touchEndY);
-    
-    sidebar.classList.remove('dragging');
-    sidebar.style.right = '';
-    
-    // Vérifier que c'est bien un swipe horizontal (pas vertical)
-    if(Math.abs(deltaX) > deltaY) {
-        // Seuil de 50px pour valider le swipe
-        if(!sidebar.classList.contains('active')) {
-            // Ouverture
-            if(deltaX < -50) {
-                openSidebar();
-            }
-        } else {
-            // Fermeture
-            if(deltaX > 50) {
-                closeSidebar();
-            }
-        }
-    }
-    
-    isDragging = false;
-}, { passive: true });
 </script>
 </body>
 </html>
