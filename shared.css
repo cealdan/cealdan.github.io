@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.5rem;
-    z-index: 300;
+    z-index: 350;
 }
 
 .home-button {
@@ -37,7 +37,8 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    z-index: 301;
+    z-index: 351;
+    position: relative;
     transition: all 0.3s ease;
 }
 
