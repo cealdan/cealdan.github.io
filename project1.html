@@ -403,7 +403,7 @@ body.light .project-header a:hover {
 
 <header class="project-header">
     <h1>Blink Activated Alert Button</h1>
-    <p class="project-date" data-lang="project1-date">Octobre 2024</p>
+    <p class="project-date" data-lang="project1-date">Octobre 2024 (terminé)</p>
 </header>
 
 <section>
@@ -759,36 +759,6 @@ p {
 
 <script src="shared.js"></script>
 <script>
-const pageTranslations = {
-    fr: {
-        "project1-date": "Octobre 2024",
-        "view-github": "Voir le projet sur GitHub",
-        "video-error": "Votre navigateur ne supporte pas la lecture de vidéos.",
-        "readme-intro": "Un site web simple où un bouton peut être déclenché par un clignement d'œil — sans les mains.",
-        "readme-description": "Vous trouverez ici les fichiers HTML, CSS et JavaScript pour exécuter le site web localement, ainsi que le code C++ pour Arduino. Le code Arduino a été repris d'<a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">un autre dépôt</a> créé par Upside Down Labs, la société qui a fabriqué la carte d'acquisition de signal que j'ai utilisée. D'un autre côté, les codes HTML, CSS et JavaScript ont été écrits par moi-même avec l'aide d'un ami pour le premier projet de NeuroTechSorbonne, un club étudiant de neurotechnologie à Sorbonne Université que nous avons fondé.",
-        "requirements-title": "Prérequis :",
-        "requirements-text": "Cela ne fonctionne que sur Google Chrome car il utilise l'API Web Serial. Il nécessite également trois électrodes, une carte Arduino Uno et une carte d'acquisition de signal. Consultez le <a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">dépôt Upside Down Labs</a> pour la configuration matérielle.",
-        "review-title": "Critique :",
-        "review-text": "Le projet fonctionne bien mais est un peu trop sensible. De plus, c'est un projet éducatif et n'a pas d'application pratique réelle, car les clignements d'yeux se produisent fréquemment et nous ne voulons pas que le bouton soit déclenché tout le temps. Une façon de résoudre ce problème pourrait être d'utiliser l'apprentissage profond pour distinguer les clignements d'yeux délibérés des clignements inconscients.",
-        "repo-structure": "Arborescence du projet",
-        "view-on-github": "Voir sur GitHub",
-        "test-btn": "Test →"
-    },
-    en: {
-        "project1-date": "October 2024",
-        "view-github": "View project on GitHub",
-        "video-error": "Your browser does not support video playback.",
-        "readme-intro": "A simple website where a button can be triggered by an eye blink — hands-free.",
-        "readme-description": "Here you can find the HTML, CSS, and JavaScript files to run the website locally, as well as the C++ code for Arduino. The Arduino code was taken from <a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">another repository</a> created by Upside Down Labs, the company that built the board for signal acquisition that I used. On the other hand, the HTML, CSS, and JavaScript code were written by myself with the help of a friend for the first project of NeuroTechSorbonne, a neurotech student club at Sorbonne University which we founded.",
-        "requirements-title": "Requirements:",
-        "requirements-text": "It only works on Google Chrome since it uses the Web Serial API. It also requires three electrodes, an Arduino Uno board, and a board for signal acquisition. Refer to the <a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">Upside Down Labs repository</a> for the hardware setup.",
-        "review-title": "Review:",
-        "review-text": "The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don't want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.",
-        "repo-structure": "Project tree",
-        "view-on-github": "View on GitHub",
-        "test-btn": "Test →"
-    }
-};
 
 function initProjectPage() {
     document.querySelectorAll('.file-item[data-file]').forEach(fileItem => {
@@ -807,7 +777,7 @@ function initProjectPage() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    SharedUI.init({ translations: pageTranslations }).then(() => {
+    SharedUI.init().then(() => {
         initProjectPage();
     });
 });

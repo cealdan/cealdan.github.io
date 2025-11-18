@@ -254,38 +254,6 @@ body.light header p {
 
 <script src="shared.js"></script>
 <script>
-const pageTranslations = {
-    fr: {
-        subtitle: "Étudiant à Sorbonne Université, développeur indépendant et passionné de neurotechnologie.",
-        warning: "⚠️ Ce site est en cours d'optimisation pour mobile. Certaines fonctionnalités s'affichent mieux sur ordinateur.",
-        projects: "Projets",
-        "project1-desc": "Contrôle par clignement d'œil",
-        "project1-date": "Octobre 2024",
-        "project1-full": "Un projet expérimental utilisant un microcontrôleur et un capteur musculaire pour déclencher une action via un clignement d'œil. Une exploration du contrôle assistif et des interfaces naturelles.",
-        "view-project": "Voir le projet →",
-        "aletheia-desc": "Application de création de contenu par IA",
-        "aletheia-date": "Printemps 2025 (suspendu depuis)",
-        "aletheia-full": "Une application mobile de création de contenu par IA pour générer des histoires, inventer des mondes fictifs et créer des illustrations visuelles.",
-        "project2-desc": "Application de magie",
-        "project2-date": "Juillet 2025 pour le développement de l'application",
-        "project2-full": "Une application pour magiciens conçue comme un tour de magie digital."
-    },
-    en: {
-        subtitle: "Student at Sorbonne University, independent developer, and neurotechnology enthusiast.",
-        warning: "⚠️ This website is being optimized for mobile. Some features may display better on desktop.",
-        projects: "Projects",
-        "project1-desc": "Eye blink control",
-        "project1-date": "October 2024",
-        "project1-full": "An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.",
-        "view-project": "View project →",
-        "aletheia-desc": "AI content creation app",
-        "aletheia-date": "Spring 2025 (suspended since)",
-        "aletheia-full": "A mobile AI content creation application for generating stories, inventing fictional worlds, and creating visual illustrations.",
-        "project2-desc": "Magic app",
-        "project2-date": "July 2025 for application development",
-        "project2-full": "An application for magicians built as a digital magic trick."
-    }
-};
 
 function initIndexPage() {
     const canvas = document.getElementById('background-canvas');
@@ -340,7 +308,7 @@ function initIndexPage() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    SharedUI.init({ translations: pageTranslations }).then(() => {
+    SharedUI.init().then(() => {
         initIndexPage();
     });
 });
