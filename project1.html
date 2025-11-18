@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blink Activated Alert Button</title>
+<link rel="stylesheet" href="shared.css" />
 <style>
 * {
     margin: 0;
@@ -18,17 +19,17 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
 }
-header {
+.project-header {
     padding: 2rem 1rem;
     text-align: center;
 }
 
-header h1 {
+.project-header h1 {
     margin-bottom: 1rem;
     font-size: 2.2rem;
 }
 
-header a {
+.project-header a {
     color: #4da6ff;
     text-decoration: none;
     display: inline-block;
@@ -39,7 +40,7 @@ header a {
     transition: all 0.3s ease;
 }
 
-header a:hover {
+.project-header a:hover {
     background: #4da6ff;
     color: #111;
 }
@@ -54,238 +55,6 @@ section a {
     color: #4da6ff;
     text-decoration: underline;
 }
-/* Controls wrapper */
-.controls-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-/* Switch thème */
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.theme-switch {
-    display: inline-block;
-    height: 30px;
-    position: relative;
-    width: 60px;
-}
-
-.theme-switch input { 
-    display: none; 
-}
-
-.slider {
-    background-color: #4DA6FF;
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: 0.4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "🌙";
-    height: 26px;
-    width: 26px;
-    left: 2px;
-    bottom: 2px;
-    background-color: #000000;
-    transition: 0.4s;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-}
-
-input:checked + .slider:before {
-    transform: translateX(30px);
-    content: "🔆";
-    background-color: #fff;
-}
-
-/* Language switcher */
-.language-switcher {
-    display: flex;
-    gap: 0.3rem;
-    background: #1c1c1c;
-    padding: 0.3rem;
-    border-radius: 20px;
-}
-
-.language-switcher button {
-    padding: 0.4rem 0.8rem;
-    border: none;
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.language-switcher button.active {
-    background: #4DA6FF;
-}
-
-.language-switcher button:hover:not(.active) {
-    background: #333;
-}
-.top-bar {
-    position: fixed;        /* reste toujours en haut */
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* espace entre gauche et droite */
-    align-items: center;
-    padding: 1rem 1.5rem;
-    z-index: 300;           /* au-dessus de la sidebar et overlay */
-}
-
-/* Bouton home */
-.home-button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid white;
-    display: block;
-}
-
-.home-button img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-/* Bouton menu sidebar - en haut à droite */
-.menu-button {
-    width: 45px;
-    height: 45px;
-    background: #4DA6FF;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    z-index: 101;
-    transition: all 0.3s ease;
-}
-
-.menu-button:hover {
-    background: #3a8fd9;
-}
-
-.menu-button span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: #fff;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-.menu-button.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.menu-button.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-button.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* Sidebar */
-.sidebar {
-    position: fixed;
-    top: 0;
-    right: -350px;
-    width: 350px;
-    height: 100vh;
-    background: #1c1c1c;
-    box-shadow: -4px 0 12px rgba(0,0,0,0.5);
-    transition: right 0.3s ease;
-    z-index: 100;
-    overflow-y: auto;
-    padding: 5rem 2rem 2rem 2rem;
-}
-
-.sidebar.active {
-    right: 0;
-}
-
-.sidebar h2 {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    color: #4DA6FF;
-    border-bottom: 2px solid #4DA6FF;
-    padding-bottom: 0.5rem;
-}
-
-.sidebar-link {
-    display: block;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
-    background: #2a2a2a;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #fff;
-    transition: all 0.3s ease;
-    border-left: 4px solid transparent;
-}
-
-.sidebar-link:hover {
-    background: #333;
-    border-left-color: #4DA6FF;
-    transform: translateX(-5px);
-}
-
-.sidebar-link h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-}
-
-.sidebar-link p {
-    font-size: 0.9rem;
-    opacity: 0.7;
-}
-
-/* Overlay pour fermer la sidebar */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 99;
-}
-
-.overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
 
 
 .media-section {
@@ -532,132 +301,29 @@ body.light .next-btn {
     color: #000000;
 }
 
-body.light header a {
+body.light .project-header a {
     border-color: #0077cc;
     color: #0077cc;
 }
 
-body.light header a:hover {
+body.light .project-header a:hover {
     background: #0077cc;
     color: #fff;
 }
-
-body.light .sidebar {
-    background: #f5f5f5;
-    border-left: 1px solid #ddd;
-}
-
-body.light .sidebar-link {
-    background: #e8e8e8;
-    color: #000;
-}
-
-body.light .sidebar-link:hover {
-    background: #d8d8d8;
-}
-
-body.light .menu-button {
-    background: #0077cc;
-}
-
-body.light .menu-button:hover {
-    background: #005fa3;
-}
-
-
-body.light .language-switcher {
-    background: #e8e8e8;
-}
-
-body.light .language-switcher button {
-    color: #000;
-}
-
-body.light .language-switcher button.active {
-    background: #0077cc;
-    color: #fff;
-}
-
-body.light .language-switcher button:hover:not(.active) {
-    background: #d0d0d0;
-}
-
 
     
 /* Media queries pour mobile */
 @media (max-width: 768px) {
-/* Boutons de Contrôle Gauche */
-    .controls-wrapper {
-        top: 0.5rem;
-        left: 0.5rem;
-        gap: 0.4rem; /* Réduit l'espacement */
-    }
-    
-    /* Bouton Thème */
-    .theme-switch {
-        height: 26px; /* Réduit la hauteur */
-        width: 52px; /* Réduit la largeur */
-    }
-    
-    .slider:before {
-        height: 22px; /* Réduit l'icône */
-        width: 22px; /* Réduit l'icône */
-        left: 2px;
-        bottom: 2px;
-        font-size: 14px;
-    }
-    
-    input:checked + .slider:before {
-        transform: translateX(26px); /* Ajuste le déplacement */
-    }
-    
-    /* Boutons Langue */
-    .language-switcher {
-        padding: 0.2rem; /* Réduit le padding */
-        gap: 0.2rem; /* Réduit l'espacement */
-    }
-    
-    .language-switcher button {
-        padding: 0.3rem 0.6rem; /* Réduit le padding */
-        font-size: 0.8rem; /* Réduit la police */
-    }
-    .top-bar {
-        padding: 0.5rem 1rem;
-    }
-
-    .home-button {
-        width: 40px;
-        height: 40px;
-    }
-    /* Bouton Menu Droite */
-    .menu-button {
-        width: 40px; /* Réduit la taille */
-        height: 40px; /* Réduit la taille */
-    }
-    
-    .menu-button span {
-        width: 22px; /* Réduit la largeur des barres */
-        height: 2px; /* Réduit l'épaisseur des barres */
-    }
-    
-    .menu-button.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px); /* Ajuste le point de pivot */
-    }
-    
-    .menu-button.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px); /* Ajuste le point de pivot */
-    }
-
-    header h1 {
+    .project-header h1 {
         font-size: 1.8rem;
     }
 
-    header {
+    .project-header {
         padding: 1.5rem 1rem;
         margin-top: 2.5rem;
     }
 
-    header a {
+    .project-header a {
         font-size: 0.9rem;
         padding: 0.4rem 0.8rem;
     }
@@ -698,11 +364,6 @@ body.light .language-switcher button:hover:not(.active) {
         padding: 1rem;
     }
 
-    .sidebar {
-        width: 95%;
-        right: -95%;
-    }
-
     footer {
         padding: 1.5rem 1rem;
         font-size: 0.85rem;
@@ -710,7 +371,7 @@ body.light .language-switcher button:hover:not(.active) {
 }
 
 @media (max-width: 480px) {
-    header h1 {
+    .project-header h1 {
         font-size: 1.5rem;
     }
 
@@ -725,62 +386,14 @@ body.light .language-switcher button:hover:not(.active) {
     .github-tree-container {
         padding: 0.75rem;
     }
-
-    .sidebar {
-        width: 90%;
-        right: -90%;
-        padding: 4rem 1.5rem 2rem 1.5rem;
-    }
-    
-    .sidebar h2 {
-        font-size: 1.5rem;
-    }
 }
 </style>
 </head>
 <body>
+<div data-include="components/topbar.html"></div>
+<div data-include="components/sidebar.html"></div>
 
-
-<header class="top-bar">
-    <a href="index.html" class="home-button">
-        <img src="photo_cv.JPG" alt="Accueil">
-    </a>
-
-    <button class="menu-button" id="menu-button">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-</header>
-<!-- Overlay -->
-<div class="overlay" id="overlay"></div>
-
-<!-- Sidebar -->
-<nav class="sidebar" id="sidebar">
-    <!-- Controls à gauche -->
-    <div class="controls-wrapper">
-        <label class="theme-switch">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider"></span>
-        </label>
-        
-        <div class="language-switcher">
-            <button id="lang-fr" class="active">FR</button>
-            <button id="lang-en">EN</button>
-        </div>
-    </div>
-    <h2 data-lang="projects">Projets</h2>
-    <a href="project1.html" class="sidebar-link">
-        <h3>Blink Activated Alert Button</h3>
-        <p data-lang="project1-desc">Contrôle par clignement d'œil</p>
-    </a>
-    <a href="project1.html" class="sidebar-link">
-        <h3>AutoXic</h3>
-        <p data-lang="project2-desc">Application de magie</p>
-    </a>
-</nav>
-
-<header>
+<header class="project-header">
     <h1>Blink Activated Alert Button</h1>
 </header>
 
@@ -1135,9 +748,9 @@ p {
     Copyright © 2025 Dimitri Boïdo
 </footer>
 
+<script src="shared.js"></script>
 <script>
-// Traductions
-const translations = {
+const pageTranslations = {
     fr: {
         "view-github": "Voir le projet sur GitHub",
         "video-error": "Votre navigateur ne supporte pas la lecture de vidéos.",
@@ -1166,100 +779,26 @@ const translations = {
     }
 };
 
-// Détecter la langue du navigateur
-function detectLanguage() {
-    const browserLang = navigator.language || navigator.userLanguage;
-    return browserLang.startsWith('fr') ? 'fr' : 'en';
-}
-
-// Changer la langue
-function changeLanguage(lang) {
-    document.querySelectorAll('[data-lang]').forEach(element => {
-        const key = element.getAttribute('data-lang');
-        if (translations[lang][key]) {
-            element.innerHTML = translations[lang][key];
-        }
-    });
-    
-    // Mettre à jour les boutons actifs
-    document.getElementById('lang-fr').classList.toggle('active', lang === 'fr');
-    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-    
-    // Sauvegarder le choix
-    if(window.localStorage) localStorage.setItem('language', lang);
-    
-    // Mettre à jour l'attribut lang de la page
-    document.documentElement.lang = lang;
-}
-
-// Initialiser la langue
-const savedLang = window.localStorage ? localStorage.getItem('language') : null;
-const initialLang = savedLang || detectLanguage();
-changeLanguage(initialLang);
-
-// Event listeners pour les boutons de langue
-document.getElementById('lang-fr').addEventListener('click', () => changeLanguage('fr'));
-document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
-
-// Gestion des clics sur les fichiers dans l'arborescence
-document.querySelectorAll('.file-item[data-file]').forEach(fileItem => {
-    fileItem.addEventListener('click', function() {
-        const fileType = this.getAttribute('data-file');
-        const codeSection = document.getElementById('code-' + fileType);
-        
-        // Fermer toutes les sections de code
-        document.querySelectorAll('.code-content').forEach(section => {
-            section.classList.remove('active');
+function initProjectPage() {
+    document.querySelectorAll('.file-item[data-file]').forEach(fileItem => {
+        fileItem.addEventListener('click', function () {
+            const fileType = this.getAttribute('data-file');
+            const codeSection = document.getElementById('code-' + fileType);
+            document.querySelectorAll('.code-content').forEach(section => {
+                section.classList.remove('active');
+            });
+            if (codeSection) {
+                codeSection.classList.add('active');
+                codeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         });
-        
-        // Ouvrir la section cliquée
-        if (codeSection) {
-            codeSection.classList.add('active');
-            // Scroll vers le code
-            codeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
     });
-});
-
-// Gestion du thème
-const toggle = document.getElementById('theme-toggle');
-const savedTheme = window.localStorage ? localStorage.getItem('theme') : null;
-
-if(savedTheme === 'light') {
-    document.body.classList.add('light');
-    toggle.checked = true;
 }
 
-toggle.addEventListener('change', () => {
-    if(toggle.checked){
-        document.body.classList.add('light');
-        if(window.localStorage) localStorage.setItem('theme', 'light');
-    } else {
-        document.body.classList.remove('light');
-        if(window.localStorage) localStorage.setItem('theme', 'dark');
-    }
-});
-
-
-// Sidebar
-const menuButton = document.getElementById('menu-button');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-
-function toggleSidebar() {
-    menuButton.classList.toggle('active');
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-}
-
-menuButton.addEventListener('click', toggleSidebar);
-overlay.addEventListener('click', toggleSidebar);
-
-// Fermer la sidebar avec Escape
-document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && sidebar.classList.contains('active')) {
-        toggleSidebar();
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    SharedUI.init({ translations: pageTranslations }).then(() => {
+        initProjectPage();
+    });
 });
 </script>
 
