@@ -335,3 +335,209 @@ body.light .language-switcher button:hover:not(.active) {
     }
 }
 
+/* GitHub Tree Container */
+.github-tree-container {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 95%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.github-tree-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #333;
+}
+
+.github-tree-header svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+}
+
+.github-tree-header h3 {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.file-tree {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.95rem;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    margin: 0.2rem 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    position: relative;
+}
+
+.file-item:hover {
+    background: #2a2a2a;
+}
+
+.file-item.folder {
+    font-weight: 500;
+}
+
+.file-item.folder.open {
+    background: #2a2a2a;
+}
+
+.folder-children {
+    transition: all 0.2s ease;
+}
+
+.file-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.file-name {
+    flex: 1;
+}
+
+.file-item.folder .file-name {
+    color: #4da6ff;
+}
+
+.file-item.file .file-name {
+    color: #e0e0e0;
+}
+
+.file-item.non-code {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.file-item.non-code:hover {
+    background: transparent;
+}
+
+.code-content {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #0d1117;
+    border-radius: 8px;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.code-content.active {
+    display: block;
+}
+
+.code-content pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #c9d1d9;
+}
+
+.indent {
+    margin-left: 1.5rem;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: #238636;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.github-link:hover {
+    background: #2ea043;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4);
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+
+body.light .github-tree-container {
+    background: #fff;
+    border: 1px solid #d0d7de;
+}
+
+body.light .github-tree-header {
+    border-bottom-color: #d0d7de;
+}
+
+body.light .github-tree-header svg {
+    fill: #000;
+}
+
+body.light .github-tree-header h3 {
+    color: #000;
+}
+
+body.light .file-item:hover {
+    background: #f6f8fa;
+}
+
+body.light .file-item.folder .file-name {
+    color: #0969da;
+}
+
+body.light .file-item.file .file-name {
+    color: #1f2328;
+}
+
+body.light .code-content {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+}
+
+body.light .code-content pre {
+    color: #1f2328;
+}
+
+@media (max-width: 768px) {
+    .github-tree-container {
+        padding: 1rem;
+    }
+
+    .file-tree {
+        font-size: 0.85rem;
+    }
+
+    .indent {
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .file-tree {
+        font-size: 0.8rem;
+    }
+
+    .github-tree-container {
+        padding: 0.75rem;
+    }
+}
+

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aletheia</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    background: #111; 
+    color: #fff; 
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+.project-header {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.project-header h1 {
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.project-date {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: #4da6ff;
+}
+
+.project-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 3px solid #4da6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1c1c1c;
+    box-shadow: 0 4px 12px rgba(77, 166, 255, 0.3);
+}
+
+.project-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-header a {
+    color: #4da6ff;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #4da6ff;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.project-header a:hover {
+    background: #4da6ff;
+    color: #111;
+}
+
+section {
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section a {
+    color: #4da6ff;
+    text-decoration: underline;
+}
+
+.media-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+}
+
+.media-section img,
+.media-section video {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.text-container {
+    width: 100%;
+    max-width: 95%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.text-container p {
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+button.next-btn {
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #4da6ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button.next-btn:hover {
+    background-color: #0077cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(77, 166, 255, 0.4);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+}
+
+/* Thème clair */
+body.light {
+    background: #f5f5f5;
+    color: #000;
+}
+
+body.light .next-btn {
+    color: #000000;
+}
+
+body.light header a {
+    border-color: #0077cc;
+    color: #0077cc;
+}
+
+body.light header a:hover {
+    background: #0077cc;
+    color: #fff;
+}
+
+/* Media queries pour mobile */
+@media (max-width: 768px) {
+    .project-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .project-header {
+        padding: 1.5rem 1rem;
+        margin-top: 2.5rem;
+    }
+    
+    .project-logo {
+        width: 120px;
+        height: 120px;
+        border-width: 2px;
+    }
+
+    .project-header a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .media-section {
+        gap: 1rem;
+    }
+
+    .media-section img,
+    .media-section video {
+        max-width: 100%;
+    }
+
+    section {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .text-container p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    button.next-btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .project-logo {
+        width: 100px;
+        height: 100px;
+        border-width: 2px;
+    }
+
+    .text-container p {
+        font-size: 0.9rem;
+    }
+}
+</style>
+</head>
+<body>
+<div data-include="components/topbar.html"></div>
+<div data-include="components/sidebar.html"></div>
+
+<header class="project-header">
+    <h1>Aletheia</h1>
+    <div class="project-logo">
+        <img src="aletheialogo.png" alt="Aletheia Logo">
+    </div>
+    <p class="project-date" data-lang="aletheia-date">Printemps 2025 (suspendu depuis)</p>
+</header>
+
+<section>
+    <div class="text-container" id="readme-container">
+        <div style="text-align: center; padding: 2rem;">
+            <p>Chargement du README...</p>
+        </div>
+    </div>
+
+    <div id="github-tree-container"></div>
+</section>
+
+<footer>
+    Copyright © 2025 Dimitri Boïdo
+</footer>
+
+<script src="shared.js"></script>
+<script>
+const pageTranslations = {
+    fr: {
+        "aletheia-date": "Printemps 2025 (suspendu depuis)",
+        "aletheia-intro": "Une application mobile de création de contenu par IA pour générer des histoires, inventer des mondes fictifs et créer des illustrations visuelles.",
+        "aletheia-description": "Aletheia est une application mobile conçue pour permettre aux utilisateurs de créer des histoires, d'inventer des mondes fictifs et de générer des illustrations visuelles pour eux avec l'aide de l'IA. Elle combine le potentiel imaginatif de la création narrative avec les capacités expressives des outils d'apprentissage automatique modernes, le tout dans une plateforme socialement interactive inspirée de la dynamique des réseaux sociaux.",
+        "aletheia-status-title": "Statut :",
+        "aletheia-status-text": "Projet en cours de développement depuis février 2025. Cette application est construite avec Kotlin et utilise des technologies d'IA pour la génération de contenu.",
+        "repo-structure": "Arborescence du projet",
+        "view-on-github": "Voir sur GitHub"
+    },
+    en: {
+        "aletheia-date": "Spring 2025 (suspended since)",
+        "aletheia-intro": "A mobile AI content creation application for generating stories, inventing fictional worlds, and creating visual illustrations.",
+        "aletheia-description": "Aletheia is a mobile application designed to empower users to craft stories, invent fictional worlds, and generate visual illustrations for them with the help of AI. It blends the imaginative potential of narrative creation with the expressive capabilities of modern machine learning tools, all within a socially interactive platform inspired by the dynamics of social media.",
+        "aletheia-status-title": "Status:",
+        "aletheia-status-text": "Ongoing project started in February 2025. This application is built with Kotlin and uses AI technologies for content generation.",
+        "repo-structure": "Project tree",
+        "view-on-github": "View on GitHub"
+    }
+};
+
+const aletheiaTreeConfig = {
+    repoName: "Aletheia",
+    repoUrl: "https://github.com/cealdan/Aletheia",
+    tree: [
+        {
+            name: "Backend/",
+            children: []
+        },
+        {
+            name: "app/src/main/",
+            children: []
+        },
+        {
+            name: "LICENSE.txt"
+        }
+    ],
+    codeContents: {}
+};
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+async function loadReadme(lang = 'en') {
+    const readmeContainer = document.getElementById('readme-container');
+    if (!readmeContainer) return;
+    
+    try {
+        // Charger le README en anglais par défaut
+        const readmeUrl = 'https://raw.githubusercontent.com/cealdan/Aletheia/master/README.md';
+        const response = await fetch(readmeUrl);
+        if (!response.ok) throw new Error('Impossible de charger le README');
+        
+        let markdown = await response.text();
+        
+        // Si la langue est française, traduire le contenu
+        if (lang === 'fr') {
+            markdown = translateReadmeToFrench(markdown);
+        }
+        
+        // Convertir le markdown en HTML basique
+        let html = markdown;
+        
+        // Headers
+        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+        
+        // Bold et italic
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        
+        // Links
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+        
+        // Code blocks
+        html = html.replace(/```[\s\S]*?```/g, function(match) {
+            const code = match.replace(/```[a-z]*\n?/g, '').replace(/```/g, '');
+            return '<pre><code>' + escapeHtml(code) + '</code></pre>';
+        });
+        
+        // Inline code
+        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+        
+        // Lists
+        const lines = html.split('\n');
+        let inList = false;
+        let result = [];
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line.match(/^[-*]\s/)) {
+                if (!inList) {
+                    result.push('<ul>');
+                    inList = true;
+                }
+                result.push('<li>' + line.replace(/^[-*]\s/, '') + '</li>');
+            } else {
+                if (inList) {
+                    result.push('</ul>');
+                    inList = false;
+                }
+                if (line && !line.match(/^<[h1-6]/) && !line.match(/^<pre/)) {
+                    result.push('<p>' + line + '</p>');
+                } else if (line) {
+                    result.push(line);
+                }
+            }
+        }
+        if (inList) result.push('</ul>');
+        
+        html = result.join('\n');
+        
+        // Nettoyer les balises vides
+        html = html.replace(/<p>\s*<\/p>/g, '');
+        html = html.replace(/<p>(<h[1-6]>)/g, '$1');
+        html = html.replace(/(<\/h[1-6]>)\s*<p>/g, '$1');
+        html = html.replace(/<p>(<pre>)/g, '$1');
+        html = html.replace(/(<\/pre>)\s*<p>/g, '$1');
+        
+        readmeContainer.innerHTML = html;
+    } catch (error) {
+        console.error('Erreur lors du chargement du README:', error);
+        readmeContainer.innerHTML = '<p>Erreur lors du chargement du README. Veuillez consulter le <a href="https://github.com/cealdan/Aletheia" target="_blank">dépôt GitHub</a>.</p>';
+    }
+}
+
+function translateReadmeToFrench(markdown) {
+    // Traductions du README
+    const translations = {
+        'Welcome to Aletheia': 'Bienvenue sur Aletheia',
+        'a project': 'un projet',
+        'aimed at exploring': 'visant à explorer',
+        'the intersection of creativity and artificial intelligence': 'l\'intersection de la créativité et de l\'intelligence artificielle',
+        'This repository contains': 'Ce dépôt contient',
+        'selected Kotlin and XML files': 'des fichiers Kotlin et XML sélectionnés',
+        'that represent': 'qui représentent',
+        'the core functionality': 'la fonctionnalité principale',
+        'and user experience': 'et l\'expérience utilisateur',
+        'of the application': 'de l\'application',
+        'Please note that': 'Veuillez noter que',
+        'this is not the full project': 'ce n\'est pas le projet complet',
+        'and it is not intended to be open-source': 'et il n\'est pas destiné à être open-source',
+        'or publicly distributed': 'ou distribué publiquement',
+        'at this time': 'à ce moment',
+        'Aletheia is a mobile application': 'Aletheia est une application mobile',
+        'designed to empower users': 'conçue pour permettre aux utilisateurs',
+        'to craft stories': 'de créer des histoires',
+        'invent fictional worlds': 'd\'inventer des mondes fictifs',
+        'and generate visual illustrations': 'et de générer des illustrations visuelles',
+        'for them with the help of AI': 'pour eux avec l\'aide de l\'IA',
+        'It blends': 'Elle combine',
+        'the imaginative potential': 'le potentiel imaginatif',
+        'of narrative creation': 'de la création narrative',
+        'with the expressive capabilities': 'avec les capacités expressives',
+        'of modern machine learning tools': 'des outils d\'apprentissage automatique modernes',
+        'all within a socially interactive platform': 'le tout dans une plateforme socialement interactive',
+        'inspired by the dynamics of social media': 'inspirée de la dynamique des réseaux sociaux',
+        'The project is currently under active development': 'Le projet est actuellement en développement actif',
+        'and these shared files': 'et ces fichiers partagés',
+        'are intended solely': 'sont destinés uniquement',
+        'to provide insight': 'à fournir un aperçu',
+        'into the app\'s architecture': 'de l\'architecture de l\'application',
+        'and main features': 'et des fonctionnalités principales',
+        'If you have any questions': 'Si vous avez des questions',
+        'feedback': 'des commentaires',
+        'or would like to discuss': 'ou souhaitez discuter',
+        'potential collaboration': 'd\'une collaboration potentielle',
+        'please feel free to reach out': 'n\'hésitez pas à nous contacter',
+        'via email at': 'par email à',
+        'Thank you for your interest': 'Merci pour votre intérêt',
+        'and understanding': 'et votre compréhension',
+        'This project is shared for demonstration purposes only': 'Ce projet est partagé à des fins de démonstration uniquement',
+        'All rights are reserved': 'Tous droits réservés',
+        'Reuse, reproduction, or redistribution': 'La réutilisation, la reproduction ou la redistribution',
+        'of any part of the code': 'de toute partie du code',
+        'is not permitted': 'n\'est pas autorisée',
+        'without explicit permission': 'sans autorisation explicite',
+        'from the author': 'de l\'auteur',
+        'About': 'À propos',
+        'An AI storytelling and art creation application': 'Une application de création d\'histoires et d\'art par IA',
+        'I started it on': 'Je l\'ai commencée en',
+        'and continue to work on it': 'et je continue à y travailler',
+        'It is an ongoing project': 'C\'est un projet en cours'
+    };
+    
+    // Remplacer les traductions
+    let translated = markdown;
+    Object.keys(translations).forEach(key => {
+        const regex = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        translated = translated.replace(regex, translations[key]);
+    });
+    
+    return translated;
+}
+
+function initAletheiaPage() {
+    const container = document.getElementById('github-tree-container');
+    if (container) {
+        const treeResult = generateGitHubTree(aletheiaTreeConfig);
+        container.innerHTML = treeResult.html;
+        setupFileTreeClickHandlers(treeResult.repoUrl, treeResult.repoName);
+    }
+    
+    // Charger le README avec la langue actuelle
+    const currentLang = SharedUI.currentLang || 'en';
+    loadReadme(currentLang);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    SharedUI.init({ 
+        translations: pageTranslations,
+        onLanguageChange: (lang) => {
+            // Recharger le README quand la langue change
+            loadReadme(lang);
+        }
+    }).then((lang) => {
+        initAletheiaPage();
+    });
+});
+</script>
+
+</body>
+</html>
+

@@ -5,7 +5,11 @@
             warning: "⚠️ Ce site est en cours d'optimisation pour mobile. Certaines fonctionnalités s'affichent mieux sur ordinateur.",
             projects: "Projets",
             "project1-desc": "Contrôle par clignement d'œil",
+            "project1-date": "Octobre 2024 (terminé)",
+            "aletheia-desc": "Application de création de contenu par IA",
+            "aletheia-date": "Printemps 2025 (suspendu)",
             "project2-desc": "Application de magie",
+            "project2-date": "Juillet 2025 (maintenant en cours de publication)",
             "view-project": "Voir le projet →",
             "view-on-github": "Voir sur GitHub",
             "video-error": "Votre navigateur ne supporte pas la lecture de vidéos."
@@ -15,7 +19,11 @@
             warning: "⚠️ This website is being optimized for mobile. Some features may display better on desktop.",
             projects: "Projects",
             "project1-desc": "Eye blink control",
+            "project1-date": "October 2024 (completed)",
+            "aletheia-desc": "AI content creation app",
+            "aletheia-date": "Spring 2025 (suspended)",
             "project2-desc": "Magic app",
+            "project2-date": "July 2025 (now in the process of publication)",
             "view-project": "View project →",
             "view-on-github": "View on GitHub",
             "video-error": "Your browser does not support video playback."
@@ -51,6 +59,10 @@
     <a href="project1.html" class="sidebar-link">
         <h3>Blink Activated Alert Button</h3>
         <p data-lang="project1-desc">Contrôle par clignement d'œil</p>
+    </a>
+    <a href="projectaletheia.html" class="sidebar-link">
+        <h3>Aletheia</h3>
+        <p data-lang="aletheia-desc">Application de création de contenu par IA</p>
     </a>
     <a href="project1.html" class="sidebar-link">
         <h3>AutoXic</h3>
@@ -206,6 +218,284 @@
         }
     };
 
+    // Fonction pour générer l'arborescence GitHub
+    function generateGitHubTree(config) {
+        const { repoName, repoUrl, tree, codeContents = {} } = config;
+        
+        const folderIcon = `<svg class="file-icon" viewBox="0 0 16 16" fill="#54a3ff">
+            <path d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75z"/>
+        </svg>`;
+        
+        const fileIcon = `<svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
+            <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
+        </svg>`;
+        
+        const githubIcon = `<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>`;
+        
+        function renderItem(item, level = 0, parentPath = '') {
+            // Un dossier est identifié par : nom se terminant par /, ou présence de la propriété children (même vide)
+            const isFolder = item.name.endsWith('/') || item.hasOwnProperty('children');
+            const isNonCode = item.nonCode === true;
+            const currentPath = parentPath ? `${parentPath}/${item.name}` : item.name;
+            const folderPath = isFolder ? currentPath.replace(/\/$/, '') : '';
+            const hasChildren = isFolder && item.children && item.children.length > 0;
+            const classes = `file-item ${isFolder ? 'folder' : 'file'} ${isNonCode ? 'non-code' : ''} ${hasChildren ? 'has-children' : ''}`;
+            const dataPath = !isFolder ? `data-file-path="${currentPath}"` : '';
+            const dataFolderPath = isFolder ? `data-folder-path="${folderPath}"` : '';
+            const dataHasChildren = isFolder ? `data-has-children="${hasChildren ? 'true' : 'false'}"` : '';
+            
+            let html = `<div class="${classes}" ${dataPath} ${dataFolderPath} ${dataHasChildren}>${isFolder ? folderIcon : fileIcon}<span class="file-name">${item.name}</span></div>`;
+            
+            if (hasChildren) {
+                html += `<div class="indent folder-children">`;
+                item.children.forEach(child => {
+                    html += renderItem(child, level + 1, currentPath);
+                });
+                html += `</div>`;
+            } else if (isFolder) {
+                // Dossier vide - on ajoute un conteneur pour les enfants qui seront chargés dynamiquement
+                html += `<div class="indent folder-children" style="display: none;"></div>`;
+            }
+            
+            return html;
+        }
+        
+        let treeHtml = `<div class="file-item folder" data-folder-path="" data-has-children="${tree.length > 0 ? 'true' : 'false'}">${folderIcon}<span class="file-name">${repoName}/</span></div><div class="indent folder-children">`;
+        tree.forEach(item => {
+            treeHtml += renderItem(item, 0);
+        });
+        treeHtml += `</div>`;
+        
+        let codeSectionsHtml = '';
+        Object.keys(codeContents).forEach(codeId => {
+            const code = codeContents[codeId];
+            codeSectionsHtml += `<div id="code-${codeId}" class="code-content"><pre>${escapeHtml(code)}</pre></div>`;
+        });
+        
+        return {
+            html: `
+                <div class="github-tree-container">
+                    <div class="github-tree-header">
+                        ${githubIcon}
+                        <h3 data-lang="repo-structure">Arborescence du projet</h3>
+                    </div>
+                    <div class="file-tree">${treeHtml}</div>
+                    <a href="${repoUrl}" target="_blank" class="github-link">
+                        ${githubIcon}
+                        <span data-lang="view-on-github">Voir sur GitHub</span>
+                    </a>
+                    ${codeSectionsHtml}
+                </div>
+            `,
+            repoUrl: repoUrl,
+            repoName: repoName
+        };
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    async function fetchGitHubFileContent(repoUrl, filePath) {
+        // Convertir l'URL GitHub en URL raw
+        // https://github.com/owner/repo -> https://raw.githubusercontent.com/owner/repo/master
+        const rawUrl = repoUrl.replace('github.com', 'raw.githubusercontent.com') + '/master/' + filePath;
+        try {
+            const response = await fetch(rawUrl);
+            if (!response.ok) {
+                throw new Error(`Impossible de charger ${filePath}`);
+            }
+            return await response.text();
+        } catch (error) {
+            console.error(`Erreur lors du chargement de ${filePath}:`, error);
+            return null;
+        }
+    }
+    
+    async function fetchGitHubDirectoryContent(repoUrl, dirPath) {
+        // Convertir l'URL GitHub en URL API
+        // https://github.com/owner/repo -> https://api.github.com/repos/owner/repo/contents
+        const match = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+        if (!match) {
+            console.error('URL GitHub invalide');
+            return null;
+        }
+        const [, owner, repo] = match;
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${dirPath}`;
+        
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`Impossible de charger le dossier ${dirPath}`);
+            }
+            const contents = await response.json();
+            return Array.isArray(contents) ? contents : null;
+        } catch (error) {
+            console.error(`Erreur lors du chargement du dossier ${dirPath}:`, error);
+            return null;
+        }
+    }
+    
+    function renderDirectoryItem(item, parentPath = '', folderIcon, fileIcon) {
+        const isFolder = item.type === 'dir';
+        const fileName = item.name;
+        const currentPath = parentPath ? `${parentPath}/${fileName}` : fileName;
+        const classes = `file-item ${isFolder ? 'folder' : 'file'}`;
+        const dataPath = !isFolder ? `data-file-path="${currentPath}"` : '';
+        const dataFolderPath = isFolder ? `data-folder-path="${currentPath}"` : '';
+        const dataHasChildren = isFolder ? `data-has-children="false"` : '';
+        
+        let html = `<div class="${classes}" ${dataPath} ${dataFolderPath} ${dataHasChildren}>${isFolder ? folderIcon : fileIcon}<span class="file-name">${fileName}${isFolder ? '/' : ''}</span></div>`;
+        
+        if (isFolder) {
+            html += `<div class="indent folder-children" style="display: none;"></div>`;
+        }
+        
+        return html;
+    }
+    
+    function setupFileTreeClickHandlers(repoUrl, repoName) {
+        const fileTree = document.querySelector('.file-tree');
+        if (!fileTree) return;
+        
+        // Utiliser la délégation d'événements pour éviter les listeners multiples
+        // Supprimer les anciens listeners si ils existent
+        if (fileTree._folderClickHandler) {
+            fileTree.removeEventListener('click', fileTree._folderClickHandler);
+        }
+        if (fileTree._fileClickHandler) {
+            fileTree.removeEventListener('click', fileTree._fileClickHandler);
+        }
+        
+        // Gestion des clics sur les dossiers (délégation d'événements)
+        fileTree._folderClickHandler = async function(e) {
+            const folderItem = e.target.closest('.file-item.folder');
+            if (!folderItem) return;
+            
+            e.stopPropagation();
+            
+            const folderPath = folderItem.getAttribute('data-folder-path');
+            if (!folderPath) return;
+            
+            const childrenContainer = folderItem.nextElementSibling;
+            if (!childrenContainer || !childrenContainer.classList.contains('folder-children')) return;
+            
+            const isOpen = childrenContainer.style.display !== 'none';
+            
+            if (isOpen) {
+                // Fermer le dossier
+                childrenContainer.style.display = 'none';
+                folderItem.classList.remove('open');
+            } else {
+                // Ouvrir le dossier
+                const hasChildren = folderItem.getAttribute('data-has-children') === 'true';
+                
+                if (!hasChildren && childrenContainer.children.length === 0) {
+                    // Le dossier est vide, charger son contenu depuis GitHub
+                    const fileNameEl = folderItem.querySelector('.file-name');
+                    const originalText = fileNameEl.textContent.replace(/\/$/, '');
+                    fileNameEl.textContent = originalText + '/ (chargement...)';
+                    
+                    // Pour le dossier racine, utiliser un chemin vide
+                    const dirPath = folderPath === '' ? '' : folderPath;
+                    const contents = await fetchGitHubDirectoryContent(repoUrl, dirPath);
+                    
+                    if (contents && contents.length > 0) {
+                        // Trier : dossiers d'abord, puis fichiers
+                        contents.sort((a, b) => {
+                            if (a.type === 'dir' && b.type !== 'dir') return -1;
+                            if (a.type !== 'dir' && b.type === 'dir') return 1;
+                            return a.name.localeCompare(b.name);
+                        });
+                        
+                        // Définir les icônes
+                        const folderIconSvg = `<svg class="file-icon" viewBox="0 0 16 16" fill="#54a3ff">
+                            <path d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75z"/>
+                        </svg>`;
+                        
+                        const fileIconSvg = `<svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
+                            <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
+                        </svg>`;
+                        
+                        let childrenHtml = '';
+                        contents.forEach(item => {
+                            // Utiliser le bon chemin parent (vide pour la racine, sinon folderPath)
+                            const parentPath = dirPath === '' ? '' : folderPath;
+                            childrenHtml += renderDirectoryItem(item, parentPath, folderIconSvg, fileIconSvg);
+                        });
+                        
+                        childrenContainer.innerHTML = childrenHtml;
+                        folderItem.setAttribute('data-has-children', 'true');
+                        folderItem.classList.add('has-children');
+                    } else {
+                        childrenContainer.innerHTML = '<div style="padding: 0.5rem; opacity: 0.6; font-style: italic;">Dossier vide</div>';
+                    }
+                    
+                    fileNameEl.textContent = originalText + '/';
+                }
+                
+                childrenContainer.style.display = 'block';
+                folderItem.classList.add('open');
+            }
+        };
+        
+        // Gestion des clics sur les fichiers (délégation d'événements)
+        fileTree._fileClickHandler = async function(e) {
+            const fileItem = e.target.closest('.file-item.file[data-file-path]');
+            if (!fileItem) return;
+            
+            e.stopPropagation();
+            
+            // Récupérer le chemin du fichier depuis l'attribut data
+            const filePath = fileItem.getAttribute('data-file-path');
+            if (!filePath) return;
+            
+            // Vérifier si le contenu est déjà chargé
+            const codeId = filePath.replace(/[^a-zA-Z0-9]/g, '-');
+            let codeSection = document.getElementById('code-' + codeId);
+            
+            if (!codeSection) {
+                // Créer la section de code
+                codeSection = document.createElement('div');
+                codeSection.id = 'code-' + codeId;
+                codeSection.className = 'code-content';
+                codeSection.innerHTML = '<pre>Chargement...</pre>';
+                
+                // Trouver le conteneur github-tree-container et ajouter la section
+                const container = document.querySelector('.github-tree-container');
+                if (container) {
+                    container.appendChild(codeSection);
+                }
+                
+                // Charger le contenu du fichier
+                const content = await fetchGitHubFileContent(repoUrl, filePath);
+                if (content !== null) {
+                    codeSection.innerHTML = `<pre>${escapeHtml(content)}</pre>`;
+                } else {
+                    codeSection.innerHTML = '<pre>Erreur lors du chargement du fichier.</pre>';
+                }
+            }
+            
+            // Fermer toutes les sections
+            document.querySelectorAll('.code-content').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Ouvrir la section cliquée
+            codeSection.classList.add('active');
+            codeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+        
+        fileTree.addEventListener('click', fileTree._folderClickHandler);
+        fileTree.addEventListener('click', fileTree._fileClickHandler);
+    }
+    
     global.SharedUI = SharedUI;
+    global.generateGitHubTree = generateGitHubTree;
+    global.setupFileTreeClickHandlers = setupFileTreeClickHandlers;
 })(window);
 

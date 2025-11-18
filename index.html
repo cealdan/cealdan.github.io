@@ -80,6 +80,13 @@ section {
     font-size: 1.5rem;
 }
 
+.project-card .project-date {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
 .project-card p { 
     margin-bottom: 1.5rem; 
     opacity: 0.9;
@@ -220,12 +227,21 @@ body.light header p {
 <section>
     <div class="project-card">
         <h3>Blink Activated Alert Button</h3>
+        <p class="project-date" data-lang="project1-date">Octobre 2024</p>
         <p data-lang="project1-full">An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.</p>
         <a href="project1.html" data-lang="view-project">Voir le projet →</a>
     </div>
 
     <div class="project-card">
+        <h3>Aletheia</h3>
+        <p class="project-date" data-lang="aletheia-date">Printemps 2025 (suspendu depuis)</p>
+        <p data-lang="aletheia-full">Une application mobile de création de contenu par IA pour générer des histoires, inventer des mondes fictifs et créer des illustrations visuelles.</p>
+        <a href="projectaletheia.html" data-lang="view-project">Voir le projet →</a>
+    </div>
+
+    <div class="project-card">
         <h3>AutoXic</h3>
+        <p class="project-date" data-lang="project2-date">Juillet 2025 pour le développement de l'application</p>
         <p data-lang="project2-full">An application for magicians built as a digital magic trick.</p>
         <a href="project1.html" data-lang="view-project">Voir le projet →</a>
     </div>
@@ -244,9 +260,14 @@ const pageTranslations = {
         warning: "⚠️ Ce site est en cours d'optimisation pour mobile. Certaines fonctionnalités s'affichent mieux sur ordinateur.",
         projects: "Projets",
         "project1-desc": "Contrôle par clignement d'œil",
+        "project1-date": "Octobre 2024",
         "project1-full": "Un projet expérimental utilisant un microcontrôleur et un capteur musculaire pour déclencher une action via un clignement d'œil. Une exploration du contrôle assistif et des interfaces naturelles.",
         "view-project": "Voir le projet →",
+        "aletheia-desc": "Application de création de contenu par IA",
+        "aletheia-date": "Printemps 2025 (suspendu depuis)",
+        "aletheia-full": "Une application mobile de création de contenu par IA pour générer des histoires, inventer des mondes fictifs et créer des illustrations visuelles.",
         "project2-desc": "Application de magie",
+        "project2-date": "Juillet 2025 pour le développement de l'application",
         "project2-full": "Une application pour magiciens conçue comme un tour de magie digital."
     },
     en: {
@@ -254,9 +275,14 @@ const pageTranslations = {
         warning: "⚠️ This website is being optimized for mobile. Some features may display better on desktop.",
         projects: "Projects",
         "project1-desc": "Eye blink control",
+        "project1-date": "October 2024",
         "project1-full": "An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.",
         "view-project": "View project →",
+        "aletheia-desc": "AI content creation app",
+        "aletheia-date": "Spring 2025 (suspended since)",
+        "aletheia-full": "A mobile AI content creation application for generating stories, inventing fictional worlds, and creating visual illustrations.",
         "project2-desc": "Magic app",
+        "project2-date": "July 2025 for application development",
         "project2-full": "An application for magicians built as a digital magic trick."
     }
 };
