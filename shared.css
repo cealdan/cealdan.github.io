@@ -78,7 +78,7 @@
     transition: right 0.3s ease;
     z-index: 300;
     overflow-y: auto;
-    padding: 5rem 2rem 2rem 2rem;
+    padding: 6.5rem 2rem 2rem 2rem;
 }
 
 .sidebar.active {
@@ -515,6 +515,10 @@ body.light .code-content {
 
 body.light .code-content pre {
     color: #1f2328;
+}
+
+body.light .home-button {
+    border: 2px solid black;
 }
 
 @media (max-width: 768px) {
