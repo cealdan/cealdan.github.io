@@ -75,9 +75,32 @@ section {
     box-shadow: 0 6px 16px rgba(0,0,0,0.4);
 }
 
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+}
+
 .project-card h3 { 
-    margin-bottom: 0.5rem; 
     font-size: 1.5rem;
+    margin: 0;
+}
+
+.project-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    color: #4da6ff;
+}
+
+.project-status svg {
+    width: 20px;
+    height: 20px;
+    fill: #4da6ff;
 }
 
 .project-card .project-date {
@@ -160,10 +183,6 @@ body.light header p {
     z-index: -1;
 }
 
-
-
-
-
 /* Responsive Mobile */
 @media (max-width: 768px) {
     header h1 {
@@ -191,10 +210,24 @@ body.light header p {
         padding: 1.25rem;
     }
     
+    .project-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
     .project-card h3 {
         font-size: 1.3rem;
     }
     
+    .project-status {
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+    }
+    
+    .project-status svg {
+        width: 16px;
+        height: 16px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -209,7 +242,6 @@ body.light header p {
     .project-card {
         padding: 1rem;
     }
-    
 }
 </style>
 </head>
@@ -226,21 +258,45 @@ body.light header p {
 
 <section>
     <div class="project-card">
-        <h3>Blink Activated Alert Button</h3>
+        <div class="project-card-header">
+            <h3>Blink Activated Alert Button</h3>
+            <div class="project-status">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 13c-1.103 0-2 .897-2 2v3c0 1.103.897 2 2 2h6c1.103 0 2-.897 2-2v-3c0-1.103-.897-2-2-2h-1V9c0-2.757-2.243-5-5-5S7 6.243 7 9h2c0-1.654 1.346-3 3-3s3 1.346 3 3v4h-3z"/>
+                </svg>
+                <span>Open Source</span>
+            </div>
+        </div>
         <p class="project-date" data-lang="project1-date">Octobre 2024</p>
         <p data-lang="project1-full">An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.</p>
         <a href="project1.html" data-lang="view-project">Voir le projet →</a>
     </div>
 
     <div class="project-card">
-        <h3>Aletheia</h3>
+        <div class="project-card-header">
+            <h3>Aletheia</h3>
+            <div class="project-status">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 13c-1.103 0-2 .897-2 2v3c0 1.103.897 2 2 2h6c1.103 0 2-.897 2-2v-3c0-1.103-.897-2-2-2h-1V9c0-2.757-2.243-5-5-5S7 6.243 7 9h2c0-1.654 1.346-3 3-3s3 1.346 3 3v4h-3z"/>
+                </svg>
+                <span>Open Source</span>
+            </div>
+        </div>
         <p class="project-date" data-lang="aletheia-date">Printemps 2025 (suspendu depuis)</p>
         <p data-lang="aletheia-full">Une application mobile de création de contenu par IA pour générer des histoires, inventer des mondes fictifs et créer des illustrations visuelles.</p>
         <a href="projectaletheia.html" data-lang="view-project">Voir le projet →</a>
     </div>
 
     <div class="project-card">
-        <h3>AutoXic</h3>
+        <div class="project-card-header">
+            <h3>AutoXic</h3>
+            <div class="project-status">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C9.243 2 7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5zm-1 9c0-.551.449-1 1-1s1 .449 1 1v3c0 .551-.449 1-1 1s-1-.449-1-1v-3z"/>
+                </svg>
+                <span>Closed Source</span>
+            </div>
+        </div>
         <p class="project-date" data-lang="project2-date">Juillet 2025 pour le développement de l'application</p>
         <p data-lang="project2-full">An application for magicians built as a digital magic trick.</p>
         <a href="project1.html" data-lang="view-project">Voir le projet →</a>
@@ -315,7 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
 
 
 
