@@ -139,9 +139,17 @@ footer {
 }
 
 footer p {
+    color: #ffffff;
     margin-bottom: 0.5rem;
 }
+footer a {
+    color: #ffffff; /* remplace #ff6600 par la couleur que tu veux */
+    text-decoration: none; /* enlève le soulignement si tu veux */
+}
 
+footer a:hover {
+    color: #4da6ff; /* couleur au survol */
+}
 
 /* Thème clair */
 body.light { 
@@ -171,6 +179,15 @@ body.light .project-card a:hover {
 body.light header p {
     background: rgba(255, 165, 0, 0.1);
     border-color: rgba(255, 165, 0, 0.5);
+}
+
+body.light footer p {
+    color: #000000;
+}
+
+body.light footer a {
+    color: #000000;
+    text-decoration: none;
 }
 
 /* Canvas */
