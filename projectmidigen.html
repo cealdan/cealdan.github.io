@@ -403,6 +403,9 @@ body.light .project-header a:hover {
         min-width: 50px;
         font-size: 11px;
         padding: 6px 8px;
+        white-space: pre-wrap; /* permet le retour à la ligne automatique */
+        word-wrap: break-word; /* compatibilité */
+        overflow-x: hidden;    /* supprime le scroll horizontal */
     }
     .expand-btn { padding: 6px 10px; font-size: 11px; }
 
