@@ -124,6 +124,16 @@ section a {
     flex-direction: column;
 }
 
+.notebook-container.fullscreen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  border-radius: 0;
+  z-index: 9999;
+}
+
 .notebook-header {
     background: #f5f5f5;
     border-bottom: 1px solid #ccc;
@@ -273,6 +283,22 @@ section a {
     font-size: 0.9em;
 }
 
+.expand-btn {
+  background: #4da6ff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+.expand-btn:hover { background: #3a8fd9; }
+.expand-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
 /* Syntax highlighting */
 .kw { color: #8959a8; font-weight: 600; }
 .str { color: #718c00; }
@@ -368,6 +394,8 @@ body.light .project-header a:hover {
         font-size: 12px;
         padding: 6px 8px;
     }
+    .expand-btn { padding: 6px 10px; font-size: 11px; }
+    .expand-btn span { display: none; }
 }
 
 @media (max-width: 480px) {
@@ -379,6 +407,9 @@ body.light .project-header a:hover {
         max-height: 400px;
     }
 
+    .notebook-container:not(.fullscreen) { max-height: 400px; }
+
+
     .notebook-header {
         flex-wrap: wrap;
         gap: 8px;
@@ -387,6 +418,21 @@ body.light .project-header a:hover {
     .kernel-badge, .readonly-badge {
         font-size: 10px;
     }
+}
+
+.notebook-container.fullscreen .notebook-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f5f5f5;
+  border-bottom: 2px solid #4da6ff;
+}
+
+.notebook-container.fullscreen .notebook-content { padding: 12px; }
+
+@media (max-width: 768px) {
+  .notebook-container.fullscreen .cell-code pre { font-size: 12px; }
+  .notebook-container.fullscreen .cell-prompt { min-width: 50px; font-size: 12px; }
 }
 </style>
 </head>
@@ -429,7 +475,7 @@ body.light .project-header a:hover {
     </div>
 
     <!-- Notebook Container -->
-    <div class="notebook-container">
+    <div class="notebook-container", id= "notebook">
         <div class="notebook-header">
             <svg class="notebook-logo" viewBox="0 0 44 51">
                 <path fill="#F37626" d="M22 0C9.8 0 0 9.8 0 22c0 9.9 6.5 18.3 15.5 21.1V51l6.5-6.5 6.5 6.5v-7.9C37.5 40.3 44 31.9 44 22 44 9.8 34.2 0 22 0z"/>
@@ -439,6 +485,10 @@ body.light .project-header a:hover {
             <span class="notebook-file">midigen.ipynb</span>
             <span class="readonly-badge">Lecture seule</span>
             <span class="kernel-badge">Python 3</span>
+            <button class="expand-btn" id="expand-btn">
+              <svg id="expand-icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+              <span id="expand-text">Agrandir</span>
+            </button>
         </div>
         <div class="notebook-content" id="notebook-content">
             <div style="text-align: center; padding: 2rem; color: #666;">
@@ -512,6 +562,7 @@ function highlightCode(code) {
     }
     return result;
 }
+
 
 function renderMarkdown(md) {
     return md
@@ -607,6 +658,31 @@ function loadNotebook() {
                 </div>`;
         });
 }
+
+// Toggle fullscreen
+const notebook = document.getElementById('notebook');
+const expandBtn = document.getElementById('expand-btn');
+const expandIcon = document.getElementById('expand-icon');
+const expandText = document.getElementById('expand-text');
+
+function toggleFullscreen(e) {
+  if (e) e.stopPropagation();
+  const isFs = notebook.classList.toggle('fullscreen');
+  expandIcon.innerHTML = isFs 
+    ? '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>'
+    : '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+  expandText.textContent = isFs ? 'Réduire' : 'Agrandir';
+  document.body.style.overflow = isFs ? 'hidden' : '';
+}
+
+expandBtn.addEventListener('click', toggleFullscreen);
+document.getElementById('notebook-header').addEventListener('click', (e) => {
+  if (e.target !== expandBtn && !expandBtn.contains(e.target)) toggleFullscreen(e);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && notebook.classList.contains('fullscreen')) toggleFullscreen();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     SharedUI.init().then(() => {
