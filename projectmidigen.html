@@ -385,6 +385,13 @@ body.light .project-header a:hover {
         max-height: 500px;
     }
 
+    .cell-output-content pre {
+        white-space: pre-wrap; /* permet le retour à la ligne automatique */
+        word-wrap: break-word; /* compatibilité */
+        overflow-x: hidden;    /* supprime le scroll horizontal */
+    }
+
+    
     .cell-code pre {
         font-size: 11px;
     }
@@ -410,6 +417,12 @@ body.light .project-header a:hover {
     .notebook-container:not(.fullscreen) { max-height: 400px; }
 
 
+    .cell-output-content pre {
+        white-space: pre-wrap; /* permet le retour à la ligne automatique */
+        word-wrap: break-word; /* compatibilité */
+        overflow-x: hidden;    /* supprime le scroll horizontal */
+    }
+    
     .notebook-header {
         flex-wrap: wrap;
         gap: 8px;
