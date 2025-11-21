@@ -451,6 +451,32 @@ body.light .language-switcher button:hover:not(.active) {
     margin-left: 1.5rem;
 }
 
+.kaggle-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: #20BEFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.kaggle-link:hover {
+    background: #0EA6D6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(32, 190, 255, 0.4);
+}
+
+.kaggle-link svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+
 .github-link {
     display: inline-flex;
     align-items: center;
