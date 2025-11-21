@@ -393,7 +393,7 @@ body.light .project-header a:hover {
 
 
     .cell-code pre {
-        font-size: 11px;
+        font-size: 12px;
         white-space: pre-wrap; /* permet le retour à la ligne automatique */
         word-wrap: break-word; /* compatibilité */
         overflow-x: hidden;    /* supprime le scroll horizontal */
@@ -401,11 +401,10 @@ body.light .project-header a:hover {
 
     .cell-prompt {
         min-width: 50px;
-        font-size: 12px;
+        font-size: 11px;
         padding: 6px 8px;
     }
     .expand-btn { padding: 6px 10px; font-size: 11px; }
-    .expand-btn span { display: none; }
 
     .notebook-container.fullscreen .cell-code pre { font-size: 12px; }
     .notebook-container.fullscreen .cell-prompt { min-width: 50px; font-size: 12px; }
@@ -439,11 +438,18 @@ body.light .project-header a:hover {
     }
 
     .cell-code pre {
-        font-size: 9px;
+        font-size: 11px;
         white-space: pre-wrap; /* permet le retour à la ligne automatique */
         word-wrap: break-word; /* compatibilité */
         overflow-x: hidden;    /* supprime le scroll horizontal */
     }
+
+    .cell-prompt {
+        min-width: 50px;
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+    
 }
 
 .notebook-container.fullscreen .notebook-header {
