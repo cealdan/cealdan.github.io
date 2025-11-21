@@ -394,6 +394,9 @@ body.light .project-header a:hover {
 
     .cell-code pre {
         font-size: 11px;
+        white-space: pre-wrap; /* permet le retour à la ligne automatique */
+        word-wrap: break-word; /* compatibilité */
+        overflow-x: hidden;    /* supprime le scroll horizontal */
     }
 
     .cell-prompt {
@@ -403,6 +406,9 @@ body.light .project-header a:hover {
     }
     .expand-btn { padding: 6px 10px; font-size: 11px; }
     .expand-btn span { display: none; }
+
+    .notebook-container.fullscreen .cell-code pre { font-size: 12px; }
+    .notebook-container.fullscreen .cell-prompt { min-width: 50px; font-size: 12px; }
 }
 
 @media (max-width: 480px) {
@@ -431,6 +437,13 @@ body.light .project-header a:hover {
         word-wrap: break-word; /* compatibilité */
         overflow-x: hidden;    /* supprime le scroll horizontal */
     }
+
+    .cell-code pre {
+        font-size: 9px;
+        white-space: pre-wrap; /* permet le retour à la ligne automatique */
+        word-wrap: break-word; /* compatibilité */
+        overflow-x: hidden;    /* supprime le scroll horizontal */
+    }
 }
 
 .notebook-container.fullscreen .notebook-header {
@@ -443,10 +456,6 @@ body.light .project-header a:hover {
 
 .notebook-container.fullscreen .notebook-content { padding: 12px; }
 
-@media (max-width: 768px) {
-  .notebook-container.fullscreen .cell-code pre { font-size: 12px; }
-  .notebook-container.fullscreen .cell-prompt { min-width: 50px; font-size: 12px; }
-}
 </style>
 </head>
 <body>
