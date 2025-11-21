@@ -455,15 +455,26 @@ body.light .language-switcher button:hover:not(.active) {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+
+    /* Taille interne du bouton */
     padding: 0.75rem 1.25rem;
+
+    /* Style */
     background: #20BEFF;
     color: #fff;
     text-decoration: none;
     border-radius: 8px;
-    margin-top: 1rem;
-    transition: all 0.3s ease;
     font-weight: 500;
+    transition: all 0.3s ease;
+
+    /* Ajout d’espace autour du bouton */
+    margin: 1rem 0 1rem 1rem;
+
+    /* Limite sa largeur et empêche qu’il s’étende */
+    width: fit-content;      /* réduit à sa taille réelle */
+    max-width: 200px;        /* optionnel : limite la largeur */
 }
+
 
 .kaggle-link:hover {
     background: #0EA6D6;
