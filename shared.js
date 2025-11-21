@@ -27,7 +27,14 @@
             "review-title": "Critique :",
             "review-text": "Le projet fonctionne bien mais est un peu trop sensible. De plus, c'est un projet éducatif et n'a pas d'application pratique réelle, car les clignements d'yeux se produisent fréquemment et nous ne voulons pas que le bouton soit déclenché tout le temps. Une façon de résoudre ce problème pourrait être d'utiliser l'apprentissage profond pour distinguer les clignements d'yeux délibérés des clignements inconscients.",
             "repo-structure": "Arborescence du projet",
-            "test-btn": "Test →"
+            "test-btn": "Test →",
+            "midigen-desc": "Générateur de mélodies MIDI",
+            "midigen-date": "Mars 2025 (terminé)",
+            "midigen-full": "Un générateur de mélodies MIDI utilisant des chaînes de Markov pour créer de la musique algorithmique à partir de fichiers MIDI existants.",
+            "midigen-intro": "MidiGen est un générateur de mélodies MIDI utilisant des chaînes de Markov. Ce projet explore la création musicale algorithmique en analysant des fichiers MIDI existants pour apprendre les transitions entre notes et générer de nouvelles mélodies originales.",
+            "midigen-description": "Le notebook Python ci-dessous montre comment analyser des fichiers MIDI, construire une matrice de transition de Markov, et générer de nouvelles séquences musicales. Le projet utilise la bibliothèque mido pour la manipulation des fichiers MIDI.",
+            "midigen-results": "🎵 Résultats générés",
+            "audio-error": "Votre navigateur ne supporte pas la lecture audio.",
         },
         en: {
             subtitle: "Student at Sorbonne University, independent developer, and neurotechnology enthusiast.",
@@ -56,7 +63,14 @@
             "review-title": "Review:",
             "review-text": "The project works well but is a little too sensitive. Also, it is an educational project and has no real practical application, as eye blinks happen frequently and we don't want the button to be triggered all the time. One way to address this could be to use deep learning to distinguish deliberate eye blinks from unconscious ones.",
             "repo-structure": "Project tree",
-            "test-btn": "Test →"
+            "test-btn": "Test →",
+            "midigen-desc": "MIDI melody generator",
+            "midigen-date": "March 2025 (completed)",
+            "midigen-full": "A MIDI melody generator using Markov chains to create algorithmic music from existing MIDI files.",
+            "midigen-intro": "MidiGen is a MIDI melody generator using Markov chains. This project explores algorithmic music creation by analyzing existing MIDI files to learn note transitions and generate new original melodies.",
+            "midigen-description": "The Python notebook below shows how to analyze MIDI files, build a Markov transition matrix, and generate new musical sequences. The project uses the mido library for MIDI file manipulation.",
+            "midigen-results": "🎵 Generated results",
+            "audio-error": "Your browser does not support audio playback.",
         }
     };
 
@@ -89,6 +103,10 @@
     <a href="project1.html" class="sidebar-link">
         <h3>Blink Activated Alert Button</h3>
         <p data-lang="project1-desc">Contrôle par clignement d'œil</p>
+    </a>
+    <a href="projectmidigen.html" class="sidebar-link">
+        <h3>MidiGen</h3>
+        <p data-lang="midigen-desc">Générateur de mélodies MIDI</p>
     </a>
     <a href="projectaletheia.html" class="sidebar-link">
         <h3>Aletheia</h3>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dimitri Boïdo</title>
@@ -144,15 +143,14 @@ footer p {
     margin-bottom: 0.5rem;
 }
 footer a {
-    color: #ffffff; /* remplace #ff6600 par la couleur que tu veux */
-    text-decoration: none; /* enlève le soulignement si tu veux */
+    color: #ffffff;
+    text-decoration: none;
 }
 
 footer a:hover {
-    color: #4da6ff; /* couleur au survol */
+    color: #4da6ff;
 }
 
-/* Thème clair */
 body.light { 
     background: #ffffff; 
     color: #000000; 
@@ -195,7 +193,6 @@ body.light footer a:hover {
     color: #4da6ff;
 }
 
-/* Canvas */
 #background-canvas {
     position: fixed;
     top: 0;
@@ -205,65 +202,23 @@ body.light footer a:hover {
     z-index: -1;
 }
 
-/* Responsive Mobile */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    header h2 {
-        font-size: 1rem;
-    }
-    
-    header {
-        padding: 3rem 1rem;
-    }
-    
-    header p {
-        font-size: 0.9rem;
-        padding: 0.8rem;
-    }
-    
-    section {
-        padding: 2rem 1rem;
-    }
-    
-    .project-card {
-        padding: 1.25rem;
-    }
-    
-    .project-card-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .project-card h3 {
-        font-size: 1.3rem;
-    }
-    
-    .project-status {
-        font-size: 0.8rem;
-        margin-top: 0.25rem;
-    }
-    
-    .project-status svg {
-        width: 16px;
-        height: 16px;
-    }
+    header h1 { font-size: 2rem; }
+    header h2 { font-size: 1rem; }
+    header { padding: 3rem 1rem; }
+    header p { font-size: 0.9rem; padding: 0.8rem; }
+    section { padding: 2rem 1rem; }
+    .project-card { padding: 1.25rem; }
+    .project-card-header { flex-direction: column; align-items: flex-start; }
+    .project-card h3 { font-size: 1.3rem; }
+    .project-status { font-size: 0.8rem; margin-top: 0.25rem; }
+    .project-status svg { width: 16px; height: 16px; }
 }
 
 @media (max-width: 480px) {
-    header h1 {
-        font-size: 1.6rem;
-    }
-    
-    header h2 {
-        font-size: 0.9rem;
-    }
-    
-    .project-card {
-        padding: 1rem;
-    }
+    header h1 { font-size: 1.6rem; }
+    header h2 { font-size: 0.9rem; }
+    .project-card { padding: 1rem; }
 }
 </style>
 </head>
@@ -292,6 +247,21 @@ body.light footer a:hover {
         <p class="project-date" data-lang="project1-date">Octobre 2024</p>
         <p data-lang="project1-full">An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. An exploration of assistive control and natural interfaces.</p>
         <a href="project1.html" data-lang="view-project">Voir le projet →</a>
+    </div>
+
+    <div class="project-card">
+        <div class="project-card-header">
+            <h3>MidiGen</h3>
+            <div class="project-status">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 13c-1.103 0-2 .897-2 2v3c0 1.103.897 2 2 2h6c1.103 0 2-.897 2-2v-3c0-1.103-.897-2-2-2h-1V9c0-2.757-2.243-5-5-5S7 6.243 7 9h2c0-1.654 1.346-3 3-3s3 1.346 3 3v4h-3z"/>
+                </svg>
+                <span>Open Source</span>
+            </div>
+        </div>
+        <p class="project-date" data-lang="midigen-date">Mars 2025</p>
+        <p data-lang="midigen-full">Un générateur de mélodies MIDI utilisant des chaînes de Markov pour créer de la musique algorithmique à partir de fichiers MIDI existants.</p>
+        <a href="projectmidigen.html" data-lang="view-project">Voir le projet →</a>
     </div>
 
     <div class="project-card">
@@ -332,7 +302,6 @@ body.light footer a:hover {
 
 <script src="shared.js"></script>
 <script>
-
 function initIndexPage() {
     const canvas = document.getElementById('background-canvas');
     if (!canvas) return;
@@ -348,10 +317,7 @@ function initIndexPage() {
 
     const numBits = window.innerWidth < 768 ? 100 : 200;
     const bits = [];
-    const colors = {
-        dark: 'rgba(77, 166, 255, 0.7)',
-        light: 'rgba(77, 166, 255, 0.7)'
-    };
+    const colors = { dark: 'rgba(77, 166, 255, 0.7)', light: 'rgba(77, 166, 255, 0.7)' };
 
     for (let i = 0; i < numBits; i++) {
         bits.push({
@@ -365,30 +331,24 @@ function initIndexPage() {
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const theme = document.body.classList.contains('light') ? 'light' : 'dark';
-
         bits.forEach(bit => {
             ctx.fillStyle = colors[theme];
             ctx.font = '16px monospace';
             ctx.fillText(bit.value, bit.x, bit.y);
             bit.y += bit.speed;
-
             if (bit.y > canvas.height) {
                 bit.y = -20;
                 bit.x = Math.random() * canvas.width;
                 bit.value = Math.random() > 0.5 ? '1' : '0';
             }
         });
-
         requestAnimationFrame(draw);
     }
-
     draw();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    SharedUI.init().then(() => {
-        initIndexPage();
-    });
+    SharedUI.init().then(() => { initIndexPage(); });
 });
 </script>
 </body>

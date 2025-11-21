@@ -1,254 +1,618 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>midigen.ipynb - Jupyter Notebook</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; }
-    .header { background: #f5f5f5; border-bottom: 1px solid #ccc; padding: 8px 16px; display: flex; align-items: center; gap: 16px; }
-    .logo { width: 24px; height: 24px; }
-    .header-title { font-weight: 600; color: #444; }
-    .header-file { font-size: 14px; color: #666; }
-    .kernel-badge { margin-left: auto; padding: 4px 8px; background: #d4edda; color: #155724; border-radius: 4px; font-size: 12px; }
-    .menubar { background: #fafafa; border-bottom: 1px solid #ccc; padding: 4px 16px; display: flex; gap: 4px; }
-    .menubar button { padding: 4px 12px; background: none; border: none; font-size: 14px; color: #444; cursor: pointer; border-radius: 4px; }
-    .menubar button:hover { background: #e0e0e0; }
-    .toolbar { background: #f5f5f5; border-bottom: 1px solid #ccc; padding: 4px 16px; display: flex; gap: 4px; align-items: center; }
-    .toolbar button { padding: 4px 8px; background: none; border: none; cursor: pointer; border-radius: 4px; }
-    .toolbar button:hover { background: #e0e0e0; }
-    .toolbar select { border: 1px solid #ccc; border-radius: 4px; padding: 4px 8px; font-size: 14px; }
-    .separator { margin: 0 8px; color: #ccc; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-    .cell { margin-bottom: 16px; }
-    .code-cell { border: 1px solid #ccc; border-radius: 4px; overflow: hidden; }
-    .cell-input { display: flex; }
-    .cell-prompt { background: #f7f7f7; padding: 8px 12px; color: #999; font-family: monospace; font-size: 14px; border-right: 1px solid #ccc; min-width: 70px; text-align: right; user-select: none; }
-    .cell-prompt.out { background: #fff; color: #d9534f; }
-    .cell-code { flex: 1; background: #f7f7f7; overflow-x: auto; }
-    .cell-code pre { padding: 8px; font-size: 14px; font-family: 'SF Mono', Monaco, 'Courier New', monospace; line-height: 1.5; margin: 0; }
-    .cell-output { border-top: 1px solid #ccc; display: flex; }
-    .cell-output-content { flex: 1; padding: 8px; overflow-x: auto; background: #fff; }
-    .cell-output-content pre { font-family: monospace; font-size: 14px; white-space: pre-wrap; margin: 0; }
-    .cell-output-content img { max-width: 100%; }
-    .error { color: #d9534f; }
-    .markdown-cell { padding: 8px 16px; }
-    .markdown-cell h1 { font-size: 2em; font-weight: bold; margin: 16px 0 12px; }
-    .markdown-cell h2 { font-size: 1.5em; font-weight: 600; margin: 14px 0 10px; }
-    .markdown-cell h3 { font-size: 1.2em; font-weight: 600; margin: 12px 0 8px; }
-    .markdown-cell p { margin: 8px 0; line-height: 1.6; }
-    .markdown-cell code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
-    .markdown-cell pre { background: #f7f7f7; padding: 12px; border-radius: 4px; overflow-x: auto; }
-    .markdown-cell ul, .markdown-cell ol { margin: 8px 0; padding-left: 24px; }
-    .markdown-cell li { margin: 4px 0; }
-    .raw-cell { padding: 8px 16px; background: #f5f5f5; border-radius: 4px; margin: 8px 16px; }
-    .raw-cell pre { font-family: monospace; font-size: 14px; white-space: pre-wrap; margin: 0; }
-    table { border-collapse: collapse; margin: 8px 0; font-size: 14px; }
-    th, td { border: 1px solid #ddd; padding: 6px 12px; text-align: left; }
-    th { background: #f5f5f5; font-weight: 600; }
-    tr:nth-child(even) { background: #fafafa; }
-    .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-    .spinner { width: 48px; height: 48px; border: 3px solid #f3f3f3; border-top: 3px solid #F37626; border-radius: 50%; animation: spin 1s linear infinite; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .error-box { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 16px 24px; border-radius: 4px; max-width: 500px; }
-    .kw { color: #8959a8; font-weight: 600; }
-    .str { color: #718c00; }
-    .num { color: #1d75b3; }
-    .cmt { color: #8e908c; font-style: italic; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MidiGen - Générateur de mélodies</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    background: #111; 
+    color: #fff; 
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.project-header {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.project-header h1 {
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.project-date {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: #4da6ff;
+}
+
+.project-header a {
+    color: #4da6ff;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #4da6ff;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.project-header a:hover {
+    background: #4da6ff;
+    color: #111;
+}
+
+section {
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section a {
+    color: #4da6ff;
+    text-decoration: underline;
+}
+
+.text-container {
+    width: 100%;
+    max-width: 95%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.text-container p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Audio Section */
+.audio-section {
+    background: #1c1c1c;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 95%;
+}
+
+.audio-section h3 {
+    color: #4da6ff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.audio-item {
+    margin-bottom: 1.5rem;
+}
+
+.audio-item:last-child {
+    margin-bottom: 0;
+}
+
+.audio-item p {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.audio-item audio {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Notebook Container */
+.notebook-container {
+    background: #fff;
+    border-radius: 12px;
+    margin: 2rem auto;
+    max-width: 95%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    overflow: hidden;
+    max-height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notebook-header {
+    background: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.notebook-logo {
+    width: 24px;
+    height: 24px;
+}
+
+.notebook-title {
+    font-weight: 600;
+    color: #444;
+    font-size: 14px;
+}
+
+.notebook-file {
+    font-size: 14px;
+    color: #666;
+}
+
+.kernel-badge {
+    margin-left: auto;
+    padding: 4px 8px;
+    background: #d4edda;
+    color: #155724;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.readonly-badge {
+    padding: 4px 8px;
+    background: #fff3cd;
+    color: #856404;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.notebook-content {
+    overflow-y: auto;
+    flex: 1;
+    padding: 16px;
+    background: #fff;
+}
+
+.cell {
+    margin-bottom: 16px;
+}
+
+.code-cell {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cell-input {
+    display: flex;
+}
+
+.cell-prompt {
+    background: #f7f7f7;
+    padding: 8px 12px;
+    color: #999;
+    font-family: monospace;
+    font-size: 14px;
+    border-right: 1px solid #ccc;
+    min-width: 70px;
+    text-align: right;
+    user-select: none;
+}
+
+.cell-prompt.out {
+    background: #fff;
+    color: #d9534f;
+}
+
+.cell-code {
+    flex: 1;
+    background: #f7f7f7;
+    overflow-x: auto;
+}
+
+.cell-code pre {
+    padding: 8px;
+    font-size: 13px;
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    line-height: 1.5;
+    margin: 0;
+    color: #333;
+}
+
+.cell-output {
+    border-top: 1px solid #ccc;
+    display: flex;
+}
+
+.cell-output-content {
+    flex: 1;
+    padding: 8px;
+    overflow-x: auto;
+    background: #fff;
+}
+
+.cell-output-content pre {
+    font-family: monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    margin: 0;
+    color: #333;
+}
+
+.markdown-cell {
+    padding: 8px 16px;
+    color: #333;
+}
+
+.markdown-cell h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 16px 0 12px;
+    color: #333;
+}
+
+.markdown-cell h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin: 14px 0 10px;
+    color: #333;
+}
+
+.markdown-cell p {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.markdown-cell code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+/* Syntax highlighting */
+.kw { color: #8959a8; font-weight: 600; }
+.str { color: #718c00; }
+.num { color: #1d75b3; }
+.cmt { color: #8e908c; font-style: italic; }
+.func { color: #4271ae; }
+
+/* GitHub Link */
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: #238636;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.github-link:hover {
+    background: #2ea043;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4);
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+}
+
+/* Light theme */
+body.light {
+    background: #f5f5f5;
+    color: #000;
+}
+
+body.light .audio-section {
+    background: #fff;
+    border: 1px solid #d0d7de;
+}
+
+body.light .project-header a {
+    border-color: #0077cc;
+    color: #0077cc;
+}
+
+body.light .project-header a:hover {
+    background: #0077cc;
+    color: #fff;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .project-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .project-header {
+        padding: 1.5rem 1rem;
+        margin-top: 2.5rem;
+    }
+
+    section {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .text-container p {
+        font-size: 0.95rem;
+    }
+
+    .notebook-container {
+        max-height: 500px;
+    }
+
+    .cell-code pre {
+        font-size: 11px;
+    }
+
+    .cell-prompt {
+        min-width: 50px;
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .notebook-container {
+        max-height: 400px;
+    }
+
+    .notebook-header {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .kernel-badge, .readonly-badge {
+        font-size: 10px;
+    }
+}
+</style>
 </head>
 <body>
-  <div id="app">
-    <div class="loading">
-      <div class="spinner"></div>
-      <p style="margin-top: 16px; color: #666;">Chargement du notebook...</p>
+<div data-include="components/topbar.html"></div>
+<div data-include="components/sidebar.html"></div>
+
+<header class="project-header">
+    <h1>MidiGen</h1>
+    <p class="project-date" data-lang="midigen-date">Mars 2024 (terminé)</p>
+</header>
+
+<section>
+    <div class="text-container">
+        <p data-lang="midigen-intro">
+            MidiGen est un générateur de mélodies MIDI utilisant des chaînes de Markov. Ce projet explore la création musicale algorithmique en analysant des fichiers MIDI existants pour apprendre les transitions entre notes et générer de nouvelles mélodies originales.
+        </p>
+        <p data-lang="midigen-description">
+            Le notebook Python ci-dessous montre comment analyser des fichiers MIDI, construire une matrice de transition de Markov, et générer de nouvelles séquences musicales. Le projet utilise la bibliothèque mido pour la manipulation des fichiers MIDI.
+        </p>
     </div>
-  </div>
 
-  <script>
-    const NOTEBOOK_FILE = './midigen.ipynb';
+    <!-- Audio Results Section -->
+    <div class="audio-section">
+        <h3 data-lang="midigen-results">🎵 Résultats générés</h3>
+        <div class="audio-item">
+            <p>Melody Generated (Cheerful)</p>
+            <audio controls>
+                <source src="audio/Melody_Generated(cheerful).wav" type="audio/wav">
+                <span data-lang="audio-error">Votre navigateur ne supporte pas la lecture audio.</span>
+            </audio>
+        </div>
+        <div class="audio-item">
+            <p>Melody Generated (Disco Fast)</p>
+            <audio controls>
+                <source src="audio/Melody_Generated(disco fast).wav" type="audio/wav">
+                <span data-lang="audio-error">Votre navigateur ne supporte pas la lecture audio.</span>
+            </audio>
+        </div>
+    </div>
 
-    const KEYWORDS = ['import', 'from', 'def', 'class', 'return', 'if', 'elif', 'else', 'for', 'while', 'in', 'and', 'or', 'not', 'True', 'False', 'None', 'print', 'with', 'as', 'try', 'except', 'finally', 'raise', 'lambda', 'yield', 'break', 'continue', 'pass', 'assert', 'del', 'global', 'is', 'async', 'await'];
+    <!-- Notebook Container -->
+    <div class="notebook-container">
+        <div class="notebook-header">
+            <svg class="notebook-logo" viewBox="0 0 44 51">
+                <path fill="#F37626" d="M22 0C9.8 0 0 9.8 0 22c0 9.9 6.5 18.3 15.5 21.1V51l6.5-6.5 6.5 6.5v-7.9C37.5 40.3 44 31.9 44 22 44 9.8 34.2 0 22 0z"/>
+                <path fill="#fff" d="M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12z"/>
+            </svg>
+            <span class="notebook-title">Jupyter Notebook</span>
+            <span class="notebook-file">midigen.ipynb</span>
+            <span class="readonly-badge">Lecture seule</span>
+            <span class="kernel-badge">Python 3</span>
+        </div>
+        <div class="notebook-content" id="notebook-content">
+            <div style="text-align: center; padding: 2rem; color: #666;">
+                Chargement du notebook...
+            </div>
+        </div>
+    </div>
 
-    function highlightCode(code) {
-      let result = '';
-      let i = 0;
-      while (i < code.length) {
+    <a href="https://github.com/cealdan/MidiGen" target="_blank" class="github-link">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        <span data-lang="view-on-github">Voir sur GitHub</span>
+    </a>
+</section>
+
+<footer>
+    Copyright © 2025 Dimitri Boïdo
+</footer>
+
+<script src="shared.js"></script>
+<script>
+const NOTEBOOK_FILE = './midigen.ipynb';
+
+const KEYWORDS = ['import', 'from', 'def', 'class', 'return', 'if', 'elif', 'else', 'for', 'while', 'in', 'and', 'or', 'not', 'True', 'False', 'None', 'print', 'with', 'as', 'try', 'except', 'finally', 'raise', 'lambda', 'yield', 'break', 'continue', 'pass', 'assert', 'del', 'global', 'is', 'async', 'await'];
+
+function escapeHtml(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function highlightCode(code) {
+    let result = '';
+    let i = 0;
+    while (i < code.length) {
         if (code[i] === '#') {
-          result += `<span class="cmt">${escapeHtml(code.slice(i))}</span>`;
-          break;
+            result += `<span class="cmt">${escapeHtml(code.slice(i))}</span>`;
+            break;
         }
         if (code[i] === '"' || code[i] === "'") {
-          const quote = code[i];
-          const triple = code.slice(i, i + 3) === quote.repeat(3);
-          const end = triple ? quote.repeat(3) : quote;
-          const start = triple ? i + 3 : i + 1;
-          let j = start;
-          while (j < code.length) {
-            if (code.slice(j, j + end.length) === end) { j += end.length; break; }
-            j++;
-          }
-          result += `<span class="str">${escapeHtml(code.slice(i, j))}</span>`;
-          i = j;
-          continue;
+            const quote = code[i];
+            const triple = code.slice(i, i + 3) === quote.repeat(3);
+            const end = triple ? quote.repeat(3) : quote;
+            const start = triple ? i + 3 : i + 1;
+            let j = start;
+            while (j < code.length) {
+                if (code.slice(j, j + end.length) === end) { j += end.length; break; }
+                j++;
+            }
+            result += `<span class="str">${escapeHtml(code.slice(i, j))}</span>`;
+            i = j;
+            continue;
         }
         const numMatch = code.slice(i).match(/^\d+\.?\d*/);
         if (numMatch && (i === 0 || !/\w/.test(code[i - 1]))) {
-          result += `<span class="num">${numMatch[0]}</span>`;
-          i += numMatch[0].length;
-          continue;
+            result += `<span class="num">${numMatch[0]}</span>`;
+            i += numMatch[0].length;
+            continue;
         }
         let kwFound = false;
         for (const kw of KEYWORDS) {
-          if (code.slice(i, i + kw.length) === kw && (i === 0 || !/\w/.test(code[i - 1])) && (i + kw.length >= code.length || !/\w/.test(code[i + kw.length]))) {
-            result += `<span class="kw">${kw}</span>`;
-            i += kw.length;
-            kwFound = true;
-            break;
-          }
+            if (code.slice(i, i + kw.length) === kw && (i === 0 || !/\w/.test(code[i - 1])) && (i + kw.length >= code.length || !/\w/.test(code[i + kw.length]))) {
+                result += `<span class="kw">${kw}</span>`;
+                i += kw.length;
+                kwFound = true;
+                break;
+            }
         }
         if (kwFound) continue;
         result += escapeHtml(code[i]);
         i++;
-      }
-      return result;
     }
+    return result;
+}
 
-    function escapeHtml(text) {
-      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    function renderMarkdown(md) {
-      return md
-        .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+function renderMarkdown(md) {
+    return md
         .replace(/^### (.*$)/gim, '<h3>$1</h3>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/`([^`]+)`/g, '<code>$1</code>')
-        .replace(/^\s*[-*]\s+(.*)$/gim, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
         .replace(/\n\n/g, '</p><p>')
         .replace(/\n/g, '<br>');
-    }
+}
 
-    function getSource(cell) {
-      return Array.isArray(cell.source) ? cell.source.join('') : cell.source;
-    }
+function getSource(cell) {
+    return Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+}
 
-    function renderOutput(output) {
-      if (output.output_type === 'stream') {
+function renderOutput(output) {
+    if (output.output_type === 'stream') {
         const text = Array.isArray(output.text) ? output.text.join('') : output.text;
         return `<pre>${escapeHtml(text)}</pre>`;
-      }
-      if (output.output_type === 'execute_result' || output.output_type === 'display_data') {
+    }
+    if (output.output_type === 'execute_result' || output.output_type === 'display_data') {
         const data = output.data;
         if (data['text/html']) {
-          return Array.isArray(data['text/html']) ? data['text/html'].join('') : data['text/html'];
+            return Array.isArray(data['text/html']) ? data['text/html'].join('') : data['text/html'];
         }
         if (data['image/png']) {
-          return `<img src="data:image/png;base64,${data['image/png']}" alt="output">`;
-        }
-        if (data['image/jpeg']) {
-          return `<img src="data:image/jpeg;base64,${data['image/jpeg']}" alt="output">`;
+            return `<img src="data:image/png;base64,${data['image/png']}" alt="output" style="max-width:100%;">`;
         }
         if (data['text/plain']) {
-          const text = Array.isArray(data['text/plain']) ? data['text/plain'].join('') : data['text/plain'];
-          return `<pre>${escapeHtml(text)}</pre>`;
+            const text = Array.isArray(data['text/plain']) ? data['text/plain'].join('') : data['text/plain'];
+            return `<pre>${escapeHtml(text)}</pre>`;
         }
-      }
-      if (output.output_type === 'error') {
+    }
+    if (output.output_type === 'error') {
         const tb = output.traceback ? output.traceback.join('\n') : `${output.ename}: ${output.evalue}`;
         const clean = tb.replace(/\x1b\[[0-9;]*m/g, '');
-        return `<pre class="error">${escapeHtml(clean)}</pre>`;
-      }
-      return '';
+        return `<pre style="color:#d9534f;">${escapeHtml(clean)}</pre>`;
     }
+    return '';
+}
 
-    function renderCodeCell(cell) {
-      const source = getSource(cell);
-      const lines = source.split('\n').map(line => highlightCode(line)).join('\n');
-      const execCount = cell.execution_count || ' ';
-      let outputHtml = '';
-      if (cell.outputs && cell.outputs.length > 0) {
+function renderCodeCell(cell) {
+    const source = getSource(cell);
+    const lines = source.split('\n').map(line => highlightCode(line)).join('\n');
+    const execCount = cell.execution_count || ' ';
+    let outputHtml = '';
+    if (cell.outputs && cell.outputs.length > 0) {
         const outputs = cell.outputs.map(renderOutput).join('');
         outputHtml = `
-          <div class="cell-output">
-            <div class="cell-prompt out">[${execCount}]:</div>
-            <div class="cell-output-content">${outputs}</div>
-          </div>`;
-      }
-      return `
+            <div class="cell-output">
+                <div class="cell-prompt out">[${execCount}]:</div>
+                <div class="cell-output-content">${outputs}</div>
+            </div>`;
+    }
+    return `
         <div class="cell code-cell">
-          <div class="cell-input">
-            <div class="cell-prompt">[${execCount}]:</div>
-            <div class="cell-code"><pre>${lines}</pre></div>
-          </div>
-          ${outputHtml}
+            <div class="cell-input">
+                <div class="cell-prompt">[${execCount}]:</div>
+                <div class="cell-code"><pre>${lines}</pre></div>
+            </div>
+            ${outputHtml}
         </div>`;
-    }
+}
 
-    function renderMarkdownCell(cell) {
-      const source = getSource(cell);
-      return `<div class="cell markdown-cell"><p>${renderMarkdown(source)}</p></div>`;
-    }
+function renderMarkdownCell(cell) {
+    const source = getSource(cell);
+    return `<div class="cell markdown-cell"><p>${renderMarkdown(source)}</p></div>`;
+}
 
-    function renderRawCell(cell) {
-      const source = getSource(cell);
-      return `<div class="cell raw-cell"><pre>${escapeHtml(source)}</pre></div>`;
-    }
-
-    function renderNotebook(notebook) {
-      const kernel = notebook.metadata?.kernelspec?.display_name || 'Python 3';
-      const cells = notebook.cells.map(cell => {
+function renderNotebook(notebook) {
+    return notebook.cells.map(cell => {
         if (cell.cell_type === 'code') return renderCodeCell(cell);
         if (cell.cell_type === 'markdown') return renderMarkdownCell(cell);
-        if (cell.cell_type === 'raw') return renderRawCell(cell);
         return '';
-      }).join('');
+    }).join('');
+}
 
-      return `
-        <div class="header">
-          <svg class="logo" viewBox="0 0 44 51">
-            <path fill="#F37626" d="M22 0C9.8 0 0 9.8 0 22c0 9.9 6.5 18.3 15.5 21.1V51l6.5-6.5 6.5 6.5v-7.9C37.5 40.3 44 31.9 44 22 44 9.8 34.2 0 22 0z"/>
-            <path fill="#fff" d="M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12z"/>
-          </svg>
-          <span class="header-title">Jupyter Notebook</span>
-          <span class="header-file">midigen.ipynb</span>
-          <span class="kernel-badge">${escapeHtml(kernel)}</span>
-        </div>
-        <div class="menubar">
-          <button>File</button><button>Edit</button><button>View</button><button>Insert</button><button>Cell</button><button>Kernel</button><button>Help</button>
-        </div>
-        <div class="toolbar">
-          <button>💾</button><button>➕</button><button>✂️</button><button>📋</button><button>▶️</button><button>⏹️</button><button>🔄</button>
-          <span class="separator">|</span>
-          <select><option>Code</option><option>Markdown</option><option>Raw</option></select>
-        </div>
-        <div class="container">${cells}</div>`;
-    }
-
-    function showError(message) {
-      document.getElementById('app').innerHTML = `
-        <div class="loading">
-          <div class="error-box">
-            <h3 style="margin-bottom: 8px;">Erreur</h3>
-            <p>${escapeHtml(message)}</p>
-          </div>
-        </div>`;
-    }
-
+function loadNotebook() {
     fetch(NOTEBOOK_FILE)
-      .then(res => {
-        if (!res.ok) throw new Error(`Impossible de charger ${NOTEBOOK_FILE} (${res.status})`);
-        return res.json();
-      })
-      .then(notebook => {
-        document.getElementById('app').innerHTML = renderNotebook(notebook);
-      })
-      .catch(err => showError(err.message));
-  </script>
+        .then(res => {
+            if (!res.ok) throw new Error(`Impossible de charger ${NOTEBOOK_FILE}`);
+            return res.json();
+        })
+        .then(notebook => {
+            document.getElementById('notebook-content').innerHTML = renderNotebook(notebook);
+        })
+        .catch(err => {
+            document.getElementById('notebook-content').innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: #d9534f;">
+                    Erreur: ${escapeHtml(err.message)}
+                </div>`;
+        });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    SharedUI.init().then(() => {
+        loadNotebook();
+    });
+});
+</script>
 </body>
 </html>
