@@ -64,7 +64,7 @@
         "components/topbar.html": `
 <header class="top-bar">
     <a href="index.html" class="home-button">
-        <img src="photo_cv.JPG" alt="Accueil">
+        <img src="images/photo_cv.JPG" alt="Accueil">
     </a>
     <button class="menu-button" id="menu-button" aria-label="Ouvrir le menu">
         <span></span>
