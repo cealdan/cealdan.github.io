@@ -675,6 +675,12 @@ function toggleFullscreen(e) {
   document.body.style.overflow = isFs ? 'hidden' : '';
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    SharedUI.init().then(() => {
+        loadNotebook();
+    });
+});
+
 expandBtn.addEventListener('click', toggleFullscreen);
 document.getElementById('notebook-header').addEventListener('click', (e) => {
   if (e.target !== expandBtn && !expandBtn.contains(e.target)) toggleFullscreen(e);
@@ -682,12 +688,6 @@ document.getElementById('notebook-header').addEventListener('click', (e) => {
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && notebook.classList.contains('fullscreen')) toggleFullscreen();
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    SharedUI.init().then(() => {
-        loadNotebook();
-    });
 });
 </script>
 </body>
