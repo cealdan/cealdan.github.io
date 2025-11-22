@@ -37,7 +37,8 @@
             "midigen-results": "🎵 Résultats générés",
             "audio-error": "Votre navigateur ne supporte pas la lecture audio.",
             "agrandir": "Agrandir",
-            "réduire": "Réduire"
+            "réduire": "Réduire",
+            "read-only": "Lecture seule"
         },
         en: {
             subtitle: "Student at Sorbonne University, independent developer, and neurotechnology enthusiast.",
@@ -76,7 +77,8 @@
             "midigen-results": "🎵 Generated results",
             "audio-error": "Your browser does not support audio playback.",
             "agrandir": "Expand",
-            "réduire": "Collapse"
+            "réduire": "Collapse",
+            "read-only": "Read only"
         }
     };
 
