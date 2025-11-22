@@ -36,6 +36,8 @@
             "midigen-description": "<p>En explorant des jeux de donn\u00e9es sur Kaggle, j&#39;ai trouv\u00e9 un dataset de fichiers MIDI correspondants à des musiques d'ABBA et je me suis dit que ce serait amusant de construire une machine \u00e0 musique, tout en restant plus simple \u00e0 manipuler que des fichiers audio purs. Ce n&#39;\u00e9tait pas si facile pour moi en tant que d\u00e9butant complet, mais je suis plutôt satisfait du r\u00e9sultat car cela ne sonne pas trop \u00ab\u00a0al\u00e9atoire\u00a0\u00bb. Je dirais que les outputs sont relativement coh\u00e9rents avec les prompts: le morceau disco est plut\u00f4t dynamique tandis que celui joyeux sonne effectivement heureux.</p><p>Pour finir, concernant la partie technique, ma courbe d&#39;apprentissage a l'air assez bonne puisqu&#39;elle ressemble \u00e0 une pente raide. Mais je dois avouer que l&#39;architecture du mod\u00e8le que j&#39;ai choisi reste assez myst\u00e9rieuse pour moi. Utiliser des mod\u00e8les existants est pratique, mais ça veut aussi dire ne pas comprendre exactement ce qu&#39;il se passe derrière. Je n&#39;ai pas choisi les composants de l&#39;architecture au hasard\u00a0 cependant: je me suis fi\u00e9 \u00e0 des sources sur Internet, ce qui n&#39;est pas totalement satisfaisant et me laisse avec le besoin de tout comprendre un jour.</p>",
             "midigen-results": "🎵 Résultats générés",
             "audio-error": "Votre navigateur ne supporte pas la lecture audio.",
+            "agrandir": "Agrandir",
+            "réduire": "Réduire"
         },
         en: {
             subtitle: "Student at Sorbonne University, independent developer, and neurotechnology enthusiast.",
@@ -73,6 +75,8 @@
             "midigen-description": "<p>As I wandered in the kaggle datasets, I found a midi dataset of ABBA songs and thought it would be fun to buil a music machine but also not too hard to play with midi files compared to pure audio files. It wasn't that easy for me as a complete beginner but I'm satisfied with the results as it doesn't sound too \"random\". I would say the outputs are relatively coherent with the prompts : the disco one is a bit dynamic while the cheerful one sounds happy to me.</p><p>Finally, for the technical part, the learning curve I got was pretty good as it looks like a steep slope, but I have to say the architecture of the model I chose remains mysterious to me. Using already existing models is handy but it also means not understanding exactly what is going on. I didn't choose the components of the architecture randomly though but trusted sources from the internet, which is not very satisfying and leave me with the need to, one day, understand it all.</p>",
             "midigen-results": "🎵 Generated results",
             "audio-error": "Your browser does not support audio playback.",
+            "agrandir": "Expand",
+            "réduire": "Collapse"
         }
     };
 
@@ -175,6 +179,8 @@
         const browserLang = navigator.language || navigator.userLanguage;
         return browserLang && browserLang.startsWith("fr") ? "fr" : "en";
     }
+
+    global.detectLanguage = detectLanguage;
 
     const SharedUI = {
         translations: baseTranslations,
