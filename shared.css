@@ -31,6 +31,7 @@ body {
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.2);
     display: block;
+    transition: transform 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -60,6 +61,7 @@ body {
     gap: 5px;
     z-index: 351;
     position: relative;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 15px rgba(77, 166, 255, 0.3);
 }
 
@@ -74,6 +76,7 @@ body {
     height: 2px;
     background: #fff;
     border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu-button.active span:nth-child(1) {
@@ -138,6 +141,7 @@ body.light .sidebar {
     text-decoration: none;
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     max-width: 600px;
 }
@@ -168,6 +172,7 @@ body.light .sidebar {
     background: rgba(0, 0, 0, 0.6);
     opacity: 0;
     visibility: hidden;
+    transition: transform 0.4s ease;
     z-index: 250;
 }
 
@@ -208,6 +213,7 @@ body.light .sidebar {
     position: absolute;
     right: 0;
     top: 0;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 34px;
     box-shadow: 0 2px 10px rgba(77, 166, 255, 0.3);
 }
@@ -220,6 +226,7 @@ body.light .sidebar {
     left: 3px;
     bottom: 3px;
     background: rgba(0, 0, 0, 0.8);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -248,6 +255,7 @@ input:checked + .slider:before {
     color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
     border-radius: 10px;
+    transition: transform 0.3s ease;
     font-size: 0.85rem;
     font-weight: 600;
 }
@@ -306,6 +314,7 @@ body.light .home-button:hover { border-color: #0077cc; }
     margin: 2rem auto;
     max-width: 95%;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .github-tree-container:hover {
@@ -352,6 +361,7 @@ body.light .github-tree-header h3 { color: #1a1a2e; }
     margin: 0.15rem 0;
     border-radius: 10px;
     cursor: pointer;
+    transition: transform 0.2s ease;
     position: relative;
 }
 
@@ -361,6 +371,7 @@ body.light .file-item:hover { background: rgba(0, 119, 204, 0.08); }
 .file-item.folder { font-weight: 500; }
 .file-item.folder.open { background: rgba(77, 166, 255, 0.08); }
 
+.folder-children { transition: transform 0.2s ease; }
 .file-icon { width: 18px; height: 18px; margin-right: 0.6rem; flex-shrink: 0; }
 .file-name { flex: 1; }
 .file-item.folder .file-name { color: #4da6ff; }
@@ -395,6 +406,7 @@ body.light .code-content pre { color: #1a1a2e; }
     padding: 0.75rem 1.25rem;
     border-radius: 12px;
     font-weight: 500;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     color: #fff;
     text-decoration: none;
 }
