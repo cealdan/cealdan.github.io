@@ -135,6 +135,14 @@ section a {
   margin: 0;
   border-radius: 0;
   z-index: 9999;
+  
+  /* --- AJOUTS POUR CORRIGER LE BUG --- */
+  /* On force l'annulation de la transformation sans délai */
+  transform: none !important; 
+  /* On désactive l'animation pour éviter que le notebook ne "glisse" en prenant sa place */
+  transition: none !important; 
+  /* On retire l'ombre qui n'a plus de sens en plein écran */
+  box-shadow: none !important;
 }
 
 .notebook-header {
