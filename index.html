@@ -79,7 +79,6 @@ section {
     border-top: 1px solid rgba(255, 255, 255, 0.25);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s; /* Optimisé */
     position: relative;
     overflow: hidden;
     /* Astuce perf : force le GPU à gérer ce calque */
@@ -192,7 +191,6 @@ section {
     background: linear-gradient(135deg, #4da6ff, #3b82f6);
     border: none;
     border-radius: 12px;
-    transition: all 0.3s ease;
     font-size: 0.95rem;
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }
@@ -210,12 +208,10 @@ footer {
     opacity: 0.8;
     font-size: 0.9rem;
     border-top: 1px solid rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
 }
 footer p, footer a { 
     color: rgba(255, 255, 255, 0.7); 
     text-decoration: none; 
-    transition: color 0.3s ease; 
 }
 footer a:hover { color: #4da6ff; }
 
