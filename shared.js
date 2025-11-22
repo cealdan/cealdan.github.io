@@ -192,6 +192,7 @@
             this.setupThemeToggle();
             this.setupSidebarToggle();
             this.setupLanguageSwitcher();
+            this.setupScrollBehavior();
             const initialLang = this.getInitialLanguage();
             this.changeLanguage(initialLang);
             this.onLanguageChange = options.onLanguageChange;
@@ -199,6 +200,42 @@
                 this.onLanguageChange(initialLang);
             }
             return initialLang;
+        },
+        setupScrollBehavior() {
+            let lastScrollY = window.scrollY;
+            const topBar = document.querySelector('.top-bar');
+            
+            if (!topBar) return;
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                
+                // Protection : Ne pas cacher la barre si le menu latéral est ouvert
+                // (sinon l'utilisateur ne peut plus le fermer)
+                const sidebar = document.querySelector('.sidebar');
+                if (sidebar && sidebar.classList.contains('active')) {
+                    topBar.classList.remove('hidden');
+                    return;
+                }
+
+                // Seuil de 60px pour éviter de cacher la barre tout en haut de page
+                if (currentScrollY <= 60) {
+                    topBar.classList.remove('hidden');
+                    lastScrollY = currentScrollY;
+                    return;
+                }
+
+                // Logique principale :
+                // Si on scrolle vers le bas ET qu'on a dépassé le haut de page -> Cacher
+                // Si on scrolle vers le haut -> Montrer
+                if (currentScrollY > lastScrollY) {
+                    topBar.classList.add('hidden');
+                } else {
+                    topBar.classList.remove('hidden');
+                }
+
+                lastScrollY = currentScrollY;
+            });
         },
         cacheElements() {
             this.themeToggle = document.getElementById("theme-toggle");
