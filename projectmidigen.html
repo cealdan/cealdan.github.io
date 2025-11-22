@@ -43,6 +43,7 @@ body {
     padding: 0.5rem 1rem;
     border: 2px solid #4da6ff;
     border-radius: 6px;
+    transition: transform 0.3s ease;
 }
 
 .project-header a:hover {
@@ -85,6 +86,7 @@ section a {
     max-width: 95%;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .audio-section:hover {
@@ -117,7 +119,12 @@ section a {
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.notebook-container.resetting {
+    transition: none !important;
+    transform: none !important;
 }
 
 .notebook-container.resetting {

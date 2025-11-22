@@ -57,6 +57,7 @@ button.next-btn {
     border-radius: 50px; /* Forme "Pill" moderne */
     
     cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     
     /* Ombre portée lumineuse (Glow) */
     box-shadow: 0 10px 25px -5px rgba(77, 166, 255, 0.2);
@@ -176,7 +177,7 @@ body.light .project-header a:hover { background: #0077cc; color: #fff; }
                     <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
                         <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
                     </svg>
-                    <span class="file-name">FixedEyeBlinkDetection.ino</span>
+                    <span class="file-name">eyeblinkdetection.cpp</span>
                 </div>
                 
                 <div class="file-item file" data-file="css">
@@ -289,7 +290,7 @@ body.light .project-header a:hover { background: #0077cc; color: #fff; }
     // --- CHARGEMENT UNIQUE ET GLOBAL ---
     document.addEventListener('DOMContentLoaded', () => {
         // 1. Charger les fichiers de code
-        loadCodeFile('FixedEyeBlinkDetection.ino', 'code-arduino');
+        loadCodeFile('eyeblinkdetection.cpp', 'code-arduino');
         loadCodeFile('neuroweb.css', 'code-css');
         loadCodeFile('neuroweb.html', 'code-html');
         loadCodeFile('neuroweb.js', 'code-js');
