@@ -182,8 +182,6 @@
         return browserLang && browserLang.startsWith("fr") ? "fr" : "en";
     }
 
-    global.detectLanguage = detectLanguage;
-
     const SharedUI = {
         translations: baseTranslations,
         currentLang: "fr",
@@ -275,6 +273,8 @@
             });
         }
     };
+
+    global.SharedUI = SharedUI
 
     // Fonction pour générer l'arborescence GitHub
     function generateGitHubTree(config) {
