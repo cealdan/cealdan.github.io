@@ -425,3 +425,14 @@ body.light .code-content pre { color: #1a1a2e; }
     .file-tree { font-size: 0.8rem; }
     .github-tree-container { padding: 0.75rem; }
 }
+
+
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none; /* Perf: ignore les clics souris */
+}

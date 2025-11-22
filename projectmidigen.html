@@ -259,6 +259,7 @@ body.light .project-header a:hover { background: #0077cc; color: #fff; }
 <body>
 <div data-include="components/topbar.html"></div>
 <div data-include="components/sidebar.html"></div>
+<canvas id="background-canvas"></canvas>
 
 <header class="project-header">
     <h1>MidiGen</h1>
@@ -424,7 +425,7 @@ function toggleFullscreen(e) {
       document.body.style.overflow = 'hidden';
   }
 }
-document.addEventListener('DOMContentLoaded', () => { SharedUI.init().then(() => { loadNotebook(); }); });
+document.addEventListener('DOMContentLoaded', () => { SharedUI.init().then(() => { loadNotebook(); initIndexPage(); }); });
 expandBtn.addEventListener('click', toggleFullscreen);
 document.getElementById('notebook-header').addEventListener('click', (e) => { if (e.target !== expandBtn && !expandBtn.contains(e.target)) toggleFullscreen(e); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && notebook.classList.contains('fullscreen')) toggleFullscreen(); });

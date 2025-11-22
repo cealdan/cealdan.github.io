@@ -132,6 +132,7 @@ body.light .project-header a:hover { background: #0077cc; color: #fff; }
 <body>
 <div data-include="components/topbar.html"></div>
 <div data-include="components/sidebar.html"></div>
+<canvas id="background-canvas"></canvas>
 
 <header class="project-header">
     <h1>Blink Activated Alert Button</h1>
@@ -292,6 +293,7 @@ body.light .project-header a:hover { background: #0077cc; color: #fff; }
         loadCodeFile('neuroweb.css', 'code-css');
         loadCodeFile('neuroweb.html', 'code-html');
         loadCodeFile('neuroweb.js', 'code-js');
+        initIndexPage();
         
         // 2. Initialiser l'interface partagée (SharedUI) UNE SEULE FOIS
         // Une fois SharedUI prêt (barres nav chargées), on lance initProjectPage

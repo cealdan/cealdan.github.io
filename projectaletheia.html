@@ -4,6 +4,8 @@
 <link rel="icon" type="image/svg+xml" href="images/aletheialogocircle.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<canvas id="background-canvas"></canvas>
+
 <title>Aletheia</title>
 <link rel="stylesheet" href="shared.css" />
 <style>
@@ -127,7 +129,7 @@ function initAletheiaPage() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    SharedUI.init().then(() => { initAletheiaPage(); });
+    SharedUI.init().then(() => { initAletheiaPage(); initIndexPage();});
 });
 </script>
 
