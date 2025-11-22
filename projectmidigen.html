@@ -43,7 +43,6 @@ body {
     padding: 0.5rem 1rem;
     border: 2px solid #4da6ff;
     border-radius: 6px;
-    transition: all 0.3s ease;
 }
 
 .project-header a:hover {
@@ -86,7 +85,6 @@ section a {
     max-width: 95%;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .audio-section:hover {
@@ -122,6 +120,11 @@ section a {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+.notebook-container.resetting {
+    transition: none !important;
+    transform: none !important;
+}
+
 .notebook-container:not(.fullscreen):hover {
     transform: translateY(-5px) scale(1.01);
     box-shadow: 0 20px 50px rgba(0,0,0,0.4);
@@ -135,6 +138,14 @@ section a {
   margin: 0;
   border-radius: 0;
   z-index: 9999;
+  
+  /* --- AJOUTS POUR CORRIGER LE BUG --- */
+  /* On force l'annulation de la transformation sans délai */
+  transform: none !important; 
+  /* On désactive l'animation pour éviter que le notebook ne "glisse" en prenant sa place */
+  transition: none !important; 
+  /* On retire l'ombre qui n'a plus de sens en plein écran */
+  box-shadow: none !important;
 }
 
 .notebook-header {
@@ -181,7 +192,6 @@ section a {
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: background 0.2s;
 }
 .expand-btn:hover { background: #3a8fd9; }
 .expand-btn svg { width: 14px; height: 14px; fill: currentColor; }
@@ -384,11 +394,35 @@ const expandIcon = document.getElementById('expand-icon');
 const expandText = document.getElementById('expand-text');
 function toggleFullscreen(e) {
   if (e) e.stopPropagation();
-  const isFs = notebook.classList.toggle('fullscreen');
-  expandIcon.innerHTML = isFs ? '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>' : '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
-  if (isFs) { expandText.textContent = SharedUI.currentLang === "fr" ? 'Réduire' : 'Collapse'; } 
-  else { expandText.textContent = SharedUI.currentLang === "fr" ? 'Agrandir' : 'Expand'; }
-  document.body.style.overflow = isFs ? 'hidden' : '';
+  
+  const isFs = notebook.classList.contains('fullscreen');
+
+  if (isFs) {
+      // CAS : ON FERME (COLLAPSE)
+      // 1. On coupe les animations pour éviter l'effet bizarre de rétrécissement
+      notebook.classList.add('resetting');
+      
+      // 2. On retire le plein écran
+      notebook.classList.remove('fullscreen');
+      
+      // 3. On change l'icône et le texte
+      expandIcon.innerHTML = '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+      expandText.textContent = SharedUI.currentLang === "fr" ? 'Agrandir' : 'Expand';
+      document.body.style.overflow = '';
+
+      // 4. Après un tout petit délai (50ms), on réactive les animations 
+      // pour que le survol (hover) refonctionne normalement
+      setTimeout(() => {
+          notebook.classList.remove('resetting');
+      }, 50);
+
+  } else {
+      // CAS : ON OUVRE (EXPAND)
+      notebook.classList.add('fullscreen');
+      expandIcon.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
+      expandText.textContent = SharedUI.currentLang === "fr" ? 'Réduire' : 'Collapse';
+      document.body.style.overflow = 'hidden';
+  }
 }
 document.addEventListener('DOMContentLoaded', () => { SharedUI.init().then(() => { loadNotebook(); }); });
 expandBtn.addEventListener('click', toggleFullscreen);
