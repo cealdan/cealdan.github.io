@@ -77,9 +77,7 @@ section a {
 
 /* Audio Section - Style Glass + Card dynamique */
 .audio-section {
-    background: rgba(28, 28, 30, 0.4);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    background: rgba(28, 28, 30, 0);
     border-radius: 30px;
     padding: 1.5rem;
     margin: 2rem auto;
@@ -109,7 +107,7 @@ section a {
 
 /* Notebook Container - Style Glass + Card dynamique */
 .notebook-container {
-    background: #fff;
+    background: #ffffff00;
     border-radius: 30px;
     margin: 2rem auto;
     max-width: 95%;
@@ -134,7 +132,7 @@ section a {
 
 .notebook-container:not(.fullscreen):hover {
     transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
 }
 
 .notebook-container.fullscreen {
@@ -156,7 +154,7 @@ section a {
 }
 
 .notebook-header {
-    background: #f5f5f5;
+    background: #f5f5f500;
     border-bottom: 1px solid #ccc;
     padding: 8px 16px;
     display: flex;
@@ -170,7 +168,7 @@ section a {
 .notebook-file { font-size: 14px; color: #666; }
 .kernel-badge { margin-left: auto; padding: 4px 8px; background: #d4edda; color: #155724; border-radius: 4px; font-size: 12px; }
 .readonly-badge { padding: 4px 8px; background: #fff3cd; color: #856404; border-radius: 4px; font-size: 12px; }
-.notebook-content { overflow-y: auto; flex: 1; padding: 16px; background: #fff; }
+.notebook-content { overflow-y: auto; flex: 1; padding: 16px; background: #ffffff00; }
 
 .cell { margin-bottom: 16px; }
 .code-cell { border: 1px solid #ccc; border-radius: 4px; overflow: hidden; }
@@ -217,9 +215,7 @@ body.light { background: #f5f5f5; color: #000; }
 
 /* Audio Section Light Glass */
 body.light .audio-section {
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    background: rgba(255, 255, 255, 0);
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
