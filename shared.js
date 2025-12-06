@@ -83,6 +83,48 @@
             "réduire": "Collapse",
             "read-only": "Read only",
             "neurotech-club": "My neurotech club"
+        },
+        ja: {
+            subtitle: "ソルボンヌ大学の学生、個人開発者、ニューロテクノロジー愛好家。",
+            warning: "⚠️ このサイトはモバイル向けに最適化中です。一部の機能はPCでの表示が推奨されます。",
+            projects: "プロジェクト",
+            "project1-desc": "瞬きによるコンピュータ制御",
+            "project1-date": "2024年10月（完了）",
+            "project1-full": "マイクロコントローラーと筋電位センサーを使用し、瞬きでアクションをトリガーする実験的プロジェクト。BCI（ブレイン・コンピュータ・インターフェース）の基礎的アプローチ。",
+            "aletheia-desc": "Androidを使用したDIY BCI",
+            "aletheia-date": "2025年11月 - 現在",
+            "aletheia-full": "電極からAndroidアプリまで、完全に自作されたブレイン・コンピュータ・インターフェース。目標：周波数に基づくデータ視覚化とP300検出。",
+            "aletheia-intro": "<p>私の最初の完全自作BCIプロジェクトのページへようこそ。このプロジェクトの目的は、電極からハードウェアに接続されたAndroidアプリまで、BCIシステムをゼロから構築することです。</p><p>システムは現在、3DプリントされたOpenBCIヘッドセット（Mark IV）の乾式Ag/AgCl電極を使用しています。完全にカスタマイズされたハードウェアを収納するために独自のケースを設計・印刷する予定なので、このセットアップはまもなく進化します。</p><p>ハードウェアのパイプラインは、明確で完全に自作されたチェーンに従います：<br>電極 → JNEEG取得ボード（ADS1299）→ ESP32マイクロコントローラー → BLE送信 → Androidアプリ。</p><p>私はESP32をプログラムして、EEG信号の初期リアルタイム前処理を実行します。その後、Androidアプリが2番目の処理段階（脳波リズムのライブ視覚化：アルファ、ベータ、ガンマなど）を適用します。この基盤が整い次第、視覚的スペラーを使用したP300実験を実装します。最終的な目標は、アイトラッキングレイヤーを追加して従来のP300スペラーを強化することです。これは、コアシステムが安定した後に計画されている機能です。</p><p><strong>使用されるソフトウェアスキル</strong>：<br>C++（低レベルプログラミング）、Python（信号処理と機械学習）、Kotlin（Android開発）。</p><p><strong>ハードウェアスキル</strong>：<br>アナログ/デジタル電子回路、マイクロコントローラープログラミング、電極の設計と取り扱い、コンポーネントの統合と配線。</p>",
+            "aletheia-hardware-desc": "3DプリントされたOpenBCI Mark IV（ヘッドセットと電極のみ）とJetson Nano Orin + JNEEGハットを使用した最初のテスト。",
+            "aletheia-app-desc": "Androidアプリのインターフェース：ロード画面、ホームページ、プロフィールページ、設定。",
+            "aletheia-wiring-desc": "JNEEGハットとESP32間の配線の最初の基本的な回路図。",
+            "project2-desc": "マジックアプリ",
+            "project2-date": "2025年7月（公開準備中）",
+            "project2-full": "デジタル手品として設計されたマジシャン向けアプリケーション。",
+            "view-project": "プロジェクトを見る →",
+            "view-on-github": "GitHubで見る",
+            "view-on-kaggle": "Kaggleで見る",
+            "view-github": "GitHubでプロジェクトを見る",
+            "video-error": "お使いのブラウザは動画再生をサポートしていません。",
+            "readme-intro": "瞬きだけでボタンを操作できるシンプルなウェブサイト — ハンズフリー。",
+            "readme-description": "ウェブサイトをローカルで実行するためのHTML、CSS、JavaScriptファイル、およびArduino用のC++コードがここにあります。Arduinoコードは、私が使用した信号取得ボードを製造したUpside Down Labsが作成した<a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">別のリポジトリ</a>から引用しました。一方、HTML、CSS、JavaScriptコードは、私たちが設立したソルボンヌ大学のニューロテック学生クラブ「NeuroTechSorbonne」の最初のプロジェクトのために、友人の助けを借りて私が書きました。",
+            "requirements-title": "要件：",
+            "requirements-text": "Web Serial APIを使用しているため、Google Chromeでのみ動作します。また、3つの電極、Arduino Unoボード、および信号取得ボードが必要です。ハードウェアのセットアップについては、<a href=\"https://github.com/upsidedownlabs/BioAmp-EXG-Pill\" target=\"_blank\">Upside Down Labsのリポジトリ</a>を参照してください。",
+            "review-title": "レビュー：",
+            "review-text": "プロジェクトはうまく機能しますが、感度が少し高すぎます。また、これは教育プロジェクトであり、瞬きは頻繁に発生するため、常にボタンがトリガーされるのは望ましくないため、実用的なアプリケーションはありません。これを解決する1つの方法は、ディープラーニングを使用して、意図的な瞬きと無意識の瞬きを区別することです。",
+            "repo-structure": "プロジェクト構成",
+            "test-btn": "テスト",
+            "midigen-desc": "MIDIメロディ生成器",
+            "midigen-date": "2025年3月（完了）",
+            "midigen-full": "Tensorflowを使用してABBA風の曲を作成するMIDIメロディジェネレーター。",
+            "midigen-intro": "<p>生成型機械学習モデル構築への私の最初の挑戦へようこそ。</p>",
+            "midigen-description": "<p>Kaggleのデータセットを探索していたとき、ABBAの曲のMIDIデータセットを見つけ、純粋なオーディオファイルと比較して操作が簡単でありながら、音楽マシンを構築するのは楽しいだろうと思いました。完全な初心者である私にとってはそれほど簡単ではありませんでしたが、結果には満足しています。「ランダム」すぎる音にはなっていません。出力はプロンプトと比較的整合していると言えます。ディスコの曲はややダイナミックで、陽気な曲は私には幸せそうに聞こえます。</p><p>最後に、技術的な部分については、学習曲線は急な坂のように見え、かなり良かったです。しかし、私が選んだモデルのアーキテクチャは私にとってまだ謎のままです。既存のモデルを使用するのは便利ですが、それはまた、裏で何が起こっているのかを正確に理解していないことを意味します。アーキテクチャのコンポーネントをランダムに選んだわけではありませんが、インターネット上のソースを信頼しました。これは完全に満足できるものではなく、いつかすべてを理解したいという欲求を残しています。</p>",
+            "midigen-results": "🎵 生成結果",
+            "audio-error": "お使いのブラウザはオーディオ再生をサポートしていません。",
+            "agrandir": "拡大",
+            "réduire": "縮小",
+            "read-only": "読み取り専用",
+            "neurotech-club": "私のニューロテッククラブ"
         }
     };
     
@@ -125,25 +167,29 @@
         <div class="language-switcher">
             <button id="lang-fr" class="active" type="button">FR</button>
             <button id="lang-en" type="button">EN</button>
+            <button id="lang-ja" type="button">JP</button>
         </div>
     </div>
     <h2 data-lang="projects">Projets</h2>
     <a href="projectaletheia.html" class="sidebar-link">
         <h3>Aletheia</h3>
-        <p data-lang="aletheia-desc">Application de création de contenu par IA</p>
+        <p data-lang="aletheia-desc">Interface cerveau-machine DIY avec android</p>
     </a>
 
     <a href="projectmidigen.html" class="sidebar-link">
         <h3>MidiGen</h3>
         <p data-lang="midigen-desc">Générateur de mélodies MIDI</p>
     </a>
+
     <a href="project1.html" class="sidebar-link">
         <h3>Blink Activated Alert Button</h3>
         <p data-lang="project1-desc">Contrôle par clignement d'œil</p>
     </a>
 
-
-
+    <!-- <a href="project1.html" class="sidebar-link">
+        <h3>AutoXic</h3>
+        <p data-lang="project2-desc">Application de magie</p>
+    </a> -->
 </nav>`.trim()
     };
 
@@ -264,6 +310,7 @@
             this.overlay = document.getElementById("overlay");
             this.langFr = document.getElementById("lang-fr");
             this.langEn = document.getElementById("lang-en");
+            this.langJa = document.getElementById("lang-ja");
         },
         setupThemeToggle() {
             if (!this.themeToggle) return;
@@ -301,6 +348,7 @@
             if (!this.langFr || !this.langEn) return;
             this.langFr.addEventListener("click", () => this.changeLanguage("fr"));
             this.langEn.addEventListener("click", () => this.changeLanguage("en"));
+            this.langJa.addEventListener("click", () => this.changeLanguage("ja"));
         },
         getInitialLanguage() {
             const savedLang = window.localStorage ? localStorage.getItem("language") : null;
@@ -314,6 +362,7 @@
             if (this.langFr && this.langEn) {
                 this.langFr.classList.toggle("active", lang === "fr");
                 this.langEn.classList.toggle("active", lang === "en");
+                this.langJa.classList.toggle("active", lang === "ja");
             }
             this.applyTranslations(lang);
             if (typeof this.onLanguageChange === "function") {
