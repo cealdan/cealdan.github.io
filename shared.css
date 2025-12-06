@@ -488,3 +488,96 @@ body.light .code-content pre { color: #1a1a2e; }
     border: 1px solid rgba(245, 158, 11, 0.3);
     box-shadow: 0 0 10px rgba(245, 158, 11, 0.1);
 }
+
+/* --- Styles Top Bar & Bouton Reddit --- */
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.reddit-button {
+    /* Taille variable pour accueillir le texte */
+    height: 48px;
+    padding: 0 20px; /* Espace autour du contenu */
+    border-radius: 50px; /* Forme de pilule */
+    
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre icône et texte */
+    
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.reddit-button svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reddit-button span {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+    padding-top: 2px; /* Micro-ajustement vertical */
+}
+
+/* Effet Hover (Orange Reddit) */
+.reddit-button:hover {
+    border-color: #FF4500;
+    background: rgba(255, 69, 0, 0.15);
+    color: #FF4500;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 69, 0, 0.3);
+}
+
+.reddit-button:hover svg {
+    transform: scale(1.1) ; /* Petite animation sympa */
+}
+
+/* Adaptation Thème Clair */
+body.light .reddit-button {
+    border-color: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+body.light .reddit-button:hover {
+    border-color: #FF4500;
+    background: rgba(255, 69, 0, 0.1);
+    color: #FF4500;
+}
+
+/* Adaptation Mobile */
+@media (max-width: 768px) {
+    .nav-left {
+        gap: 10px;
+    }
+    
+    /* Sur mobile, on redevient un bouton rond sans texte pour gagner de la place */
+    .reddit-button {
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    
+    .reddit-button span {
+        display: none; /* Cache le texte */
+    }
+    
+    .reddit-button svg {
+        width: 20px;
+        height: 20px;
+    }
+}
