@@ -455,3 +455,36 @@ body.light .code-content pre { color: #1a1a2e; }
     z-index: -1;
     pointer-events: none; /* Perf: ignore les clics souris */
 }
+
+/* Status Icons in Titles */
+.status-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.status-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 3;
+}
+/* Completed - Green Check */
+.status-completed {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+}
+
+/* In Progress - Yellow Hourglass */
+.status-wip {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.1);
+}
