@@ -10,8 +10,10 @@
             "aletheia-desc": "Interface cerveau-machine DIY avec android",
             "aletheia-date": "Novembre 2025-aujourd'hui",
             "aletheia-full": "Une interface cerveau-machine complète faite maison des électrodes jusqu'à l'application android. Objectifs : visualisation des données selon les fréquences, détection de P300.",
-            //"aletheia-intro": "<p>Bienvenue sur Aletheia — un projet visant à explorer l'intersection de la créativité et de l'intelligence artificielle. Ce dépôt contient des fichiers Kotlin et XML sélectionnés qui représentent la fonctionnalité principale et l'expérience utilisateur de l'application. Veuillez noter que ce n'est pas le projet complet (certains fichiers ne pouvant être partagés), et il n'est pas destiné à être distribué publiquement pour le moment.</p><p>Aletheia est une application mobile conçue pour permettre aux utilisateurs de créer des histoires, d'inventer des mondes fictifs et de générer des illustrations avec l'aide de l'IA. Elle combine le potentiel imaginatif de la création narrative avec les capacités expressives des outils d'apprentissage automatique modernes, le tout dans une plateforme socialement interactive inspirée de la dynamique des réseaux sociaux.</p><p>Le projet est en développement (même si actuellement suspendu), et ces fichiers partagés sont destinés uniquement à fournir un aperçu de l'architecture de l'application et des fonctionnalités principales.</p><p>Si vous avez des questions, des commentaires ou souhaitez discuter d'une collaboration potentielle, n'hésitez pas à me contacter par email à <a href=\"mailto:cealdan.dev@gmail.com\">cealdan.dev@gmail.com</a>.</p><p>Merci pour votre intérêt et votre compréhension.</p><p>Ce projet est partagé à des fins de démonstration uniquement. Tous droits réservés. La réutilisation, la reproduction ou la redistribution de toute partie du code n'est pas autorisée sans autorisation explicite de l'auteur.</p>",
             "aletheia-intro": "<p>Bienvenue sur la page de mon premier projet complet d'interface cerveau-machine. Le but de ce projet est de construire moi-même une BCI de A à Z, depuis les électrodes jusqu'à l’application Android connectée au hardware.</p><p>Le système repose sur des électrodes sèches Ag/AgCl provenant du casque OpenBCI imprimé en 3D (actuellement le Mark IV). Ce montage évoluera bientôt, car je prévois d’imprimer mon propre boîtier afin d’y intégrer entièrement mon hardware personnalisé.</p><p>Le pipeline matériel suit une chaîne simple et entièrement maîtrisée :<br>électrodes → module d’acquisition JNEEG (ADS1299) → micro-contrôleur ESP32 → transmission BLE → application Android.</p><p>Je programme l’ESP32 moi-même pour effectuer un premier traitement des signaux en temps réel. L’application Android réalise ensuite une seconde étape d’analyse, notamment l’affichage des rythmes cérébraux (alpha, bêta, gamma, etc.). Une fois cette base solide, j’ajouterai une expérience de P300 avec un clavier visuel. L’objectif final est d’améliorer un P300 speller classique grâce à un système d’eye-tracking superposé — une étape prévue lorsque toute l’architecture de base sera parfaitement stable.</p><p><strong>Compétences logicielles mobilisées</strong> :<br>C++ (programmation bas niveau), Python (traitement du signal, machine learning), Kotlin (développement Android).</p><p><strong>Compétences matérielles</strong> :<br>Électronique analogique/numérique, manipulation de micro-contrôleurs, usage et conception d’électrodes, intégration des composants et câblage.</p>",
+            "aletheia-hardware-desc": "Premiers tests avec le casque OpenBCI Mark IV imprimé en 3D (seulement le casque et les électrodes) et un Jetson Nano Orin accompagné du JNEEG Hat.",
+            "aletheia-app-desc": "Interface de l'application Android : Écran de chargement, Page d'accueil, Page de profil et Paramètres.",
+            "aletheia-wiring-desc": "Premier schéma rudimentaire du câblage entre le JNEEG Hat et l’ESP32.",
             "project2-desc": "Application de magie",
             "project2-date": "Juillet 2025 (maintenant en cours de publication)",
             "project2-full": "Une application pour magiciens vue comme un tour de magie digital.",
@@ -47,10 +49,12 @@
             "project1-date": "October 2024 (completed)",
             "project1-full": "An experimental project using a microcontroller and a muscle sensor to trigger an action via eye blink. A first glance at BCIs.",
             "aletheia-desc": "DIY BCI with Android",
-            "aletheia-date": "Spring 2025-today",
+            "aletheia-date": "November 2025-today",
             "aletheia-full": "A fully homemade brain–computer interface, from the electrodes to the Android application. Goals: frequency-based data visualization and P300 detection.",
-            //"aletheia-intro": "<p>Welcome to Aletheia — a project aimed at exploring the intersection of creativity and artificial intelligence. This repository contains selected Kotlin and XML files that represent the core functionality and user experience of the application. Please note that this is not the full project (some files could not be shared), and it is not intended to be publicly distributed at this time.</p><p>Aletheia is a mobile application designed to empower users to craft stories, invent fictional worlds, and generate illustrations with the help of AI. It blends the imaginative potential of narrative creation with the expressive capabilities of modern machine learning tools, all within a socially interactive platform inspired by the dynamics of social media.</p><p>The project is in development (although currently suspended), and these shared files are intended solely to provide insight into the app's architecture and main features.</p><p>If you have any questions, feedback, or would like to discuss potential collaboration, please feel free to reach out via email at <a href=\"mailto:cealdan.dev@gmail.com\">cealdan.dev@gmail.com</a>.</p><p>Thank you for your interest and understanding.</p><p>This project is shared for demonstration purposes only. All rights are reserved. Reuse, reproduction, or redistribution of any part of the code is not permitted without explicit permission from the author.</p>",
             "aletheia-intro": "<p>Welcome to the presentation page of my first fully custom brain-computer interface project. The goal is to build a complete BCI system from scratch, from the electrodes all the way to the Android application connected to the hardware.</p><p>The system currently uses dry Ag/AgCl electrodes from the 3D-printed OpenBCI headset (Mark IV). This setup will evolve soon, as I plan to design and print my own enclosure to house fully customized hardware.</p><p>The hardware pipeline follows a clear and fully self-built chain:<br>electrodes → JNEEG acquisition board (ADS1299) → ESP32 microcontroller → BLE transmission → Android application.</p><p>I program the ESP32 to perform an initial real-time preprocessing of the EEG signals. The Android app then applies a second processing stage, including live visualization of brain rhythms (alpha, beta, gamma, etc.). Once this foundation is in place, I will implement a P300 experiment with a visual speller. The long-term goal is to enhance a traditional P300 speller by adding an eye-tracking layer — a feature planned once the core system is stable.</p><p><strong>Software skills involved</strong>:<br>C++ (low-level programming), Python (signal processing and machine learning), Kotlin (Android development).</p><p><strong>Hardware skills</strong>:<br>Analog/digital electronics, microcontroller programming, electrode design and handling, integration and wiring of components.</p>",
+            "aletheia-hardware-desc": "First tests with the 3D-printed openBCI Mark IV (only the headset and the electrodes) and a jetson nano orin + jneeg hat.",
+            "aletheia-app-desc": "Android App Interface: Loading Screen, Home Page, Profile Page and Settings.",
+            "aletheia-wiring-desc": "First rudimentary schematic for the wiring between the JNEEG hat and the esp32",
             "project2-desc": "Magic app",
             "project2-date": "July 2025 (now in the process of publication)",
             "project2-full": "An application for magicians seen as a digital magic trick.",
@@ -79,6 +83,7 @@
             "read-only": "Read only"
         }
     };
+    
 
     const fallbackComponents = {
         "components/topbar.html": `
@@ -106,22 +111,22 @@
         </div>
     </div>
     <h2 data-lang="projects">Projets</h2>
-    <a href="project1.html" class="sidebar-link">
-        <h3>Blink Activated Alert Button</h3>
-        <p data-lang="project1-desc">Contrôle par clignement d'œil</p>
-    </a>
-    <a href="projectmidigen.html" class="sidebar-link">
-        <h3>MidiGen</h3>
-        <p data-lang="midigen-desc">Générateur de mélodies MIDI</p>
-    </a>
     <a href="projectaletheia.html" class="sidebar-link">
         <h3>Aletheia</h3>
         <p data-lang="aletheia-desc">Application de création de contenu par IA</p>
     </a>
-    <a href="project1.html" class="sidebar-link">
-        <h3>AutoXic</h3>
-        <p data-lang="project2-desc">Application de magie</p>
+
+    <a href="projectmidigen.html" class="sidebar-link">
+        <h3>MidiGen</h3>
+        <p data-lang="midigen-desc">Générateur de mélodies MIDI</p>
     </a>
+    <a href="project1.html" class="sidebar-link">
+        <h3>Blink Activated Alert Button</h3>
+        <p data-lang="project1-desc">Contrôle par clignement d'œil</p>
+    </a>
+
+
+
 </nav>`.trim()
     };
 
