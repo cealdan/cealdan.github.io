@@ -720,4 +720,36 @@ body.light footer a:hover { background: #000000; color: #ffffff; border-color: #
         font-size: 11px;
         white-space: pre; /* Garde le formatage, force le scroll */
     }
+
+    /* --- MOBILE HEADER FIXES --- */
+
+    .notebook-header {
+        padding: 8px 10px; /* Moins de padding sur les côtés */
+        gap: 8px;          /* Réduit l'espace entre les éléments */
+        overflow-x: auto;  /* Permet de scroller si ça dépasse encore un peu */
+    }
+
+    /* On cache les infos inutiles sur mobile pour gagner de la place */
+    .notebook-file, 
+    .readonly-badge {
+        display: none; 
+    }
+
+    /* On garde le titre mais on réduit sa taille */
+    .notebook-title {
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    /* On s'assure que le badge Python et le bouton restent alignés */
+    .kernel-badge {
+        padding: 2px 6px;
+        font-size: 10px;
+    }
+    
+    .expand-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
 }
