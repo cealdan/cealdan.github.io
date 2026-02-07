@@ -798,7 +798,54 @@
         }
     }
 
+    function setupNotebookHandlers(notebookId, expandBtnId, expandIconId, expandTextId) {
+        const notebookEl = document.getElementById(notebookId);
+        const expandBtn = document.getElementById(expandBtnId);
+        const expandIcon = document.getElementById(expandIconId);
+        const expandText = document.getElementById(expandTextId);
+
+        if (!notebookEl || !expandBtn) return;
+
+        function toggleFullscreen(e) {
+            if (e) e.stopPropagation();
+            const isFs = notebookEl.classList.contains('fullscreen');
+            
+            // Textes selon la langue (défaut FR)
+            const isFr = SharedUI.currentLang === "fr";
+
+            if (isFs) {
+                // RÉDUIRE
+                notebookEl.classList.remove('fullscreen');
+                
+                // Reset icône (flèches vers l'extérieur)
+                if(expandIcon) expandIcon.innerHTML = '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+                if(expandText) expandText.textContent = isFr ? 'Agrandir' : 'Expand';
+                
+                document.body.style.overflow = ''; // Réactiver le scroll page
+            } else {
+                // AGRANDIR
+                notebookEl.classList.add('fullscreen');
+                
+                // Icône réduire (flèches vers l'intérieur)
+                if(expandIcon) expandIcon.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
+                if(expandText) expandText.textContent = isFr ? 'Réduire' : 'Collapse';
+                
+                document.body.style.overflow = 'hidden'; // Bloquer le scroll page
+            }
+        }
+
+        expandBtn.addEventListener('click', toggleFullscreen);
+        
+        // Touche Echap pour quitter
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape' && notebookEl.classList.contains('fullscreen')) {
+                toggleFullscreen(); 
+            }
+        });
+    }
+
     // Exporter uniquement ce qui est nécessaire
+    global.setupNotebookHandlers = setupNotebookHandlers;
     global.loadNotebook = loadNotebook;
     global.SharedUI = SharedUI;
     global.generateGitHubTree = generateGitHubTree;

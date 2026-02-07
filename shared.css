@@ -687,4 +687,37 @@ body.light footer a:hover { background: #000000; color: #ffffff; border-color: #
     .reddit-button, .neurotech-button { width: 36px; height: 36px; padding: 0; justify-content: center; }
     .reddit-button span, .neurotech-button span { display: none; }
     .media-section { gap: 1rem; }
+
+    .notebook-container {
+        margin-left: -1rem; /* Annule le padding de la section parent */
+        margin-right: -1rem;
+        width: calc(100% + 2rem);
+        border-radius: 0; /* Carré sur mobile c'est plus propre */
+        border-left: none;
+        border-right: none;
+    }
+
+    /* 2. On cache les "In [1]:" qui mangent 60px pour rien sur mobile */
+    .cell-prompt {
+        display: none;
+    }
+
+    /* 3. On réduit le padding interne */
+    .notebook-content {
+        padding: 1rem;
+    }
+
+    /* 4. On force le scroll horizontal sur le code pour ne pas qu'il soit coupé */
+    .cell-code, .cell-output-content {
+        display: block;
+        width: 100%;
+        overflow-x: auto; /* Ajoute une scrollbar si ça dépasse */
+        -webkit-overflow-scrolling: touch; /* Scroll fluide sur iOS */
+    }
+
+    /* 5. On réduit un peu la police du code */
+    .cell-code pre, .cell-output-content pre {
+        font-size: 11px;
+        white-space: pre; /* Garde le formatage, force le scroll */
+    }
 }
