@@ -8,78 +8,6 @@
 
 <title>Clotho</title>
 <link rel="stylesheet" href="shared.css" />
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body { 
-    background: #111; 
-    color: #fff; 
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-}
-.project-header { padding: 2rem 1rem; text-align: center; }
-.project-header h1 { margin-bottom: 1rem; font-size: 2.2rem; }
-.project-date { font-size: 1rem; opacity: 0.8; margin-bottom: 1.5rem; font-style: italic; color: #4da6ff; }
-
-.project-logo {
-    width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.5rem;
-    border: 3px solid #4da6ff; display: flex; align-items: center; justify-content: center;
-    background: #1c1c1c; box-shadow: 0 4px 12px rgba(77, 166, 255, 0.3);
-}
-.project-logo img { width: 100%; height: 100%; object-fit: cover; }
-
-.project-header a {
-    color: #4da6ff; text-decoration: none; display: inline-block; margin-bottom: 1.5rem; padding: 0.5rem 1rem;
-    border: 2px solid #4da6ff; border-radius: 6px; 
-}
-.project-header a:hover { background: #4da6ff; color: #111; }
-.home-button { border: 2px solid white; }
-body.light .home-button { border: 2px solid black; }
-
-section { padding: 2rem 1rem; max-width: 1000px; margin: 0 auto; }
-section a { color: #4da6ff; text-decoration: underline; }
-
-.media-section { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; padding: 0 1rem; }
-.media-section img, .media-section video { max-width: 300px; width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
-
-.text-container { width: 100%; max-width: 95%; margin: 0 auto; padding-bottom: 2rem; }
-.text-container p { font-size: 1rem; line-height: 1.8; }
-
-button.next-btn {
-    margin-top: 2rem; padding: 0.8rem 1.5rem; font-size: 1rem; background-color: #4da6ff; color: #ffffff;
-    border: none; border-radius: 8px; cursor: pointer;  display: block; margin-left: auto; margin-right: auto;
-}
-button.next-btn:hover { background-color: #0077cc; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(77, 166, 255, 0.4); }
-
-footer { text-align: center; padding: 2rem; color: #888; font-size: 0.9rem; margin-top: 3rem; }
-
-/* Thème clair */
-body.light { background: #f5f5f5; color: #000; }
-body.light .next-btn { color: #000000; }
-body.light header a { border-color: #0077cc; color: #0077cc; }
-body.light header a:hover { background: #0077cc; color: #fff; }
-
-/* Media queries pour mobile */
-@media (max-width: 768px) {
-    .project-header h1 { font-size: 1.8rem; }
-    .project-header { padding: 1.5rem 1rem; margin-top: 2.5rem; }
-    .project-logo { width: 120px; height: 120px; border-width: 2px; }
-    .project-header a { font-size: 0.9rem; padding: 0.4rem 0.8rem; }
-    .media-section { gap: 1rem; }
-    .media-section img, .media-section video { max-width: 100%; }
-    section { padding: 1.5rem 0.75rem; }
-    .text-container p { font-size: 0.95rem; line-height: 1.7; }
-    button.next-btn { width: 100%; max-width: 300px; padding: 1rem; }
-    footer { padding: 1.5rem 1rem; font-size: 0.85rem; }
-}
-
-@media (max-width: 480px) {
-    .project-header h1 { font-size: 1.5rem; }
-    .project-logo { width: 100px; height: 100px; border-width: 2px; }
-    .text-container p { font-size: 0.9rem; }
-}
-</style>
 </head>
 <body>
 <div data-include="components/topbar.html"></div>
@@ -103,19 +31,10 @@ body.light header a:hover { background: #0077cc; color: #fff; }
     </div>
     <p style="text-align: center; margin-top: 0.5rem; margin-bottom: 3rem; color: #888; font-size: 0.9rem;" data-lang="clotho-hardware-desc"></p>
 
-    <!--
-    <div class="media-section">
-        <img src="images/WhatsApp Image 2025-12-06 à 01.31.11_63b625b4.jpg" alt="App Splash" style="max-width: 220px;">
-        <img src="images/WhatsApp Image 2025-12-06 à 01.31.11_35543af3.jpg" alt="App Home" style="max-width: 220px;">
-        <img src="images/WhatsApp Image 2025-12-06 à 01.31.11_e73e9f28.jpg" alt="App Profile" style="max-width: 220px;">
-        <img src="images/WhatsApp Image 2025-12-06 à 01.31.11_36432d41.jpg" alt="App Settings" style="max-width: 220px;">
-    </div>
-    <p style="text-align: center; margin-top: 0.5rem; color: #888; font-size: 0.9rem;" data-lang="clotho-app-desc"></p> -->
-
-    <div class="media-section">
+    <!--<div class="media-section">
         <img src="images/schema_kicad.png" alt="Kicad wiring" style="max-width: 600px; width: 100%;">
     </div>
-    <p style="text-align: center; margin-top: 0.5rem; color: #888; font-size: 0.9rem;" data-lang="clotho-wiring-desc"></p>
+    <p style="text-align: center; margin-top: 0.5rem; color: #888; font-size: 0.9rem;" data-lang="clotho-wiring-desc"></p>-->
 </section>
 
 <footer>
@@ -124,12 +43,7 @@ body.light header a:hover { background: #0077cc; color: #fff; }
 
 <script src="shared.js"></script>
 <script>
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    SharedUI.init().then(() => { initIndexPage();});
-});
+document.addEventListener('DOMContentLoaded', () => { SharedUI.init(); });
 </script>
-
 </body>
 </html>

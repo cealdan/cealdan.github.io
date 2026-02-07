@@ -15,10 +15,10 @@
             "clotho-desc": "Interface cerveau-machine DIY avec android",
             "clotho-date": "Novembre 2025-aujourd'hui",
             "clotho-full": "Une interface cerveau-machine complète faite maison des électrodes jusqu'à l'application android. Objectifs : visualisation des données selon les fréquences, détection de P300.",
-            "clotho-intro": "<p>Bienvenue sur la page de mon premier projet complet d'interface cerveau-machine. Le but de ce projet est de construire moi-même une BCI de A à Z, depuis les électrodes jusqu'à l’application Android connectée au hardware.</p><p>Le système repose sur des électrodes sèches Ag/AgCl provenant du casque OpenBCI imprimé en 3D (actuellement le Mark IV). Ce montage évoluera bientôt, car je prévois d’imprimer mon propre boîtier afin d’y intégrer entièrement mon hardware personnalisé.</p><p>Le pipeline matériel suit une chaîne simple et entièrement maîtrisée :<br>électrodes → module d’acquisition JNEEG (ADS1299) → micro-contrôleur ESP32 → transmission BLE → application Android.</p><p>Je programme l’ESP32 moi-même pour effectuer un premier traitement des signaux en temps réel. L’application Android réalise ensuite une seconde étape d’analyse, notamment l’affichage des rythmes cérébraux (alpha, bêta, gamma, etc.). Une fois cette base solide, j’ajouterai une expérience de P300 avec un clavier visuel. L’objectif final est d’améliorer un P300 speller classique grâce à un système d’eye-tracking superposé — une étape prévue lorsque toute l’architecture de base sera parfaitement stable.</p><p><strong>Compétences logicielles mobilisées</strong> :<br>C++ (programmation bas niveau), Python (traitement du signal, machine learning), Kotlin (développement Android).</p><p><strong>Compétences matérielles</strong> :<br>Électronique analogique/numérique, manipulation de micro-contrôleurs, usage et conception d’électrodes, intégration des composants et câblage.</p>",
+            "clotho-intro": "<p>Bienvenue sur la page de mon premier projet complet d'interface cerveau-machine. Le but de ce projet est de construire moi-même une BCI de A à Z, depuis les électrodes jusqu'à l’application Android connectée au hardware.</p><p>Le système repose sur des électrodes sèches Ag/AgCl provenant du casque OpenBCI imprimé en 3D (actuellement le Mark IV). Ce montage évoluera bientôt, car je prévois d’imprimer mon propre boîtier afin d’y intégrer entièrement mon hardware personnalisé.</p><p>Le pipeline matériel suit une chaîne simple :<br>électrodes → module d’acquisition (hat) JNEEG (ADS1299) → RaspBerry Pi → transmission BLE → application Android.</p><p>Je programmerai le RaspBerry Pi moi-même pour effectuer un premier traitement des signaux en temps réel. L’application Android réalisera ensuite une seconde étape d’analyse, notamment l’affichage des rythmes cérébraux (alpha, bêta, gamma, etc.). Une fois cette base acquise, j’ajouterai une expérience de P300 avec un clavier visuel. L’objectif final est d’améliorer un P300 speller classique grâce à un système d’eye-tracking superposé — une étape prévue lorsque toute l’architecture de base sera parfaitement stable.</p><p><strong>Compétences logicielles mobilisées</strong> :<br>C++ (programmation bas niveau), Python (traitement du signal, machine learning), Kotlin (développement Android).</p><p><strong>Compétences matérielles</strong> :<br>Électronique analogique/numérique, soudure sur circuit imprimé, manipulation de micro-contrôleurs, usage et conception d’électrodes, intégration des composants et câblage.</p>",
             "clotho-hardware-desc": "Premiers tests avec le casque OpenBCI Mark IV imprimé en 3D (seulement le casque et les électrodes) et un Jetson Nano Orin accompagné du JNEEG Hat.",
             "clotho-app-desc": "Interface de l'application Android : Écran de chargement, Page d'accueil, Page de profil et Paramètres.",
-            "clotho-wiring-desc": "Premier schéma rudimentaire du câblage entre le JNEEG Hat et l’ESP32.",
+            "clotho-wiring-desc": "Premier schéma rudimentaire du câblage entre le JNEEG Hat et le Raspberry Pi.",
             "project2-desc": "Application de magie",
             "project2-date": "Juillet 2025 (maintenant en cours de publication)",
             "project2-full": "Une application pour magiciens vue comme un tour de magie digital.",
@@ -62,10 +62,9 @@
             "clotho-desc": "DIY BCI with Android",
             "clotho-date": "November 2025-today",
             "clotho-full": "A fully homemade brain–computer interface, from the electrodes to the Android application. Goals: frequency-based data visualization and P300 detection.",
-            "clotho-intro": "<p>Welcome to the presentation page of my first fully custom brain-computer interface project. The goal is to build a complete BCI system from scratch, from the electrodes all the way to the Android application connected to the hardware.</p><p>The system currently uses dry Ag/AgCl electrodes from the 3D-printed OpenBCI headset (Mark IV). This setup will evolve soon, as I plan to design and print my own enclosure to house fully customized hardware.</p><p>The hardware pipeline follows a clear and fully self-built chain:<br>electrodes → JNEEG acquisition board (ADS1299) → ESP32 microcontroller → BLE transmission → Android application.</p><p>I program the ESP32 to perform an initial real-time preprocessing of the EEG signals. The Android app then applies a second processing stage, including live visualization of brain rhythms (alpha, beta, gamma, etc.). Once this foundation is in place, I will implement a P300 experiment with a visual speller. The long-term goal is to enhance a traditional P300 speller by adding an eye-tracking layer — a feature planned once the core system is stable.</p><p><strong>Software skills involved</strong>:<br>C++ (low-level programming), Python (signal processing and machine learning), Kotlin (Android development).</p><p><strong>Hardware skills</strong>:<br>Analog/digital electronics, microcontroller programming, electrode design and handling, integration and wiring of components.</p>",
-            "clotho-hardware-desc": "First tests with the 3D-printed openBCI Mark IV (only the headset and the electrodes) and a jetson nano orin + jneeg hat.",
+            "clotho-intro": "<p>Welcome to the page of my first complete brain-computer interface project. The goal of this project is to build a BCI myself from scratch, from the electrodes to the Android application connected to the hardware.</p><p>The system relies on Ag/AgCl dry electrodes from the 3D-printed OpenBCI headset (currently the Mark IV). This setup will soon evolve, as I plan to print my own casing to fully integrate my custom hardware.</p><p>The hardware pipeline follows a simple chain: electrodes → JNEEG acquisition module (hat) (ADS1299) → Raspberry Pi → BLE transmission → Android application.</p><p>I will program the Raspberry Pi myself to perform an initial real-time signal processing. The Android application will then carry out a second analysis step, notably displaying brain rhythms (alpha, beta, gamma, etc.). Once this foundation is established, I will add a P300 experience with a visual keyboard. The final objective is to improve a classic P300 speller using a superimposed eye-tracking system — a step planned once the entire base architecture is perfectly stable.</p><p><strong>Software skills utilized</strong>:<br>C++ (low-level programming), Python (signal processing, machine learning), Kotlin (Android development).</p><p><strong>Hardware skills</strong>:<br>Analog/digital electronics, PCB soldering, microcontroller handling, electrode use and design, component integration, and wiring.</p>",            "clotho-hardware-desc": "First tests with the 3D-printed openBCI Mark IV (only the headset and the electrodes) and a jetson nano orin + jneeg hat.",
             "clotho-app-desc": "Android App Interface: Loading Screen, Home Page, Profile Page and Settings.",
-            "clotho-wiring-desc": "First rudimentary schematic for the wiring between the JNEEG hat and the esp32",
+            "clotho-wiring-desc": "First rudimentary schematic for the wiring between the JNEEG hat and the Raspberry Pi",
             "project2-desc": "Magic app",
             "project2-date": "July 2025 (now in the process of publication)",
             "project2-full": "An application for magicians seen as a digital magic trick.",
@@ -109,10 +108,9 @@
             "clotho-desc": "Androidを使用したDIY BCI",
             "clotho-date": "2025年11月 - 現在",
             "clotho-full": "電極からAndroidアプリまで、完全に自作されたブレイン・コンピュータ・インターフェース。目標：周波数に基づくデータ視覚化とP300検出。",
-            "clotho-intro": "<p>私の最初の完全自作BCIプロジェクトのページへようこそ。このプロジェクトの目的は、電極からハードウェアに接続されたAndroidアプリまで、BCIシステムをゼロから構築することです。</p><p>システムは現在、3DプリントされたOpenBCIヘッドセット（Mark IV）の乾式Ag/AgCl電極を使用しています。完全にカスタマイズされたハードウェアを収納するために独自のケースを設計・印刷する予定なので、このセットアップはまもなく進化します。</p><p>ハードウェアのパイプラインは、明確で完全に自作されたチェーンに従います：<br>電極 → JNEEG取得ボード（ADS1299）→ ESP32マイクロコントローラー → BLE送信 → Androidアプリ。</p><p>私はESP32をプログラムして、EEG信号の初期リアルタイム前処理を実行します。その後、Androidアプリが2番目の処理段階（脳波リズムのライブ視覚化：アルファ、ベータ、ガンマなど）を適用します。この基盤が整い次第、視覚的スペラーを使用したP300実験を実装します。最終的な目標は、アイトラッキングレイヤーを追加して従来のP300スペラーを強化することです。これは、コアシステムが安定した後に計画されている機能です。</p><p><strong>使用されるソフトウェアスキル</strong>：<br>C++（低レベルプログラミング）、Python（信号処理と機械学習）、Kotlin（Android開発）。</p><p><strong>ハードウェアスキル</strong>：<br>アナログ/デジタル電子回路、マイクロコントローラープログラミング、電極の設計と取り扱い、コンポーネントの統合と配線。</p>",
-            "clotho-hardware-desc": "3DプリントされたOpenBCI Mark IV（ヘッドセットと電極のみ）とJetson Nano Orin + JNEEGハットを使用した最初のテスト。",
+            "clotho-intro": "<p>私の最初の完全なブレイン・コンピュータ・インターフェース（BCI）プロジェクトのページへようこそ。このプロジェクトの目的は、電極からハードウェアに接続されたAndroidアプリまで、BCIをゼロから自作することです。</p><p>システムは、3DプリントされたOpenBCIヘッドセット（現在はMark IV）のAg/AgClドライ電極を使用しています。独自のカスタムハードウェアを完全に統合するために、自分専用のケースをプリントする予定であるため、この構成は間もなく進化します。</p><p>ハードウェアのパイプラインは、電極 → JNEEG計測モジュール（ADS1299） → Raspberry Pi → BLE送信 → Androidアプリというシンプルな流れです。</p><p>Raspberry Piを自分でプログラミングし、リアルタイムで最初の信号処理を行います。その後、Androidアプリが第2段階の分析を行い、特に脳波リズム（アルファ、ベータ、ガンマなど）を表示します。この基礎が整い次第、視覚的キーボードを用いたP300の実験を追加します。最終的な目標は、基本アーキテクチャが完全に安定した段階で、アイトラッキングシステムを重ね合わせて従来のP300スペラーを改良することです。</p><p><strong>活用するソフトウェアスキル</strong>：<br>C++（低レイヤプログラミング）、Python（信号処理、機械学習）、Kotlin（Android開発）。</p><p><strong>ハードウェアスキル</strong>：<br>アナログ・デジタル電子回路、基板はんだ付け、マイコン操作、電極の使用と設計、コンポーネント統合および配線。</p>",            "clotho-hardware-desc": "3DプリントされたOpenBCI Mark IV（ヘッドセットと電極のみ）とJetson Nano Orin + JNEEGハットを使用した最初のテスト。",
             "clotho-app-desc": "Androidアプリのインターフェース：ロード画面、ホームページ、プロフィールページ、設定。",
-            "clotho-wiring-desc": "JNEEGハットとESP32間の配線の最初の基本的な回路図。",
+            "clotho-wiring-desc": "JNEEGハットとRASPBERRYPI間の配線の最初の基本的な回路図。",
             "project2-desc": "マジックアプリ",
             "project2-date": "2025年7月（公開準備中）",
             "project2-full": "デジタル手品として設計されたマジシャン向けアプリケーション。",
@@ -186,7 +184,7 @@
         </div>
     </div>
     <h2 data-lang="projects">Projets</h2>
-    <a href="projectclotho.html" class="sidebar-link">
+    <a href="clothoproject.html" class="sidebar-link">
         <h3>Clotho</h3>
         <p data-lang="clotho-desc">Interface cerveau-machine DIY avec android</p>
     </a>
@@ -681,7 +679,7 @@
     global.generateGitHubTree = generateGitHubTree;
     global.setupFileTreeClickHandlers = setupFileTreeClickHandlers;
 })(window);
-
+/*
 function initIndexPage() {
     const canvas = document.getElementById('background-canvas');
     if (!canvas) return;
@@ -849,6 +847,7 @@ function initIndexPage() {
     }
     animate();
 }
+    */
 
 
 

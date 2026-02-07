@@ -6,129 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blink Activated Alert Button</title>
 <link rel="stylesheet" href="shared.css" />
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body { 
-    background: #111; 
-    color: #fff; 
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-}
-.project-header { padding: 2rem 1rem; text-align: center; }
-.project-header h1 { margin-bottom: 1rem; font-size: 2.2rem; }
-.project-date { font-size: 1rem; opacity: 0.8; margin-bottom: 1.5rem; font-style: italic; color: #4da6ff; }
-.project-header a {
-    color: #4da6ff; text-decoration: none; display: inline-block; margin-bottom: 1.5rem; padding: 0.5rem 1rem;
-    border: 2px solid #4da6ff; border-radius: 6px; transition: all 0.3s ease;
-}
-.project-header a:hover { background: #4da6ff; color: #111; }
-
-section { padding: 2rem 1rem; max-width: 1000px; margin: 0 auto; }
-section a { color: #4da6ff; text-decoration: underline; }
-
-.media-section { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; padding: 0 1rem; }
-.media-section img, .media-section video { max-width: 300px; width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
-
-.text-container { width: 100%; max-width: 95%; margin: 0 auto; padding-bottom: 2rem; }
-.text-container p { font-size: 1rem; line-height: 1.8; }
-
-/* Styles spécifiques pour le conteneur GitHub sont maintenant gérés dans shared.css pour l'effet Glass */
-
-/* Nouveau Style Moderne pour le bouton Next */
-button.next-btn {
-    position: relative;
-    margin: 3rem auto; /* Centré avec marge haut/bas */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px; /* Espace entre texte et flèche */
-    
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    
-    /* Couleurs et Dégradé */
-    background: linear-gradient(135deg, #4da6ff 0%, #0077cc 100%);
-    color: #ffffff;
-    border: none;
-    border-radius: 50px; /* Forme "Pill" moderne */
-    
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    
-    /* Ombre portée lumineuse (Glow) */
-    box-shadow: 0 10px 25px -5px rgba(77, 166, 255, 0.2);
-}
-
-/* État au survol */
-button.next-btn:hover {
-    transform: translateY(-4px) scale(1.02);
-    background: linear-gradient(135deg, #60a5fa 0%, #0088e0 100%);
-    box-shadow: 0 20px 35px -10px rgba(77, 166, 255, 0.4);
-}
-
-/* État au clic */
-button.next-btn:active {
-    transform: translateY(-1px) scale(0.98);
-    box-shadow: 0 5px 15px -5px rgba(77, 166, 255, 0.4);
-}
-
-/* Animation de la flèche */
-button.next-btn .arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-button.next-btn:hover .arrow {
-    transform: translateX(6px); /* La flèche bouge vers la droite */
-}
-
-/* Adaptation Thème Clair */
-body.light button.next-btn {
-    background: linear-gradient(135deg, #007aff 0%, #0051a8 100%);
-    box-shadow: 0 10px 25px -5px rgba(0, 122, 255, 0.2);
-    color: #fff;
-}
-body.light button.next-btn:hover {
-    box-shadow: 0 20px 35px -10px rgba(0, 122, 255, 0.4);
-}
-
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-    button.next-btn {
-        width: 100%;
-        max-width: 280px;
-        padding: 0.9rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-
-footer { text-align: center; padding: 2rem; color: #888; font-size: 0.9rem; margin-top: 3rem; }
-
-/* Thème clair */
-body.light { background: #f5f5f5; color: #000; }
-body.light .project-header a { border-color: #0077cc; color: #0077cc; }
-body.light .project-header a:hover { background: #0077cc; color: #fff; }
-
-@media (max-width: 768px) {
-    .project-header h1 { font-size: 1.8rem; }
-    .project-header { padding: 1.5rem 1rem; margin-top: 2.5rem; }
-    .project-header a { font-size: 0.9rem; padding: 0.4rem 0.8rem; }
-    .media-section { gap: 1rem; }
-    .media-section img, .media-section video { max-width: 100%; }
-    section { padding: 1.5rem 0.75rem; }
-    .text-container p { font-size: 0.95rem; line-height: 1.7; }
-    footer { padding: 1.5rem 1rem; font-size: 0.85rem; }
-}
-
-@media (max-width: 480px) {
-    .project-header h1 { font-size: 1.5rem; }
-    .text-container p { font-size: 0.9rem; }
-}
-</style>
 </head>
 <body>
 <div data-include="components/topbar.html"></div>
@@ -158,55 +35,37 @@ body.light .project-header a:hover { background: #0077cc; color: #fff; }
 
     <div class="github-tree-container">
         <div class="github-tree-header">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-            </svg>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
             <h3 data-lang="repo-structure">Arborescence du projet</h3>
         </div>
         
         <div class="file-tree">
             <div class="file-item folder">
-                <svg class="file-icon" viewBox="0 0 16 16" fill="#54a3ff">
-                    <path d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75z"/>
-                </svg>
+                <svg class="file-icon" viewBox="0 0 16 16" fill="#54a3ff"><path d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75z"/></svg>
                 <span class="file-name">BlinkActivatedAlertButton/</span>
             </div>
-            
             <div class="indent">
                 <div class="file-item file" data-file="arduino">
-                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
-                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
-                    </svg>
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585"><path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/></svg>
                     <span class="file-name">eyeblinkdetection.cpp</span>
                 </div>
-                
                 <div class="file-item file" data-file="css">
-                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
-                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
-                    </svg>
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585"><path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/></svg>
                     <span class="file-name">neuroweb.css</span>
                 </div>
-                
                 <div class="file-item file" data-file="html">
-                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
-                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
-                    </svg>
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585"><path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/></svg>
                     <span class="file-name">neuroweb.html</span>
                 </div>
-                
                 <div class="file-item file" data-file="js">
-                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585">
-                        <path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/>
-                    </svg>
+                    <svg class="file-icon" viewBox="0 0 16 16" fill="#858585"><path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.086c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v8.086A1.75 1.75 0 0112.25 15h-8.5A1.75 1.75 0 012 13.25V1.75z"/></svg>
                     <span class="file-name">neuroweb.js</span>
                 </div>
             </div>
         </div>
         
         <a href="https://github.com/cealdan/BlinkActivatedAlertButton/" target="_blank" class="github-link">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-            </svg>
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
             <span data-lang="view-on-github">Voir sur GitHub</span>
         </a>
         
@@ -222,84 +81,47 @@ body.light .project-header a:hover { background: #0077cc; color: #fff; }
     </button>
 </section>
 
-
 <footer>
     Copyright © 2025 Dimitri Boïdo
 </footer>
 
 <script src="shared.js"></script>
 <script>
-    /**
-     * Charge un fichier texte et l'injecte dans la balise <pre> du conteneur visé
-     */
     async function loadCodeFile(filePath, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
-    
         try {
             const response = await fetch(filePath);
-            if (!response.ok) throw new Error(`Erreur chargement ${filePath}`);
-            
+            if (!response.ok) throw new Error();
             let text = await response.text();
-    
-            // Échapper les caractères HTML
-            text = text.replace(/&/g, "&amp;")
-                       .replace(/</g, "&lt;")
-                       .replace(/>/g, "&gt;")
-                       .replace(/"/g, "&quot;")
-                       .replace(/'/g, "&#039;");
-    
-            // Coloration syntaxique si dispo
-            if (typeof highlightCode === 'function') {
-                text = highlightCode(text); 
-            }
-    
+            text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+            if (typeof highlightCode === 'function') text = highlightCode(text);
             const pre = container.querySelector('pre');
             if (pre) pre.innerHTML = text; 
-    
         } catch (error) {
-            console.error(error);
             const pre = container.querySelector('pre');
-            if (pre) pre.textContent = "// Erreur : Impossible de charger le fichier " + filePath;
+            if (pre) pre.textContent = "// Erreur chargement";
         }
     }
 
-    /**
-     * Initialise les interactions spécifiques à la page projet
-     */
-    function initProjectPage() {
-        document.querySelectorAll('.file-item[data-file]').forEach(fileItem => {
-            fileItem.addEventListener('click', function () {
-                const fileType = this.getAttribute('data-file');
-                const codeSection = document.getElementById('code-' + fileType);
-                
-                // Fermer les autres sections
-                document.querySelectorAll('.code-content').forEach(section => { 
-                    section.classList.remove('active'); 
-                });
-
-                // Ouvrir la section ciblée
-                if (codeSection) {
-                    codeSection.classList.add('active');
-                    codeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            });
-        });
-    }
-    
-    // --- CHARGEMENT UNIQUE ET GLOBAL ---
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Charger les fichiers de code
         loadCodeFile('eyeblinkdetection.cpp', 'code-arduino');
         loadCodeFile('neuroweb.css', 'code-css');
         loadCodeFile('neuroweb.html', 'code-html');
         loadCodeFile('neuroweb.js', 'code-js');
-        initIndexPage();
         
-        // 2. Initialiser l'interface partagée (SharedUI) UNE SEULE FOIS
-        // Une fois SharedUI prêt (barres nav chargées), on lance initProjectPage
         SharedUI.init().then(() => { 
-            initProjectPage(); 
+            document.querySelectorAll('.file-item[data-file]').forEach(fileItem => {
+                fileItem.addEventListener('click', function () {
+                    const fileType = this.getAttribute('data-file');
+                    const codeSection = document.getElementById('code-' + fileType);
+                    document.querySelectorAll('.code-content').forEach(section => { section.classList.remove('active'); });
+                    if (codeSection) {
+                        codeSection.classList.add('active');
+                        codeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
         });
     });
 </script>
