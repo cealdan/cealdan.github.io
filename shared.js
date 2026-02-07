@@ -674,10 +674,94 @@
         fileTree.addEventListener('click', fileTree._folderClickHandler);
         fileTree.addEventListener('click', fileTree._fileClickHandler);
     }
-    
+
+    // =========================================
+    // NOTEBOOK LOGIC (Via Library notebookjs)
+    // =========================================
+
+    function loadNotebook(filePath, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">Chargement du notebook...</div>';
+
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) throw new Error("Impossible de charger le fichier (vérifiez le nom ou Live Server).");
+                return response.json();
+            })
+            .then(data => {
+                // Vérification de sécurité : la librairie est-elle chargée dans le HTML ?
+                if (typeof notebook === 'undefined') {
+                    throw new Error("La librairie 'notebookjs' n'est pas chargée. Vérifiez vos scripts dans le <head>.");
+                }
+
+                // 1. Parsing et Rendu via la librairie
+                var nb = notebook.parse(data);
+                var content = nb.render();
+
+                // 2. Injection dans la page
+                container.innerHTML = "";
+                container.appendChild(content);
+
+                // 3. Relancer la coloration syntaxique (Prism) sur le nouveau contenu
+                if (window.Prism) {
+                    Prism.highlightAllUnder(container);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                container.innerHTML = `<div style="text-align: center; padding: 2rem; color: #d9534f;">Erreur : ${err.message}</div>`;
+            });
+    }
+
+    function setupNotebookHandlers(notebookId, expandBtnId, expandIconId, expandTextId) {
+        const notebookEl = document.getElementById(notebookId);
+        const expandBtn = document.getElementById(expandBtnId);
+        const expandIcon = document.getElementById(expandIconId);
+        const expandText = document.getElementById(expandTextId);
+
+        if (!notebookEl || !expandBtn) return;
+
+        function toggleFullscreen(e) {
+            if (e) e.stopPropagation();
+            const isFs = notebookEl.classList.contains('fullscreen');
+
+            if (isFs) {
+                // CAS : RÉDUIRE
+                notebookEl.classList.add('resetting'); // Bloque les transitions bizarres
+                notebookEl.classList.remove('fullscreen');
+                
+                // Reset icône et texte
+                expandIcon.innerHTML = '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+                expandText.textContent = SharedUI.currentLang === "fr" ? 'Agrandir' : 'Expand';
+                
+                document.body.style.overflow = ''; // Réactiver le scroll de la page
+                setTimeout(() => notebookEl.classList.remove('resetting'), 50);
+
+            } else {
+                // CAS : AGRANDIR
+                notebookEl.classList.add('fullscreen');
+                
+                // Icône réduire et texte
+                expandIcon.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
+                expandText.textContent = SharedUI.currentLang === "fr" ? 'Réduire' : 'Collapse';
+                
+                document.body.style.overflow = 'hidden'; // Bloquer le scroll de la page derrière
+            }
+        }
+
+        expandBtn.addEventListener('click', toggleFullscreen);
+        
+        // Permettre de quitter avec la touche Echap
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape' && notebookEl.classList.contains('fullscreen')) toggleFullscreen(); 
+        });
+    }
+    global.loadNotebook = loadNotebook;
+    global.setupNotebookHandlers = setupNotebookHandlers;
     global.SharedUI = SharedUI;
     global.generateGitHubTree = generateGitHubTree;
     global.setupFileTreeClickHandlers = setupFileTreeClickHandlers;
+    
 })(window);
 /*
 function initIndexPage() {
