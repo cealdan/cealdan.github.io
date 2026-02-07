@@ -676,92 +676,134 @@
     }
 
     // =========================================
-    // NOTEBOOK LOGIC (Via Library notebookjs)
+    // NOTEBOOK LOGIC (Vanilla JS - No Libraries)
     // =========================================
 
-    function loadNotebook(filePath, containerId) {
+    /**
+     * Convertit sommairement du Markdown en HTML pour l'affichage
+     * (Gère les titres, le gras, les liens et les blocs de code basiques)
+     */
+    function simpleMarkdownParser(text) {
+        if (!text) return '';
+        
+        let html = text
+            // Échapper le HTML existant pour éviter les failles XSS basiques
+            .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+            // Titres (H1 à H3)
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            // Gras
+            .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+            // Liens [texte](url)
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
+            // Blocs de code (```)
+            .replace(/```([^`]+)```/gim, '<pre><code>$1</code></pre>')
+            // Code inline (`)
+            .replace(/`([^`]+)`/gim, '<code>$1</code>')
+            // Sauts de ligne
+            .replace(/\n/gim, '<br>');
+
+        return html;
+    }
+
+    async function loadNotebook(filePath, containerId) {
         const container = document.getElementById(containerId);
         container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">Chargement du notebook...</div>';
 
-        fetch(filePath)
-            .then(response => {
-                if (!response.ok) throw new Error("Impossible de charger le fichier (vérifiez le nom ou Live Server).");
-                return response.json();
-            })
-            .then(data => {
-                // Vérification de sécurité : la librairie est-elle chargée dans le HTML ?
-                if (typeof notebook === 'undefined') {
-                    throw new Error("La librairie 'notebookjs' n'est pas chargée. Vérifiez vos scripts dans le <head>.");
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) throw new Error("Impossible de charger le fichier .ipynb");
+            const data = await response.json();
+
+            container.innerHTML = ''; // Vider le container
+
+            // Boucler sur chaque cellule du notebook
+            data.cells.forEach((cell, index) => {
+                const cellDiv = document.createElement('div');
+                cellDiv.className = 'cell ' + (cell.cell_type === 'code' ? 'code-cell' : 'markdown-cell');
+
+                // 1. GESTION DU MARKDOWN
+                if (cell.cell_type === 'markdown') {
+                    const sourceText = Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+                    cellDiv.innerHTML = simpleMarkdownParser(sourceText);
+                } 
+                
+                // 2. GESTION DU CODE
+                else if (cell.cell_type === 'code') {
+                    // A. Input (Le code écrit)
+                    const inputDiv = document.createElement('div');
+                    inputDiv.className = 'cell-input';
+                    
+                    const promptDiv = document.createElement('div');
+                    promptDiv.className = 'cell-prompt';
+                    promptDiv.textContent = `In [${cell.execution_count || ' '}]:`;
+
+                    const codeContent = document.createElement('div');
+                    codeContent.className = 'cell-code';
+                    const sourceCode = Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+                    codeContent.innerHTML = `<pre>${sourceCode}</pre>`;
+
+                    inputDiv.appendChild(promptDiv);
+                    inputDiv.appendChild(codeContent);
+                    cellDiv.appendChild(inputDiv);
+
+                    // B. Outputs (Résultats, prints, graphiques)
+                    if (cell.outputs && cell.outputs.length > 0) {
+                        cell.outputs.forEach(output => {
+                            const outputDiv = document.createElement('div');
+                            outputDiv.className = 'cell-output';
+                            
+                            const outPrompt = document.createElement('div');
+                            outPrompt.className = 'cell-prompt out';
+                            outPrompt.textContent = output.execution_count ? `Out[${output.execution_count}]:` : '';
+
+                            const outContent = document.createElement('div');
+                            outContent.className = 'cell-output-content';
+
+                            // Cas 1 : Texte standard (stream / stdout)
+                            if (output.name === 'stdout' || output.name === 'stderr') {
+                                const text = Array.isArray(output.text) ? output.text.join('') : output.text;
+                                outContent.innerHTML = `<pre>${text}</pre>`;
+                            }
+                            // Cas 2 : Données (execute_result ou display_data)
+                            else if (output.data) {
+                                // Priorité aux images
+                                if (output.data['image/png']) {
+                                    const img = document.createElement('img');
+                                    img.src = 'data:image/png;base64,' + output.data['image/png'].replace(/\n/g, '');
+                                    img.style.maxWidth = '100%';
+                                    outContent.appendChild(img);
+                                }
+                                // Sinon texte brut
+                                else if (output.data['text/plain']) {
+                                    const text = Array.isArray(output.data['text/plain']) ? output.data['text/plain'].join('') : output.data['text/plain'];
+                                    outContent.innerHTML = `<pre>${text}</pre>`;
+                                }
+                            }
+
+                            outputDiv.appendChild(outPrompt);
+                            outputDiv.appendChild(outContent);
+                            cellDiv.appendChild(outputDiv);
+                        });
+                    }
                 }
 
-                // 1. Parsing et Rendu via la librairie
-                var nb = notebook.parse(data);
-                var content = nb.render();
-
-                // 2. Injection dans la page
-                container.innerHTML = "";
-                container.appendChild(content);
-
-                // 3. Relancer la coloration syntaxique (Prism) sur le nouveau contenu
-                if (window.Prism) {
-                    Prism.highlightAllUnder(container);
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                container.innerHTML = `<div style="text-align: center; padding: 2rem; color: #d9534f;">Erreur : ${err.message}</div>`;
+                container.appendChild(cellDiv);
             });
-    }
 
-    function setupNotebookHandlers(notebookId, expandBtnId, expandIconId, expandTextId) {
-        const notebookEl = document.getElementById(notebookId);
-        const expandBtn = document.getElementById(expandBtnId);
-        const expandIcon = document.getElementById(expandIconId);
-        const expandText = document.getElementById(expandTextId);
-
-        if (!notebookEl || !expandBtn) return;
-
-        function toggleFullscreen(e) {
-            if (e) e.stopPropagation();
-            const isFs = notebookEl.classList.contains('fullscreen');
-
-            if (isFs) {
-                // CAS : RÉDUIRE
-                notebookEl.classList.add('resetting'); // Bloque les transitions bizarres
-                notebookEl.classList.remove('fullscreen');
-                
-                // Reset icône et texte
-                expandIcon.innerHTML = '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
-                expandText.textContent = SharedUI.currentLang === "fr" ? 'Agrandir' : 'Expand';
-                
-                document.body.style.overflow = ''; // Réactiver le scroll de la page
-                setTimeout(() => notebookEl.classList.remove('resetting'), 50);
-
-            } else {
-                // CAS : AGRANDIR
-                notebookEl.classList.add('fullscreen');
-                
-                // Icône réduire et texte
-                expandIcon.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
-                expandText.textContent = SharedUI.currentLang === "fr" ? 'Réduire' : 'Collapse';
-                
-                document.body.style.overflow = 'hidden'; // Bloquer le scroll de la page derrière
-            }
+        } catch (err) {
+            console.error(err);
+            container.innerHTML = `<div style="text-align: center; padding: 2rem; color: #d9534f;">Erreur lors de la lecture du Notebook : ${err.message}</div>`;
         }
-
-        expandBtn.addEventListener('click', toggleFullscreen);
-        
-        // Permettre de quitter avec la touche Echap
-        document.addEventListener('keydown', (e) => { 
-            if (e.key === 'Escape' && notebookEl.classList.contains('fullscreen')) toggleFullscreen(); 
-        });
     }
+
+    // Exporter uniquement ce qui est nécessaire
     global.loadNotebook = loadNotebook;
-    global.setupNotebookHandlers = setupNotebookHandlers;
     global.SharedUI = SharedUI;
     global.generateGitHubTree = generateGitHubTree;
     global.setupFileTreeClickHandlers = setupFileTreeClickHandlers;
-    
+        
 })(window);
 /*
 function initIndexPage() {

@@ -370,8 +370,13 @@ body.light .media-section img, body.light .media-section video {
    GITHUB TREE & CODE
    ========================================= */
 .github-tree-container {
-    background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px; padding: 1.5rem; margin: 2rem auto; max-width: 100%;
+    background: #0a0a0a; 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px; 
+    padding: 1.5rem; 
+    margin: 2rem 0; /* Changé de "2rem auto" à "2rem 0" */
+    width: 100%;    /* S'assure qu'il prend toute la place disponible */
+    max-width: 100%; /* Supprime toute restriction de largeur */
 }
 body.light .github-tree-container { background: #f9f9f9; border-color: rgba(0, 0, 0, 0.1); }
 
@@ -413,9 +418,17 @@ body.light .code-content pre { color: #333; }
    NOTEBOOK (Jupyter)
    ========================================= */
 .notebook-container {
-    background: #0a0a0a; border-radius: 16px; margin: 3rem auto; max-width: 100%;
-    box-shadow: none; overflow: hidden; max-height: 650px;
-    display: flex; flex-direction: column; border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #0a0a0a; 
+    border-radius: 16px; 
+    margin: 3rem 0; /* Changé de "3rem auto" à "3rem 0" */
+    width: 100%;    /* Utilise 100% de la largeur du parent */
+    max-width: 100%; 
+    box-shadow: none; 
+    overflow: hidden; 
+    max-height: 650px;
+    display: flex; 
+    flex-direction: column; 
+    border: 1px solid rgba(255, 255, 255, 0.15);
     position: relative;
 }
 body.light .notebook-container { background: #f9f9f9; border-color: rgba(0,0,0,0.15); }
